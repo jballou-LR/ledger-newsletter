@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ledger — July 2026 · Edition 02</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap');
+ 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  body {
+    background: #0F172A;
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    color: #1E293B;
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  .email-wrapper {
+    max-width: 680px;
+    margin: 32px auto;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #1E3A5F;
+  }
+ 
+  /* ── HEADER ── */
+  .header {
+    background: #1E293B;
+    padding: 36px 40px 28px;
+  }
+  .header-meta {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: #475569;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header-meta span { color: #10B981; }
+  .header-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #F8FAFC;
+    line-height: 1;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+  .header-teaser {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 480px;
+  }
+  .nav-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 3px;
+    background: #1E3A5F;
+    color: #64748B;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    user-select: none;
+  }
+  .pill.active, .pill:hover {
+    background: #10B981;
+    color: #fff;
+  }
+ 
+  /* ── INTRO BLURB ── */
+  .intro {
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 20px 40px;
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.7;
+    font-style: italic;
+  }
+ 
+  /* ── MAIN GRID: 3fr + 2fr ── */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    min-height: 280px;
+  }
+  .main-col {
+    padding: 28px 32px;
+    border-right: 1px solid #E2E8F0;
+  }
+  .sidebar-col {
+    padding: 28px 24px;
+    background: #F8FAFC;
+  }
+ 
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label.emerald { color: #10B981; }
+  .section-label.slate { color: #94A3B8; }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #E2E8F0;
+  }
+ 
+  .update-block { margin-bottom: 24px; }
+  .update-block p {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #334155;
+  }
+  .update-block p + p { margin-top: 8px; }
+ 
+  .divider { height: 1px; background: #E2E8F0; margin: 4px 0 20px; }
+
+  /* ── ACCOUNTING LENS ── */
+  .acct-lens {
+    margin-top: 9px;
+    background: #F0FDF8;
+    border-left: 3px solid #10B981;
+    border-radius: 0 4px 4px 0;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    color: #1E4D3A;
+    line-height: 1.65;
+  }
+  .acct-lens-label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #10B981;
+    margin-bottom: 3px;
+  }
+ 
+  /* ── DATE CHIPS ── */
+  .date-chips { display: flex; flex-direction: column; gap: 6px; }
+  .date-chip {
+    font-size: 11px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    border: 1px solid transparent;
+  }
+  .date-chip.green { background: #fff; border-color: #10B981; color: #1E293B; }
+  .date-chip.amber { background: #fff; border-color: #94A3B8; color: #1E293B; }
+  .date-chip.red   { background: #fff; border-color: #475569; color: #1E293B; }
+  .date-chip .date-day { font-weight: 700; font-size: 10px; min-width: 40px; color: #10B981; }
+  .date-chip.amber .date-day { color: #64748B; }
+  .date-chip.red .date-day   { color: #334155; }
+  .date-chip .date-desc { font-size: 11px; }
+ 
+  /* ── CPE PICKS ── */
+  .cpe-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  .cpe-item:last-child { border-bottom: none; }
+  .cpe-provider {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #10B981;
+    margin-bottom: 2px;
+  }
+  .cpe-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1E293B;
+    margin-bottom: 2px;
+    line-height: 1.4;
+    transition: color 0.15s;
+  }
+  .cpe-item a { text-decoration: none; }
+  .cpe-item a:hover .cpe-title { color: #10B981; }
+  .cpe-meta { font-size: 11px; color: #94A3B8; }
+ 
+  /* ── INDUSTRY / ASU / CPE ROW ── */
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: 1px solid #E2E8F0;
+  }
+  .three-block {
+    padding: 22px 24px;
+    border-right: 1px solid #E2E8F0;
+  }
+  .three-block:last-child { border-right: none; }
+ 
+  .news-item {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #F1F5F9;
+  }
+  .news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .news-source {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #94A3B8;
+    margin-bottom: 3px;
+  }
+  .news-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1E293B;
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+  .news-summary { font-size: 11px; color: #64748B; line-height: 1.6; }
+  .news-link {
+    font-size: 10px;
+    color: #10B981;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 4px;
+  }
+ 
+  .asu-item {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #F1F5F9;
+  }
+  .asu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .asu-tag {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    background: #F0FDF8;
+    color: #10B981;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .asu-tag:hover {
+    background: #10B981;
+    color: #fff;
+  }
+  .asu-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1E293B;
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+  .asu-summary { font-size: 11px; color: #64748B; line-height: 1.6; }
+ 
+  /* ── FOOTER ── */
+  .footer {
+    background: #1E293B;
+    padding: 24px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .closer-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #10B981;
+    margin-bottom: 5px;
+  }
+  .closer-text {
+    font-size: 12px;
+    color: #94A3B8;
+    line-height: 1.5;
+    font-style: italic;
+    max-width: 340px;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #334155;
+    white-space: nowrap;
+    text-align: right;
+  }
+  .footer-brand span { display: block; font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #475569; margin-top: 2px; }
+
+  /* ── COMMENTS ── */
+  .comment-section { background: #F8FAFC; border-top: 1px solid #E2E8F0; padding: 10px 16px 12px; margin-top: 2px; margin-bottom: 10px; border-radius: 0 0 4px 4px; }
+  .comment-section-header { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
+  .comment-section-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #64748B; }
+  .comment-count-badge { font-size: 9px; font-weight: 700; background: #E2E8F0; color: #475569; border-radius: 10px; padding: 1px 7px; }
+  .comment-toggle-btn { font-size: 9px; color: #10B981; margin-left: auto; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; font-weight: 600; }
+  .comment-thread { margin-top: 10px; }
+  .comment-row { display: flex; gap: 8px; margin-bottom: 9px; }
+  .comment-avatar-sm { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #fff; flex-shrink: 0; margin-top: 1px; }
+  .comment-body-wrap { flex: 1; }
+  .comment-meta-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 2px; }
+  .comment-author { font-size: 10.5px; font-weight: 700; color: #1E293B; }
+  .comment-time { font-size: 9.5px; color: #94A3B8; }
+  .comment-new-badge { font-size: 7.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: #F0FDF8; color: #10B981; border: 1px solid #10B981; border-radius: 3px; padding: 1px 4px; }
+  .comment-text { font-size: 11px; color: #334155; line-height: 1.6; }
+  .comment-reply-link { font-size: 9.5px; color: #10B981; font-weight: 700; cursor: pointer; margin-top: 3px; display: inline-block; background: none; border: none; padding: 0; font-family: inherit; }
+  .comment-reply-link:hover { text-decoration: underline; }
+  .comment-reply-indent { margin-left: 30px; margin-bottom: 8px; padding-left: 8px; border-left: 2px solid #E2E8F0; }
+  .comment-compose { display: flex; gap: 8px; align-items: flex-start; margin-top: 8px; }
+  .compose-avatar-xs { width: 22px; height: 22px; border-radius: 50%; background: #334155; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #fff; flex-shrink: 0; margin-top: 2px; }
+  .compose-inner-wrap { flex: 1; }
+  .compose-textarea { width: 100%; border: 1.5px solid #E2E8F0; border-radius: 5px; padding: 6px 9px; font-size: 11px; color: #1E293B; font-family: 'DM Sans', sans-serif; resize: none; outline: none; line-height: 1.55; background: #fff; transition: border-color 0.15s; }
+  .compose-textarea:focus { border-color: #10B981; }
+  .compose-textarea::placeholder { color: #94A3B8; }
+  .compose-footer-row { display: flex; align-items: center; justify-content: space-between; margin-top: 5px; }
+  .compose-hint-text { font-size: 9px; color: #94A3B8; }
+  .compose-post-btn { font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: #10B981; color: #fff; border: none; border-radius: 3px; padding: 4px 12px; cursor: pointer; transition: background 0.15s; font-family: inherit; }
+  .compose-post-btn:hover { background: #059669; }
+  .compose-post-btn:disabled { background: #CBD5E1; cursor: default; }
+</style>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "xep3smgbwg");
+    </script>
+</head>
+<body>
+ 
+<div class="email-wrapper">
+ 
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">Newsletter &nbsp;·&nbsp; <span>July 2026</span> &nbsp;·&nbsp; Edition 02</div>
+    <div class="header-title">The Ledger</div>
+    <div class="nav-pills" id="nav-pills-row">
+      <span class="pill active" data-target="sec-dev">Development</span>
+      <span class="pill" data-target="sec-ops">Operations</span>
+      <span class="pill" data-target="sec-dates">Key dates</span>
+      <span class="pill" data-target="sec-cpe">CPE</span>
+      <span class="pill" data-target="sec-industry">Industry</span>
+      <span class="pill" data-target="sec-asu">ASU updates</span>
+    </div>
+  </div>
+ 
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+ 
+    <!-- LEFT: Dev + Ops updates -->
+    <div class="main-col">
+      <div class="update-block">
+        <div id="sec-dev" class="section-label emerald">Development updates</div>
+
+        <p><strong>1000 Mile Solar — Substantial Completion &amp; COD.</strong></p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Achieved substantial completion (construction essentially complete, capable of operating) and COD under the LLCA is imminent. At substantial completion, reclass CIP to PP&amp;E and stop capitalizing construction interest. LLCA COD is the placed in service date and triggers the beginning of depreciation, the vesting of ITCs, final funding by the TE partner, and the beginning of HLBV accounting.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-1000mile-cod')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-1000mile-cod">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-1000mile-cod">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-1000mile-cod" style="display:none;">
+            <div id="new-dev-1000mile-cod"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-1000mile-cod" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-1000mile-cod" onclick="postComment('dev-1000mile-cod')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p><strong>Milford Wind — PTC transfer to Dot Foods approved, TCTA execution expected in August.</strong> Milford Wind 1 & 2 generated ~$18.0M of 2025 PTCs; $6.8M has already been monetized, leaving $11.2M available for transfer. IC approved the sale to Dot Foods on July 22 and the Tax Credit Transfer Agreement is expected to execute in August, with the closing payment due no later than mid-September; proceeds will service the High Street facility debt.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>TA to review, likely ASC 740 equity accounting.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-milford-ptc')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-milford-ptc">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-milford-ptc">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-milford-ptc" style="display:none;">
+            <div id="new-dev-milford-ptc"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-milford-ptc" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-milford-ptc" onclick="postComment('dev-milford-ptc')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EDITORIAL NOTE (Justin): in-progress item, hold vs. cut during human review — fee structure explicitly not yet confirmed in IC minutes -->
+        <p><strong>Notch Peak — LADWP Board approves PPA; self-operations approved with fee structure now set.</strong> The LADWP Board approved the Notch Peak PPA on July 14 — next up is a vote by the LA City Council, a gating item for the project's targeted September debt close and tax equity commitment. Separately, IC approved LES self-servicing Notch Peak directly i.e. LES will perform O&amp;M to help achieve FNTP timing. LES will contract intercompany at $4.77/kWDC (~$2.0mm).</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>The intercompany O&amp;M rate ($4.77/kWDC) is set — TA to confirm this reflects arm's-length pricing.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-notchpeak-selfops')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-notchpeak-selfops">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-notchpeak-selfops">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-notchpeak-selfops" style="display:none;">
+            <div id="new-dev-notchpeak-selfops"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-notchpeak-selfops" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-notchpeak-selfops" onclick="postComment('dev-notchpeak-selfops')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p><strong>Titan — Import Resource Adequacy agreement with SCE.</strong> IC approved a three-year Import RA agreement with Southern California Edison under a slice-of-day construct, providing strong RA revenue certainty at or above current market levels.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>TA to review for appropriate revenue treatment.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-titan-sce-ra')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-titan-sce-ra">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-titan-sce-ra">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-titan-sce-ra" style="display:none;">
+            <div id="new-dev-titan-sce-ra"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-titan-sce-ra" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-titan-sce-ra" onclick="postComment('dev-titan-sce-ra')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p><strong>Rosemary — BESS Supply Agreement with Fluence.</strong> IC approved executing a BESS Supply Agreement with Fluence, including an upfront cash deposit not to exceed $8mm.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Upfront deposit either capitalized as a contract asset or prepayment pending delivery milestones -- TA to review executed agreement when available.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-rosemary-fluence')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-rosemary-fluence">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-rosemary-fluence">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-rosemary-fluence" style="display:none;">
+            <div id="new-dev-rosemary-fluence"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-rosemary-fluence" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-rosemary-fluence" onclick="postComment('dev-rosemary-fluence')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+ 
+      <div class="divider"></div>
+ 
+      <div class="update-block">
+        <div id="sec-ops" class="section-label slate">Operations updates</div>
+
+        <p><strong>Prospero II — term loan extension signed.</strong> The loan extension was executed on July 16th and extends the maturity date to 12/31/2026, giving the project time to contract the remaining open 80MW and refinance under improved terms.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Completed the ASC 470-50 quantitative analysis (10% cash flow test) — the change falls short of the brightline threshold, so the restructuring is accounted for as a modification. No gain or loss is recognized on the modification itself; the carrying amount is adjusted for net lender fees, a revised effective interest rate of approximately 6.47% is applied prospectively, and third-party costs of ~$20.6K are expensed as incurred.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('ops-prospero2-extension')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-ops-prospero2-extension">0</span>
+            <button class="comment-toggle-btn" id="tog-ops-prospero2-extension">show</button>
+          </div>
+          <div class="comment-thread" id="thread-ops-prospero2-extension" style="display:none;">
+            <div id="new-ops-prospero2-extension"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-ops-prospero2-extension" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-ops-prospero2-extension" onclick="postComment('ops-prospero2-extension')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p><strong>Milford Wind — Fervo outage reimbursement position cleared PwC review.</strong> The technical accounting position on the planned outage reimbursement from Fervo was approved by PwC and sets the precedent for planned outage reimbursements going forward.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>The reimbursement captures lost revenues from the inability to generate PV energy, RECs, and PTCs during the outage period. We obtained approval to record the full reimbursement in operating income, but kept outside of topline revenue as it does not meet the scope of ASC 606 (no customer and no delivery of performance obligation).</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('ops-milford-fervo')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-ops-milford-fervo">0</span>
+            <button class="comment-toggle-btn" id="tog-ops-milford-fervo">show</button>
+          </div>
+          <div class="comment-thread" id="thread-ops-milford-fervo" style="display:none;">
+            <div id="new-ops-milford-fervo"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-ops-milford-fervo" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-ops-milford-fervo" onclick="postComment('ops-milford-fervo')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+ 
+    <!-- RIGHT: Key dates + CPE -->
+    <div class="sidebar-col">
+      <div id="sec-dates" class="section-label slate" style="margin-bottom:14px;">Key dates &amp; deadlines</div>
+      <div class="date-chips">
+        <div class="date-chip green"><span class="date-day">Aug 12</span><span class="date-desc">Pine Meadow/High Cotton — targeted LGIA execution (security required)</span></div>
+        <div class="date-chip green" style="align-items:flex-start;"><span class="date-day">Aug</span><span class="date-desc"><span style="display:block;padding-left:14px;text-indent:-14px;">1. Milford Wind — TCTA execution expected</span><span style="display:block;padding-left:14px;text-indent:-14px;">2. 1000 Mile TE final funding &amp; term conversion</span></span></div>
+        <div class="date-chip green"><span class="date-day">Sep</span><span class="date-desc">Milford Wind — TCTA closing payment due (no later than mid-September)</span></div>
+        <div class="date-chip green"><span class="date-day">Sep 15–16</span><span class="date-desc">Longroad Accounting Summit (PwC Boston office)</span></div>
+      </div>
+ 
+      <div style="margin-top: 22px;">
+        <div id="sec-cpe" class="section-label slate" style="margin-bottom:12px;">CPE &amp; trainings</div>
+        <div class="cpe-item">
+          <a href="https://kpmg.com/us/en/frv/webcast/2026/beyond-basics-business-combinations.html" target="_blank">
+          <div class="cpe-provider">KPMG</div>
+          <div class="cpe-title">Beyond the Basics: Business Combinations</div>
+          <div class="cpe-meta">Webcast · Aug 4 · Practical ASC 805 insights &amp; evaluation framework</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://blog.surgentcpe.com/surgent-cpe-corporate-tax-cpe-series-dave-peters" target="_blank">
+          <div class="cpe-provider">Surgent</div>
+          <div class="cpe-title">Corporate Tax CPE Series: Understanding Corporate Tax Credits and Dispositions</div>
+          <div class="cpe-meta">Live webinar · Sep 3 · 2 CPE credits</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://www.euci.com/event_post/ferc-accounting-101/" target="_blank">
+          <div class="cpe-provider">EUCI</div>
+          <div class="cpe-title">FERC Accounting 101</div>
+          <div class="cpe-meta">Online course · August 2026</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://www.euci.com/event_post/electric-utilities-101/" target="_blank">
+          <div class="cpe-provider">EUCI</div>
+          <div class="cpe-title">Electric Utilities 101</div>
+          <div class="cpe-meta">Online course · September 2026</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://www.aicpa-cima.com/cpe-learning/webcast/annual-update-for-accountants-and-auditors-revenue-recognition-financial-instruments-leases" target="_blank">
+          <div class="cpe-provider">AICPA</div>
+          <div class="cpe-title">Annual Update for Accountants and Auditors: Revenue Recognition, Financial Instruments, Leases</div>
+          <div class="cpe-meta">On-demand · Digital product · Credits vary</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- OFF THE BOOKS -->
+      <div style="margin-top:22px;">
+        <div class="section-label slate" style="margin-bottom:4px;">Off the Books</div>
+
+        <!-- TRUE / FALSE -->
+        <div style="margin-bottom:4px;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#10B981;margin-bottom:2px;">True or False</div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+            <div style="font-size:10px;color:#94A3B8;">Select true or false for each statement.</div>
+            <div style="font-size:9px;font-weight:700;color:#10B981;">Score: <span id="tf-score">0/0</span></div>
+          </div>
+          <div id="tf-list" style="display:flex;flex-direction:column;gap:5px;"></div>
+        </div>
+
+        <!-- WORDLE -->
+        <div style="margin-top:18px;padding-top:16px;border-top:1px solid #E2E8F0;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#10B981;margin-bottom:2px;">Word of the Month</div>
+          <div style="font-size:10px;color:#94A3B8;margin-bottom:6px;">Guess the 5-letter term in 6 tries.</div>
+          <div style="margin-bottom:8px;">
+            <button id="hint-btn" onclick="var h=document.getElementById('hint-text');var showing=h.style.display!=='none';h.style.display=showing?'none':'block';this.textContent=showing?'Need a hint?':'Hide hint';" style="font-size:8.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:transparent;border:1px solid #E2E8F0;color:#94A3B8;padding:3px 8px;border-radius:3px;cursor:pointer;">Need a hint?</button>
+            <div id="hint-text" style="display:none;margin-top:5px;font-size:9.5px;color:#475569;font-style:italic;line-height:1.5;background:#F8FAFC;border-left:2px solid #10B981;padding:4px 7px;border-radius:0 3px 3px 0;">FASB just gave this its first-ever standalone standard. Topic 832.</div>
+          </div>
+          <div id="wordle-grid" style="display:grid;grid-template-columns:repeat(5,28px);grid-template-rows:repeat(6,28px);gap:3px;margin-bottom:8px;"></div>
+          <div id="wordle-keyboard" style="display:flex;flex-direction:column;gap:3px;align-items:flex-start;margin-bottom:6px;"></div>
+          <div id="wordle-msg" style="font-size:10px;font-weight:600;color:#10B981;min-height:14px;"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+ 
+  <!-- TWO-COL: Industry / ASU -->
+  <div class="three-col" style="grid-template-columns: 1fr 1fr;">
+ 
+    <div class="three-block">
+      <div id="sec-industry" class="section-label slate" style="margin-bottom:14px;">Industry news</div>
+      <div class="news-item">
+        <div class="news-source">Crowe · July 2026</div>
+        <div class="news-title">Wind and solar safe harbor survives court ruling</div>
+        <div class="news-summary">A June 6 federal court ruling vacated IRS Notice 2025-42, restoring the 5% safe harbor for beginning-of-construction determinations just ahead of the July 4 statutory deadline for §45Y/48E eligibility. The government is expected to appeal, so developers relying on the restored safe harbor for construction starts near the deadline carry real risk that it could be reinstated mid-litigation.</div>
+        <a class="news-link" href="https://www.crowe.com/insights/tax-news-highlights/wind-and-solar-safe-harbor-survives-court-ruling" target="_blank">Read more →</a>
+      </div>
+      <div class="news-item">
+        <div class="news-source">Enverus Intelligence Research · July 29, 2026</div>
+        <div class="news-title">Race to resiliency: tax-credit phaseout expected to push renewable PPA prices higher</div>
+        <div class="news-summary">Enverus screened over 3,200 U.S. wind and solar projects with first-power dates before the end of 2027 and found roughly 760 (mostly solar) are dependent on IRA tax credits, meaning their levelized costs exceed projected merchant power and REC revenue once those credits phase out. Projects that miss the July 4 construction-start or 2027 in-service deadlines will need materially stronger PPA pricing to pencil, with hyperscalers likely more willing to absorb the premium than other offtakers.</div>
+        <a class="news-link" href="https://www.enverus.com/newsroom/race-to-resiliency-tax-credit-phaseout-expected-to-push-renewable-ppa-prices-higher/" target="_blank">Read more →</a>
+      </div>
+      <div class="news-item">
+        <div class="news-source">Lazard · July 13, 2026</div>
+        <div class="news-title">Renewables remain the lowest-cost new-build generation despite rising cost pressures</div>
+        <div class="news-summary">Lazard's 19th annual Levelized Cost of Energy+ report finds unsubsidized renewables still the cheapest new-build generation option, even as costs rise across every technology amid tariffs, supply-chain pressure, and unprecedented data-center-driven demand growth. Wind, solar, and storage are still expected to make up the majority of near-term U.S. capacity additions given their comparatively short deployment timelines — a trend directly relevant to how we underwrite new PPA pricing.</div>
+        <a class="news-link" href="https://www.lazard.com/news-announcements/lazard-releases-2026-levelized-cost-of-energyplus-report-pr/" target="_blank">Read more →</a>
+      </div>
+      <div class="news-item">
+        <div class="news-source">Crux · 2Q 2026</div>
+        <div class="news-title">Market update: what happened in the 2Q2026 tax credit market</div>
+        <div class="news-summary">Crux's second-quarter market update covers where transferable tax credit pricing landed following the OBBB-driven pause, how prohibited-foreign-entity restrictions are shaping deal structuring, and the competitive dynamics among buyers as the pool of available 2025- and 2026-vintage credits narrows — directly relevant context for how we price our own ITC/PTC transfers.</div>
+        <a class="news-link" href="https://www.crux.com/blog/market-update-what-happened-in-the-2q2026-tax-credit-market" target="_blank">Read more →</a>
+      </div>
+    </div>
+ 
+    <div class="three-block">
+      <div id="sec-asu" class="section-label slate" style="margin-bottom:14px;">ASU updates</div>
+      <div class="asu-item">
+        <a href="https://www.fasb.org/page/ShowPdf?path=ASU%202025-10.pdf" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2025-10 · NEW ↗</div></a>
+        <div class="asu-title">Government Grants (Topic 832)</div>
+        <div class="asu-summary">Issued July 7, 2026. FASB's first authoritative U.S. GAAP guidance for recognizing and measuring government grants received by business entities — previously handled by analogy to IAS 20. The ASU defines "government grant" and sets recognition/measurement requirements that vary by whether the grant relates to an asset or to income. Effective for PBEs in fiscal years beginning after Dec 15, 2029; one year later for other entities. Modified prospective, modified retrospective, or full retrospective transition permitted.</div>
+        <div class="acct-lens"><div class="acct-lens-label">Where we landed</div>As it relates to transferrable tax credits, TA evaluating whether we can analogize to the new ASC 832 standard rather than ASC 740. No impact in 2026. Will be a 2027 change in policy, if elected.</div>
+      </div>
+      <div class="asu-item">
+        <a href="https://fasb.org/page/ShowPdf?path=ASU%202026-01.pdf" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2026-01 ↗</div></a>
+        <div class="asu-title">Initial Measurement of Paid-in-Kind Dividends (Topic 505)</div>
+        <div class="asu-summary">Issued April 23, 2026. Requires PIK dividends on equity-classified preferred stock to be measured based on the stated PIK dividend rate in the preferred stock agreement, eliminating prior diversity in practice. Applies to all entities. Effective for annual periods beginning after Dec 15, 2026; early adoption permitted.</div>
+        <div class="acct-lens"><div class="acct-lens-label">Where we landed</div>Deemed not applicable to Longroad.</div>
+      </div>
+      <div class="asu-item">
+        <a href="https://www.fasb.org/page/ShowPdf?path=ASU%202026-02.pdf" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2026-02 ↗</div></a>
+        <div class="asu-title">Environmental Credits and ECOs (Topic 818)</div>
+        <div class="asu-summary">Issued May 19, 2026. Establishes the first comprehensive accounting model for environmental credits and environmental credit obligations. Entities recognize assets based on intended use (compliance vs. noncompliance vs. voluntary) and how credits are obtained. Effective for PBEs in fiscal years beginning after Dec 15, 2027; one year later for all others. Early adoption permitted.</div>
+        <div class="acct-lens"><div class="acct-lens-label">Where we landed</div>We're effectively already there — our current REC/environmental credit treatment lines up with the ASC 818 model, so we will formally early-adopt the ASU, however, there is no change to our current accounting methodology.</div>
+      </div>
+    </div>
+ 
+  </div>
+ 
+  <!-- SUGGESTIONS FOOTER -->
+  <div style="background:#F8FAFC;border-top:1px solid #E2E8F0;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <div style="font-size:12px;color:#64748B;line-height:1.5;">Have a suggestion for future editions?</div>
+    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=BcspO8NhZE-7_herJMJHBZ20oyIyhXBHp-8_DV8rvxFUNE00MThMNFJJRTlHNVRRODVSTVc4TzA4WS4u" style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;background:#475569;padding:8px 18px;border-radius:3px;text-decoration:none;white-space:nowrap;">Share your ideas →</a>
+  </div>
+ 
+  <!-- EMERALD DIVIDER -->
+  <div style="height:3px;background:#10B981;"></div>
+ 
+  <div class="footer">
+    <div>
+      <div class="closer-label">Monthly closer</div>
+      <div class="closer-text">Before ASU 2025-10, U.S. companies accounted for government grants by analogy to a foreign standard. How long had that standard been on the books?</div>
+      <div style="font-size:11px;color:#64748B;margin-top:8px;letter-spacing:0.02em;">A) ~10 years &nbsp;·&nbsp; B) ~20 years &nbsp;·&nbsp; C) ~40 years &nbsp;·&nbsp; D) ~60 years</div>
+      <div style="margin-top:10px;">
+        <button id="reveal-btn" onclick="document.getElementById('reveal-btn').style.display='none';document.getElementById('reveal-ans').style.display='block';" style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:transparent;border:1px solid #334155;color:#64748B;padding:5px 14px;border-radius:3px;cursor:pointer;">Reveal answer</button>
+        <div id="reveal-ans" onclick="document.getElementById('reveal-ans').style.display='none';document.getElementById('reveal-btn').style.display='inline-block';" style="display:none;font-size:12px;color:#10B981;font-weight:600;padding:5px 0;cursor:pointer;">C) ~40 years — IAS 20 was issued in 1983. U.S. GAAP had no equivalent authoritative guidance until ASU 2025-10 in July 2026, 43 years later. <span style="font-size:10px;color:#475569;font-weight:400;margin-left:6px;">Hide ↑</span></div>
+      </div>
+    </div>
+    <div class="footer-brand">
+      The Ledger
+      <span>Longroad Accounting</span>
+    </div>
+  </div>
+ 
+</div>
+
+<!-- IDENTITY MODAL -->
+<div id="identity-modal" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.75);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:8px;padding:32px 28px 24px;max-width:360px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#10B981;margin-bottom:10px;">The Ledger · Comments</div>
+    <div style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#1E293B;margin-bottom:8px;line-height:1.2;">What’s your name?</div>
+    <div style="font-size:12px;color:#64748B;margin-bottom:18px;line-height:1.5;">Your name appears on comments you post. You’ll only be asked once per browser.</div>
+    <input id="idn-inp" type="text" placeholder="First Last" autocomplete="name"
+      style="width:100%;border:1.5px solid #E2E8F0;border-radius:5px;padding:9px 12px;font-size:13px;color:#1E293B;font-family:inherit;outline:none;transition:border-color 0.15s;margin-bottom:14px;"
+      onfocus="this.style.borderColor='#10B981'" onblur="this.style.borderColor='#E2E8F0'" />
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <button id="idn-skip" style="font-size:10px;font-weight:600;color:#94A3B8;background:none;border:none;cursor:pointer;padding:4px 0;">Skip for now</button>
+      <button id="idn-save" style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:#10B981;color:#fff;border:none;border-radius:3px;padding:9px 22px;cursor:pointer;" onmouseover="this.style.background='#059669'" onmouseout="this.style.background='#10B981'">Save name →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── NAV PILLS ──
+  document.querySelectorAll('.pill[data-target]').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('.pill').forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      var target = document.getElementById(pill.getAttribute('data-target'));
+      if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // ── WORDLE ──
+  (function() {
+    var ANSWER = 'GRANT';
+    var ROWS = 6, COLS = 5;
+    var currentRow = 0, currentCol = 0;
+    var board = Array.from({length: ROWS}, function() { return Array(COLS).fill(''); });
+    var gameOver = false;
+
+    var KEYS = [
+      ['Q','W','E','R','T','Y','U','I','O','P'],
+      ['A','S','D','F','G','H','J','K','L'],
+      ['ENTER','Z','X','C','V','B','N','M','⌫']
+    ];
+    var keyEls = {};
+
+    // Build grid
+    var grid = document.getElementById('wordle-grid');
+    for (var r = 0; r < ROWS; r++) {
+      for (var c = 0; c < COLS; c++) {
+        var cell = document.createElement('div');
+        cell.id = 'wc-' + r + '-' + c;
+        cell.style.cssText = 'width:28px;height:28px;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#1E293B;border-radius:3px;transition:background 0.2s;';
+        grid.appendChild(cell);
+      }
+    }
+
+    // Build keyboard
+    var kb = document.getElementById('wordle-keyboard');
+    KEYS.forEach(function(row) {
+      var rowEl = document.createElement('div');
+      rowEl.style.cssText = 'display:flex;gap:3px;';
+      row.forEach(function(key) {
+        var btn = document.createElement('button');
+        btn.textContent = key;
+        var isWide = key === 'ENTER' || key === '⌫';
+        btn.style.cssText = 'min-width:' + (isWide ? '36px' : '20px') + ';height:26px;border:none;border-radius:3px;background:#E2E8F0;color:#1E293B;font-size:8px;font-weight:700;cursor:pointer;transition:background 0.15s;';
+        btn.addEventListener('click', function() { handleKey(key); });
+        keyEls[key] = btn;
+        rowEl.appendChild(btn);
+      });
+      kb.appendChild(rowEl);
+    });
+
+    function handleKey(key) {
+      if (gameOver) return;
+      if (key === '⌫') {
+        if (currentCol > 0) {
+          currentCol--;
+          board[currentRow][currentCol] = '';
+          document.getElementById('wc-' + currentRow + '-' + currentCol).textContent = '';
+        }
+      } else if (key === 'ENTER') {
+        if (currentCol < COLS) { showMsg('Not enough letters'); return; }
+        submitGuess();
+      } else if (currentCol < COLS && key.length === 1) {
+        board[currentRow][currentCol] = key;
+        var cell = document.getElementById('wc-' + currentRow + '-' + currentCol);
+        cell.textContent = key;
+        cell.style.border = '2px solid #94A3B8';
+        currentCol++;
+      }
+    }
+
+    function submitGuess() {
+      var guess = board[currentRow].join('');
+      var result = Array(COLS).fill('absent');
+      var answerArr = ANSWER.split('');
+      var guessArr = guess.split('');
+      // Correct pass
+      for (var i = 0; i < COLS; i++) {
+        if (guessArr[i] === answerArr[i]) {
+          result[i] = 'correct';
+          answerArr[i] = null;
+          guessArr[i] = null;
+        }
+      }
+      // Present pass
+      for (var i = 0; i < COLS; i++) {
+        if (guessArr[i] === null) continue;
+        var idx = answerArr.indexOf(guessArr[i]);
+        if (idx !== -1) {
+          result[i] = 'present';
+          answerArr[idx] = null;
+        }
+      }
+      // Colour cells
+      var colors = { correct: '#6EE7B7', present: '#FDE68A', absent: '#CBD5E1' };
+      var textCol = { correct: '#065F46', present: '#92400E', absent: '#475569' };
+      result.forEach(function(r, i) {
+        var cell = document.getElementById('wc-' + currentRow + '-' + i);
+        cell.style.background = colors[r];
+        cell.style.border = '2px solid ' + colors[r];
+        cell.style.color = textCol[r];
+        // Update key colour (only upgrade: absent→present→correct)
+        var k = board[currentRow][i];
+        var btn = keyEls[k];
+        if (btn) {
+          var cur = btn.dataset.state || '';
+          if (r === 'correct' || (r === 'present' && cur !== 'correct') || (r === 'absent' && cur === '')) {
+            btn.style.background = colors[r];
+            btn.style.color = '#fff';
+            btn.dataset.state = r;
+          }
+        }
+      });
+
+      if (guess === ANSWER) {
+        gameOver = true;
+        showMsg('Nice work! 🎉');
+        return;
+      }
+      currentRow++;
+      currentCol = 0;
+      if (currentRow === ROWS) {
+        gameOver = true;
+        showMsg('The word was ' + ANSWER);
+      }
+    }
+
+    function showMsg(m) {
+      var el = document.getElementById('wordle-msg');
+      el.textContent = m;
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace') { handleKey('⌫'); }
+      else if (e.key === 'Enter') { handleKey('ENTER'); }
+      else if (/^[a-zA-Z]$/.test(e.key)) { handleKey(e.key.toUpperCase()); }
+    });
+  })();
+
+  // ── TRUE / FALSE ──
+  (function() {
+    var QUESTIONS = [
+      {
+        q: 'The depreciation trigger occurs at substantial completion.',
+        answer: false,
+        explanation: 'False. Depreciation begins at COD (the placed-in-service date), not substantial completion. Substantial completion triggers the CIP-to-PP&E reclass and stops capitalized interest, but depreciation, ITC vesting, and TE funding don\'t kick in until COD.'
+      },
+      {
+        q: 'ASU 2025-10 is FASB\'s first authoritative U.S. GAAP standard specifically addressing government grants.',
+        answer: true,
+        explanation: 'True. Before this, most entities accounted for government grants by analogy to IAS 20 — there was no direct U.S. GAAP guidance.'
+      },
+      {
+        q: 'Under ASC 470-50, a loan stays classified as current until a formal extension is signed.',
+        answer: true,
+        explanation: 'True. Until the amendment is executed, the original maturity terms govern classification.'
+      },
+      {
+        q: '1000 Mile Solar\'s tax equity investor is Wells Fargo.',
+        answer: false,
+        explanation: 'False — that\'s Big Creek Solar. 1000 Mile Solar\'s tax equity investor is Morgan Stanley.'
+      },
+      {
+        q: 'Sun Pond includes both a solar component and a battery storage component.',
+        answer: true,
+        explanation: 'True. 111 MWdc solar plus 340 MWh of BESS, part of the broader Sun Streams Complex.'
+      }
+    ];
+
+    var score = 0;
+    var answered = 0;
+    var list = document.getElementById('tf-list');
+
+    QUESTIONS.forEach(function(item, idx) {
+      var wrapper = document.createElement('div');
+      wrapper.style.cssText = 'border:1.5px solid #E2E8F0;border-radius:5px;overflow:hidden;';
+
+      // Question row
+      var qRow = document.createElement('div');
+      qRow.style.cssText = 'padding:7px 9px 6px;font-size:9.5px;color:#334155;line-height:1.5;';
+      qRow.textContent = item.q;
+
+      // Button row
+      var btnRow = document.createElement('div');
+      btnRow.style.cssText = 'display:flex;gap:4px;padding:0 9px 7px;';
+
+      var trueBtn = document.createElement('button');
+      trueBtn.textContent = 'True';
+      trueBtn.style.cssText = 'flex:1;font-size:8.5px;font-weight:700;letter-spacing:0.06em;padding:4px 0;border-radius:3px;border:1.5px solid #E2E8F0;background:#fff;color:#334155;cursor:pointer;transition:all 0.15s;';
+
+      var falseBtn = document.createElement('button');
+      falseBtn.textContent = 'False';
+      falseBtn.style.cssText = 'flex:1;font-size:8.5px;font-weight:700;letter-spacing:0.06em;padding:4px 0;border-radius:3px;border:1.5px solid #E2E8F0;background:#fff;color:#334155;cursor:pointer;transition:all 0.15s;';
+
+      // Explanation row (hidden until answered)
+      var expRow = document.createElement('div');
+      expRow.style.cssText = 'display:none;padding:5px 9px 7px;border-top:1.5px solid #E2E8F0;font-size:9px;color:#475569;line-height:1.55;';
+
+      function handleAnswer(chosen) {
+        var correct = (chosen === item.answer);
+        if (correct) score++;
+        answered++;
+
+        // Style the chosen button
+        var chosenBtn = chosen ? trueBtn : falseBtn;
+        var otherBtn = chosen ? falseBtn : trueBtn;
+        chosenBtn.style.background = correct ? '#6EE7B7' : '#FCA5A5';
+        chosenBtn.style.color = correct ? '#065F46' : '#7F1D1D';
+        chosenBtn.style.borderColor = correct ? '#6EE7B7' : '#FCA5A5';
+
+        // If wrong, highlight the correct button
+        if (!correct) {
+          var correctBtn = item.answer ? trueBtn : falseBtn;
+          correctBtn.style.background = '#F0FDF8';
+          correctBtn.style.borderColor = '#6EE7B7';
+          correctBtn.style.color = '#065F46';
+        }
+
+        // Disable both buttons
+        trueBtn.disabled = true;
+        falseBtn.disabled = true;
+        trueBtn.style.cursor = 'default';
+        falseBtn.style.cursor = 'default';
+
+        // Show explanation
+        expRow.style.display = 'block';
+        expRow.style.background = correct ? '#F0FDF8' : '#FEF2F2';
+        expRow.innerHTML = '<span style="font-weight:700;color:' + (correct ? '#059669' : '#EF9090') + ';">' + (correct ? '✓ Correct' : '✗ Incorrect') + '</span> — ' + item.explanation;
+
+        // Update score display
+        document.getElementById('tf-score').textContent = score + '/' + answered;
+      }
+
+      trueBtn.addEventListener('click', function() { handleAnswer(true); });
+      falseBtn.addEventListener('click', function() { handleAnswer(false); });
+
+      btnRow.appendChild(trueBtn);
+      btnRow.appendChild(falseBtn);
+      wrapper.appendChild(qRow);
+      wrapper.appendChild(btnRow);
+      wrapper.appendChild(expRow);
+      list.appendChild(wrapper);
+    });
+  })();
+
+  // ── SMARTSHEET COMMENT ENGINE ──
+  var SS_TOKEN = '582WSoRAfSMF9vpicJgU4IVHcS42UY4kmr0ry';
+  var SS_SHEET = 4281939509858180;
+  var SS_URL   = 'https://api.smartsheet.com/2.0/sheets/' + SS_SHEET;
+  var EDITION  = 'July 2026';
+
+  var COL = {
+    commentId:     8500066816135044,
+    edition:        337292491526020,
+    itemKey:       4840892118896516,
+    itemTitle:     2589092305211268,
+    commenterName: 7092691932581764,
+    commentText:   1463192398368644,
+    timestamp:     5966792025739140,
+    parentId:      3714992212053892
+  };
+
+  var ITEM_TITLES = {
+    'dev-1000mile-cod':        '1000 Mile Solar — Substantial Completion & COD',
+    'dev-milford-ptc':         'Milford Wind — PTC transfer to Dot Foods',
+    'dev-notchpeak-selfops':   'Notch Peak — LADWP Board approves PPA',
+    'dev-titan-sce-ra':        'Titan — Import Resource Adequacy (SCE)',
+    'dev-rosemary-fluence':    'Rosemary — BESS Supply Agreement with Fluence',
+    'ops-prospero2-extension': 'Prospero II — term loan extension signed',
+    'ops-milford-fervo':       'Milford Wind — Fervo outage reimbursement'
+  };
+
+  var commentCounts = {};
+  var threadOpen    = {};
+  var currentUser   = '';
+
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function getInitials(name) {
+    var p = String(name||'').trim().split(/\s+/);
+    return p.length >= 2 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : String(name||'??').slice(0,2).toUpperCase();
+  }
+  function avatarBg(name) {
+    var palette = ['#334155','#1E4D3A','#1E3A5F','#44337A','#744210','#065F46'];
+    var h = 0; for(var i=0;i<name.length;i++) h += name.charCodeAt(i);
+    return palette[h % palette.length];
+  }
+  function relTime(iso) {
+    var d = new Date(iso), diff = (Date.now()-d)/1000;
+    if (diff < 60)    return 'just now';
+    if (diff < 3600)  return Math.floor(diff/60)+'m ago';
+    if (diff < 86400) return Math.floor(diff/3600)+'h ago';
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  }
+  function uid() { return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+
+  function updateAvatars() {
+    var bg = avatarBg(currentUser), ini = getInitials(currentUser);
+    document.querySelectorAll('.compose-avatar-xs').forEach(function(el){
+      el.textContent = ini; el.style.background = bg;
+    });
+  }
+
+  function showIdentityPrompt(then) {
+    var modal = document.getElementById('identity-modal');
+    modal.style.display = 'flex';
+    var inp = document.getElementById('idn-inp');
+    inp.value = ''; inp.focus();
+    function save() {
+      var name = inp.value.trim();
+      if (!name) { inp.style.borderColor='#EF4444'; return; }
+      localStorage.setItem('ledger_name', name);
+      currentUser = name;
+      updateAvatars();
+      modal.style.display = 'none';
+      if (then) then();
+    }
+    document.getElementById('idn-save').onclick = save;
+    document.getElementById('idn-skip').onclick = function() { modal.style.display='none'; if(then) then(); };
+    inp.onkeydown = function(e) { if(e.key==='Enter') save(); };
+  }
+
+  function toggleThread(id) {
+    var thread = document.getElementById('thread-'+id);
+    var tog    = document.getElementById('tog-'+id);
+    if (!thread||!tog) return;
+    threadOpen[id] = !threadOpen[id];
+    thread.style.display = threadOpen[id] ? 'block' : 'none';
+    tog.textContent = threadOpen[id] ? 'hide' : 'show';
+  }
+
+  function renderComment(c, isNew, isReply) {
+    var bg = avatarBg(c.name), ini = getInitials(c.name);
+    var newBadge = isNew   ? '<span class="comment-new-badge">new</span>' : '';
+    var replyBtn = isReply ? '' : '<button class="comment-reply-link" onclick="startReply(\'' + esc(c.itemKey) + '\',\'' + esc(c.id) + '\')">Reply</button>';
+    return '<div class="comment-row" id="cmt-'+esc(c.id)+'">' +
+      '<div class="comment-avatar-sm" style="background:'+bg+';">'+ini+'</div>' +
+      '<div class="comment-body-wrap">' +
+        '<div class="comment-meta-row">' +
+          '<span class="comment-author">'+esc(c.name)+'</span>' +
+          '<span class="comment-time">'+relTime(c.ts)+'</span>' +
+          newBadge +
+        '</div>' +
+        '<div class="comment-text">'+esc(c.text)+'</div>' +
+        replyBtn +
+        '<div class="replies-for-'+esc(c.id)+'"></div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  async function loadComments() {
+    try {
+      var r = await fetch(SS_URL, { headers:{ Authorization:'Bearer '+SS_TOKEN } });
+      if (!r.ok) return;
+      var d = await r.json();
+      var all = [];
+      (d.rows||[]).forEach(function(row) {
+        var c = {};
+        (row.cells||[]).forEach(function(cell) {
+          var cid = cell.columnId, v = cell.value != null ? String(cell.value) : '';
+          if      (cid === COL.commentId)     c.id      = v;
+          else if (cid === COL.edition)       c.edition = v;
+          else if (cid === COL.itemKey)       c.itemKey = v;
+          else if (cid === COL.commenterName) c.name    = v;
+          else if (cid === COL.commentText)   c.text    = v;
+          else if (cid === COL.timestamp)     c.ts      = v;
+          else if (cid === COL.parentId)      c.parent  = v;
+        });
+        if (c.edition === EDITION && c.id && c.itemKey) all.push(c);
+      });
+      var byKey = {};
+      all.forEach(function(c) { (byKey[c.itemKey] = byKey[c.itemKey]||[]).push(c); });
+      Object.keys(byKey).forEach(function(key) {
+        var comments  = byKey[key];
+        var top       = comments.filter(function(c){ return !c.parent; });
+        var replies   = comments.filter(function(c){ return !!c.parent; });
+        var container = document.getElementById('new-'+key);
+        if (!container) return;
+        container.innerHTML = '';
+        top.forEach(function(c) {
+          var div = document.createElement('div');
+          div.innerHTML = renderComment(c, false, false);
+          container.appendChild(div.firstChild);
+          var slot = container.querySelector('.replies-for-'+c.id);
+          if (slot) {
+            replies.filter(function(r){ return r.parent===c.id; }).forEach(function(r){
+              var rdiv = document.createElement('div');
+              rdiv.className = 'comment-reply-indent';
+              rdiv.innerHTML = renderComment(r, false, true);
+              slot.appendChild(rdiv);
+            });
+          }
+        });
+        commentCounts[key] = comments.length;
+        var badge = document.getElementById('cnt-'+key);
+        if (badge) badge.textContent = commentCounts[key];
+      });
+    } catch(e) { console.warn('Ledger: could not load comments', e); }
+  }
+
+  async function sendToSheet(itemKey, text, parentId) {
+    var id = uid(), now = new Date().toISOString();
+    var payload = { rows:[{ cells:[
+      { columnId: COL.commentId,     value: id },
+      { columnId: COL.edition,       value: EDITION },
+      { columnId: COL.itemKey,       value: itemKey },
+      { columnId: COL.itemTitle,     value: ITEM_TITLES[itemKey]||itemKey },
+      { columnId: COL.commenterName, value: currentUser },
+      { columnId: COL.commentText,   value: text },
+      { columnId: COL.timestamp,     value: now },
+      { columnId: COL.parentId,      value: parentId||'' }
+    ]}]};
+    var r = await fetch(SS_URL+'/rows', {
+      method:'POST',
+      headers:{ Authorization:'Bearer '+SS_TOKEN, 'Content-Type':'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    return { id:id, ts:now, name:currentUser, itemKey:itemKey, text:text, parent:parentId||'' };
+  }
+
+  function postComment(itemKey) {
+    if (!currentUser) { showIdentityPrompt(function(){ postComment(itemKey); }); return; }
+    var inp = document.getElementById('inp-'+itemKey);
+    var btn = document.getElementById('btn-'+itemKey);
+    if (!inp) return;
+    var text = inp.value.trim();
+    if (!text) return;
+    if (btn) { btn.disabled=true; btn.textContent='Posting…'; }
+    sendToSheet(itemKey, text, '').then(function(c) {
+      var container = document.getElementById('new-'+itemKey);
+      if (container) {
+        var div = document.createElement('div');
+        div.innerHTML = renderComment(c, true, false);
+        container.appendChild(div.firstChild);
+      }
+      commentCounts[itemKey] = (commentCounts[itemKey]||0)+1;
+      var badge = document.getElementById('cnt-'+itemKey);
+      if (badge) badge.textContent = commentCounts[itemKey];
+      inp.value = ''; inp.placeholder = 'Add a comment…';
+      if (btn) { btn.textContent='Post'; btn.disabled=true; }
+    }).catch(function(e) {
+      console.error(e);
+      if (btn) { btn.textContent='Post'; btn.disabled=false; }
+      alert('Could not save comment — please try again.');
+    });
+  }
+
+  function startReply(itemKey, parentId) {
+    document.querySelectorAll('.reply-input-area').forEach(function(el){ el.remove(); });
+    var slot = document.querySelector('.replies-for-'+parentId);
+    if (!slot) return;
+    var bg  = currentUser ? avatarBg(currentUser)    : '#334155';
+    var ini = currentUser ? getInitials(currentUser) : '?';
+    var area = document.createElement('div');
+    area.className = 'reply-input-area comment-compose';
+    area.style.marginTop = '6px';
+    area.innerHTML =
+      '<div class="compose-avatar-xs" style="background:'+bg+';">'+ini+'</div>' +
+      '<div class="compose-inner-wrap">' +
+        '<textarea class="compose-textarea" id="ri-'+parentId+'" rows="2" placeholder="Reply…"></textarea>' +
+        '<div class="compose-footer-row">' +
+          '<button style="font-size:9px;color:#94A3B8;background:none;border:none;cursor:pointer;" onclick="this.closest(\'.reply-input-area\').remove()">Cancel</button>' +
+          '<button class="compose-post-btn" id="rb-'+parentId+'" disabled>Reply</button>' +
+        '</div>' +
+      '</div>';
+    slot.appendChild(area);
+    var tinp = document.getElementById('ri-'+parentId);
+    var tbtn = document.getElementById('rb-'+parentId);
+    if (tinp) {
+      tinp.focus();
+      tinp.addEventListener('input', function(){ if(tbtn) tbtn.disabled = tinp.value.trim().length===0; });
+    }
+    if (tbtn) tbtn.onclick = function() {
+      if (!currentUser) { showIdentityPrompt(function(){ tbtn.click(); }); return; }
+      var text = tinp ? tinp.value.trim() : '';
+      if (!text) return;
+      tbtn.disabled=true; tbtn.textContent='Posting…';
+      sendToSheet(itemKey, text, parentId).then(function(c) {
+        var rdiv = document.createElement('div');
+        rdiv.className = 'comment-reply-indent';
+        rdiv.innerHTML = renderComment(c, true, true);
+        slot.insertBefore(rdiv, area);
+        commentCounts[itemKey] = (commentCounts[itemKey]||0)+1;
+        var badge = document.getElementById('cnt-'+itemKey);
+        if (badge) badge.textContent = commentCounts[itemKey];
+        area.remove();
+      }).catch(function(e){
+        console.error(e);
+        tbtn.disabled=false; tbtn.textContent='Reply';
+        alert('Could not save reply — please try again.');
+      });
+    };
+  }
+
+  (function init() {
+    document.querySelectorAll('.comment-count-badge').forEach(function(el) {
+      var id = el.id.replace('cnt-','');
+      commentCounts[id] = parseInt(el.textContent)||0;
+      threadOpen[id] = false;
+    });
+    document.querySelectorAll('.compose-textarea').forEach(function(inp) {
+      var id = inp.id.replace('inp-','');
+      var btn = document.getElementById('btn-'+id);
+      if (btn) inp.addEventListener('input', function(){ btn.disabled = inp.value.trim().length===0; });
+    });
+    currentUser = localStorage.getItem('ledger_name')||'';
+    if (currentUser) updateAvatars();
+    loadComments();
+  })();
+</script>
+</body>
+</html>

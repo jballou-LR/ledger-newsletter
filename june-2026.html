@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ledger — June 2026 · Edition 01</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap');
+ 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  body {
+    background: #0F172A;
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    color: #1E293B;
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  .email-wrapper {
+    max-width: 680px;
+    margin: 32px auto;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #1E3A5F;
+  }
+ 
+  /* ── HEADER ── */
+  .header {
+    background: #1E293B;
+    padding: 36px 40px 28px;
+  }
+  .header-meta {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: #475569;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header-meta span { color: #10B981; }
+  .header-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #F8FAFC;
+    line-height: 1;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+  .header-teaser {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 480px;
+  }
+  .nav-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 3px;
+    background: #1E3A5F;
+    color: #64748B;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    user-select: none;
+  }
+  .pill.active, .pill:hover {
+    background: #10B981;
+    color: #fff;
+  }
+ 
+  /* ── INTRO BLURB ── */
+  .intro {
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 20px 40px;
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.7;
+    font-style: italic;
+  }
+ 
+  /* ── MAIN GRID: 3fr + 2fr ── */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    min-height: 280px;
+  }
+  .main-col {
+    padding: 28px 32px;
+    border-right: 1px solid #E2E8F0;
+  }
+  .sidebar-col {
+    padding: 28px 24px;
+    background: #F8FAFC;
+  }
+ 
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label.emerald { color: #10B981; }
+  .section-label.slate { color: #94A3B8; }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #E2E8F0;
+  }
+ 
+  .update-block { margin-bottom: 24px; }
+  .update-block p {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #334155;
+  }
+  .update-block p + p { margin-top: 8px; }
+ 
+  .divider { height: 1px; background: #E2E8F0; margin: 4px 0 20px; }
+
+  /* ── ACCOUNTING LENS ── */
+  .acct-lens {
+    margin-top: 9px;
+    background: #F0FDF8;
+    border-left: 3px solid #10B981;
+    border-radius: 0 4px 4px 0;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    color: #1E4D3A;
+    line-height: 1.65;
+  }
+  .acct-lens-label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #10B981;
+    margin-bottom: 3px;
+  }
+ 
+  /* ── DATE CHIPS ── */
+  .date-chips { display: flex; flex-direction: column; gap: 6px; }
+  .date-chip {
+    font-size: 11px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    border: 1px solid transparent;
+  }
+  .date-chip.green { background: #fff; border-color: #10B981; color: #1E293B; }
+  .date-chip.amber { background: #fff; border-color: #94A3B8; color: #1E293B; }
+  .date-chip.red   { background: #fff; border-color: #475569; color: #1E293B; }
+  .date-chip .date-day { font-weight: 700; font-size: 10px; min-width: 40px; color: #10B981; }
+  .date-chip.amber .date-day { color: #64748B; }
+  .date-chip.red .date-day   { color: #334155; }
+  .date-chip .date-desc { font-size: 11px; }
+ 
+  /* ── CPE PICKS ── */
+  .cpe-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  .cpe-item:last-child { border-bottom: none; }
+  .cpe-provider {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #10B981;
+    margin-bottom: 2px;
+  }
+  .cpe-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1E293B;
+    margin-bottom: 2px;
+    line-height: 1.4;
+    transition: color 0.15s;
+  }
+  .cpe-item a { text-decoration: none; }
+  .cpe-item a:hover .cpe-title { color: #10B981; }
+  .cpe-meta { font-size: 11px; color: #94A3B8; }
+ 
+  /* ── INDUSTRY / ASU / CPE ROW ── */
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: 1px solid #E2E8F0;
+  }
+  .three-block {
+    padding: 22px 24px;
+    border-right: 1px solid #E2E8F0;
+  }
+  .three-block:last-child { border-right: none; }
+ 
+  .news-item {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #F1F5F9;
+  }
+  .news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .news-source {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #94A3B8;
+    margin-bottom: 3px;
+  }
+  .news-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1E293B;
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+  .news-summary { font-size: 11px; color: #64748B; line-height: 1.6; }
+  .news-link {
+    font-size: 10px;
+    color: #10B981;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 4px;
+  }
+ 
+  .asu-item {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #F1F5F9;
+  }
+  .asu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .asu-tag {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    background: #F0FDF8;
+    color: #10B981;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .asu-tag:hover {
+    background: #10B981;
+    color: #fff;
+  }
+  .asu-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1E293B;
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+  .asu-summary { font-size: 11px; color: #64748B; line-height: 1.6; }
+ 
+  /* ── FOOTER ── */
+  .footer {
+    background: #1E293B;
+    padding: 24px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .closer-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #10B981;
+    margin-bottom: 5px;
+  }
+  .closer-text {
+    font-size: 12px;
+    color: #94A3B8;
+    line-height: 1.5;
+    font-style: italic;
+    max-width: 340px;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #334155;
+    white-space: nowrap;
+    text-align: right;
+  }
+  .footer-brand span { display: block; font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #475569; margin-top: 2px; }
+
+  /* ── COMMENTS ── */
+  .comment-section { background: #F8FAFC; border-top: 1px solid #E2E8F0; padding: 10px 16px 12px; margin-top: 2px; margin-bottom: 10px; border-radius: 0 0 4px 4px; }
+  .comment-section-header { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
+  .comment-section-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #64748B; }
+  .comment-count-badge { font-size: 9px; font-weight: 700; background: #E2E8F0; color: #475569; border-radius: 10px; padding: 1px 7px; }
+  .comment-toggle-btn { font-size: 9px; color: #10B981; margin-left: auto; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; font-weight: 600; }
+  .comment-thread { margin-top: 10px; }
+  .comment-row { display: flex; gap: 8px; margin-bottom: 9px; }
+  .comment-avatar-sm { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #fff; flex-shrink: 0; margin-top: 1px; }
+  .comment-body-wrap { flex: 1; }
+  .comment-meta-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 2px; }
+  .comment-author { font-size: 10.5px; font-weight: 700; color: #1E293B; }
+  .comment-time { font-size: 9.5px; color: #94A3B8; }
+  .comment-new-badge { font-size: 7.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: #F0FDF8; color: #10B981; border: 1px solid #10B981; border-radius: 3px; padding: 1px 4px; }
+  .comment-text { font-size: 11px; color: #334155; line-height: 1.6; }
+  .comment-reply-link { font-size: 9.5px; color: #10B981; font-weight: 700; cursor: pointer; margin-top: 3px; display: inline-block; background: none; border: none; padding: 0; font-family: inherit; }
+  .comment-reply-link:hover { text-decoration: underline; }
+  .comment-reply-indent { margin-left: 30px; margin-bottom: 8px; padding-left: 8px; border-left: 2px solid #E2E8F0; }
+  .comment-compose { display: flex; gap: 8px; align-items: flex-start; margin-top: 8px; }
+  .compose-avatar-xs { width: 22px; height: 22px; border-radius: 50%; background: #334155; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #fff; flex-shrink: 0; margin-top: 2px; }
+  .compose-inner-wrap { flex: 1; }
+  .compose-textarea { width: 100%; border: 1.5px solid #E2E8F0; border-radius: 5px; padding: 6px 9px; font-size: 11px; color: #1E293B; font-family: 'DM Sans', sans-serif; resize: none; outline: none; line-height: 1.55; background: #fff; transition: border-color 0.15s; }
+  .compose-textarea:focus { border-color: #10B981; }
+  .compose-textarea::placeholder { color: #94A3B8; }
+  .compose-footer-row { display: flex; align-items: center; justify-content: space-between; margin-top: 5px; }
+  .compose-hint-text { font-size: 9px; color: #94A3B8; }
+  .compose-post-btn { font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: #10B981; color: #fff; border: none; border-radius: 3px; padding: 4px 12px; cursor: pointer; transition: background 0.15s; font-family: inherit; }
+  .compose-post-btn:hover { background: #059669; }
+  .compose-post-btn:disabled { background: #CBD5E1; cursor: default; }
+</style>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "xep3smgbwg");
+    </script>
+</head>
+<body>
+ 
+<div class="email-wrapper">
+ 
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">Newsletter &nbsp;·&nbsp; <span>June 2026</span> &nbsp;·&nbsp; Edition 01</div>
+    <div class="header-title">The Ledger</div>
+    <div class="header-teaser">Piloting the inaugural edition. Inside: development and operations updates, key dates and milestones, industry news, ASU updates, and CPE picks. Would appreciate your feedback — hit the link at the bottom and let us know what's working and what would make this better.</div>
+    <div class="nav-pills">
+      <span class="pill active" data-target="sec-dev">Development</span>
+      <span class="pill" data-target="sec-ops">Operations</span>
+      <span class="pill" data-target="sec-dates">Key dates</span>
+      <span class="pill" data-target="sec-cpe">CPE</span>
+      <span class="pill" data-target="sec-industry">Industry</span>
+      <span class="pill" data-target="sec-asu">ASU updates</span>
+    </div>
+  </div>
+ 
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+ 
+    <!-- LEFT: Dev + Ops updates -->
+    <div class="main-col">
+      <div class="update-block">
+        <div id="sec-dev" class="section-label emerald">Development updates</div>
+        <p><strong>Sun Pond achieves COD.</strong> Sun Pond (111 MWdc solar + 340 MWh BESS, Maricopa County, AZ) achieved COD under the LLCA on December 18, COD under the PPA on April 1 (guaranteed COD), and term conversion on April 20. Part of the Sun Streams Complex (~1.6 GW); PPAs with Ava Community Energy and San José Clean Energy. ITC closing payment from Sprouts executed mid-May.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>CIP → placed-in-service; depreciation and ITC recapture periods start. ITC transfer follows Serrano approach.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-sunpond-cod')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-sunpond-cod">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-sunpond-cod">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-sunpond-cod" style="display:none;">
+            
+            <div id="new-dev-sunpond-cod"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-sunpond-cod" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-sunpond-cod" onclick="postComment('dev-sunpond-cod')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Champion Creek clears IC.</strong> IC approved June 3. Two tracks: Champion Creek Generation (PV + BESS, ~500 MWac / 207 MWac BESS) and Champion Creek Link (600 MW data center, bridge-to-grid concept). Behind-the-meter and long-term data center offtake structures under consideration.</p>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-champion')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-champion">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-champion">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-champion" style="display:none;">
+            
+            <div id="new-dev-champion"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-champion" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-champion" onclick="postComment('dev-champion')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Raven — financing terms approved.</strong> IC approved tax equity (Captona) and debt (First Citizens Bank) on a portfolio-level structure, with a minimum Longroad equity contribution required.</p>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-raven')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-raven">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-raven">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-raven" style="display:none;">
+            
+            <div id="new-dev-raven"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-raven" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-raven" onclick="postComment('dev-raven')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>1000 Mile Solar — tax equity funded.</strong> 400 MWdc, Yoakum County, TX; COD targeted 2026. Morgan Stanley tax equity (~$329M total, ~$68M first funding April 30; remainder to be contributed following COD) in place. Debt ~$510M (Societe Generale / CIBC). PPA with Meta.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Allocation is subject to hypothetical liquidation at book value (HLBV) method (relates to 3Q2026 close).</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-1000mile-te')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-1000mile-te">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-1000mile-te">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-1000mile-te" style="display:none;">
+            
+            <div id="new-dev-1000mile-te"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-1000mile-te" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-1000mile-te" onclick="postComment('dev-1000mile-te')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Big Creek Solar 1 — TE term sheet signed; ECCA and LLCA in draft.</strong> 400 MWac, Lee County, AR; COD August 31, 2027, on track. TE term sheet signed May 4. Tax equity investor is Wells Fargo; ECCA expected 2026. PPA with Siculus, Inc. (Meta). Technical accounting and tax teams reviewing draft ECCA and LLCA for reporting requirements, consolidation conclusions, and HLBV modeling.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Similar ASC 606 / 815 considerations as 1000 Mile. TE term sheet affects debt classification — uncommitted TEBLs are current; committed TEBLs are noncurrent. ECCA in draft = TE commitment not yet closed; TEBL remains uncommitted and current.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-bigcreek-ts')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-bigcreek-ts">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-bigcreek-ts">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-bigcreek-ts" style="display:none;">
+            
+            <div id="new-dev-bigcreek-ts"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-bigcreek-ts" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-bigcreek-ts" onclick="postComment('dev-bigcreek-ts')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Amargosa — acquisition signed.</strong> ~1,200 MWac solar + storage (two 600 MW phases) with NV Energy, signed April 17. Delayed close conditioned on development milestones; earliest close September–November 2026.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>No acquisition accounting until close.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-amargosa')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-amargosa">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-amargosa">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-amargosa" style="display:none;">
+            
+            <div id="new-dev-amargosa"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-amargosa" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-amargosa" onclick="postComment('dev-amargosa')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Notch Peak — deal contingent hedge executed; debt term sheet approved.</strong> DCH (~70% of expected debt) with JPMorgan executed to manage interest rate risk during PPA approval; unwinds automatically if the deal doesn't close. IC approved the debt term sheet on June 10. Debt close and tax equity commitment (anticipated to be JPMorgan) both targeted for September 2026. Awaiting LADWP approval of the PPA. ITC/PTC deal structure.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>No longer designating deal-contingent hedges. TEBL stays current until the TE commitment is signed.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-notchpeak-dch')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-notchpeak-dch">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-notchpeak-dch">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-notchpeak-dch" style="display:none;">
+            
+            <div id="new-dev-notchpeak-dch"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-notchpeak-dch" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-notchpeak-dch" onclick="postComment('dev-notchpeak-dch')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Serrano TCPAs.</strong> MetLife and Allstate TCPAs executed; Chipotle in draft. ~$100M incremental TCPA volume on Serrano.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Each executed TCPA is a separate recognition event.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-serrano')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-serrano">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-serrano">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-serrano" style="display:none;">
+            
+            <div id="new-dev-serrano"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-serrano" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-serrano" onclick="postComment('dev-serrano')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Sun Basin — land auctions.</strong> Land auctions completed June 3.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Auctions were successful — a project that was previously storage-only will now include PV as well.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-sunbasin')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-sunbasin">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-sunbasin">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-sunbasin" style="display:none;">
+            
+            <div id="new-dev-sunbasin"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-sunbasin" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-sunbasin" onclick="postComment('dev-sunbasin')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>1000 Mile Solar — TCPA executed with Publix.</strong> Executed tax credit purchase agreement with Morgan Stanley on June 5, transferring up to $225M of ITCs to Publix Super Markets. No funds exchanged at execution; final closing is targeted for September 2026.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>The $0.913 pricing and par monetization will be key inputs to the ITC transfer gain/loss calculation at closing (est. September).</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-1000mile-tcpa')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-1000mile-tcpa">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-1000mile-tcpa">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-1000mile-tcpa" style="display:none;">
+            
+            <div id="new-dev-1000mile-tcpa"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-1000mile-tcpa" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-1000mile-tcpa" onclick="postComment('dev-1000mile-tcpa')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Milford Wind — 2025 PTCs transferred to Dot Foods.</strong> Commercial terms agreed with Dot Foods (facilitated by Wells Fargo) for the transfer of 2025 Milford Wind PTCs.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>PTC transfer gain recognized at closing of the transfer agreement.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('dev-milford-ptc')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-dev-milford-ptc">0</span>
+            <button class="comment-toggle-btn" id="tog-dev-milford-ptc">show</button>
+          </div>
+          <div class="comment-thread" id="thread-dev-milford-ptc" style="display:none;">
+            
+            <div id="new-dev-milford-ptc"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-dev-milford-ptc" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-dev-milford-ptc" onclick="postComment('dev-milford-ptc')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="divider"></div>
+ 
+      <div class="update-block">
+        <div id="sec-ops" class="section-label slate">Operations updates</div>
+        <p><strong>Sun Pond — now operating; storage payment dispute.</strong> COD April 1. O&amp;M under NovaSource and Longroad Energy Services. PPAs with Ava Community Energy and San José Clean Energy now generating revenue. Ava is contesting payment on the storage component, arguing that because one of the ancillary services has not been approved by CAISO, availability is effectively 0. Resolution expected to hinge on CAISO approval. Ava is also the offtaker for Zeta and Rosemary.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>PV revenue recognition under ASC 606 begins at COD. Battery portion is accounted for under ASC 842. If the CAISO dispute takes time to resolve, a reserve or derecognition may be warranted.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('ops-sunpond')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-ops-sunpond">0</span>
+            <button class="comment-toggle-btn" id="tog-ops-sunpond">show</button>
+          </div>
+          <div class="comment-thread" id="thread-ops-sunpond" style="display:none;">
+            <div id="new-ops-sunpond"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-ops-sunpond" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-ops-sunpond" onclick="postComment('ops-sunpond')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Milford Wind — Fervo invoice revised; LADWP replacement power obligation emerging.</strong> Original ~$7M invoice to Fervo for the outage is being revised downward. Separately, Milford 2 is expected to miss minimum delivery requirements because of the outage, triggering a replacement power payment obligation to LADWP for the first time. Discussions with LADWP are ongoing. A credit against future invoices is being explored rather than a lump-sum payment.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Two separate exposures: (1) the initial Fervo outage receivable; (2) the LADWP replacement power obligation.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('ops-milford')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-ops-milford">0</span>
+            <button class="comment-toggle-btn" id="tog-ops-milford">show</button>
+          </div>
+          <div class="comment-thread" id="thread-ops-milford" style="display:none;">
+            <div id="new-ops-milford"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-ops-milford" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-ops-milford" onclick="postComment('ops-milford')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Prospero 2 — loan extension in negotiation.</strong> Term loan matures August 1. Extension through December 31 being negotiated — $5M paydown.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Loan is current until extension is signed. Mod vs. extinguishment call needed on the paydown and fee under ASC 470-50.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('ops-prospero2')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-ops-prospero2">0</span>
+            <button class="comment-toggle-btn" id="tog-ops-prospero2">show</button>
+          </div>
+          <div class="comment-thread" id="thread-ops-prospero2" style="display:none;">
+            
+            <div id="new-ops-prospero2"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-ops-prospero2" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-ops-prospero2" onclick="postComment('ops-prospero2')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p><strong>Minnesota wind sale — Shaokatan Hills, Lakota Ridge, and West Pipestone.</strong> Small Minnesota Wind being sold. Combined net asset position is a deficit of approximately $4.085M.</p>
+        <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Approximately $4M in AROs to be written off at sale.</div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('ops-mnwind')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-ops-mnwind">0</span>
+            <button class="comment-toggle-btn" id="tog-ops-mnwind">show</button>
+          </div>
+          <div class="comment-thread" id="thread-ops-mnwind" style="display:none;">
+            
+            <div id="new-ops-mnwind"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">JB</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-ops-mnwind" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-ops-mnwind" onclick="postComment('ops-mnwind')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- RIGHT: Key dates + CPE -->
+    <div class="sidebar-col">
+      <div id="sec-dates" class="section-label slate" style="margin-bottom:14px;">Key dates &amp; deadlines</div>
+      <div class="date-chips">
+        <div class="date-chip green"><span class="date-day">Jun 30</span><span class="date-desc">High Cotton purchase option closing deadline</span></div>
+        <div class="date-chip green"><span class="date-day">Jul 4</span><span class="date-desc">OBBB §45Y/48E safe harbor — construction begin deadline for solar &amp; wind credits</span></div>
+        <div class="date-chip green"><span class="date-day">Jul</span><span class="date-desc">Project Raven — financing close</span></div>
+        <div class="date-chip green"><span class="date-day">Jul</span><span class="date-desc">1000 Mile Solar — COD target</span></div>
+        <div class="date-chip green"><span class="date-day">Aug 1</span><span class="date-desc">Prospero 2 term loan maturity (extension being negotiated)</span></div>
+        <div class="date-chip green"><span class="date-day">Aug 7</span><span class="date-desc">Cherry Lane land payment(s) potentially due ($265K + milestone)</span></div>
+        <div class="date-chip green"><span class="date-day">Sep</span><span class="date-desc">Notch Peak — debt close target and tax equity commitment expected concurrently</span></div>
+        <div class="date-chip green"><span class="date-day">Sep</span><span class="date-desc">1000 Mile Solar — TCPA closing with Publix (contingent on COD / placed-in-service)</span></div>
+      </div>
+ 
+      <div style="margin-top: 22px;">
+        <div id="sec-cpe" class="section-label slate" style="margin-bottom:12px;">CPE &amp; trainings</div>
+        <div class="cpe-item">
+          <a href="https://viewpoint.pwc.com/dt/us/en/pwc/webcasts/webcasts/q22026qaw.html" target="_blank">
+          <div class="cpe-provider">PwC</div>
+          <div class="cpe-title">Q2 2026 Quarterly Accounting &amp; Financial Reporting Briefing</div>
+          <div class="cpe-meta">Webcast · Jun 4 / 10 / 23 · 1.5 CPE credits</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://www.ey.com/en_us/media/webcasts/2026/06/what-you-need-to-know-for-q2-2026-financial-reporting-offering-1-of-2" target="_blank">
+          <div class="cpe-provider">EY</div>
+          <div class="cpe-title">What You Need to Know for Q2 2026 Financial Reporting</div>
+          <div class="cpe-meta">Webcast · Jun 11 (alt. Jun 16) · 1:00 PM ET · 1.2 CPE credits · Free</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://kpmg.com/us/en/frv/webcast/2026/consolidation-considerations-in-investment-transactions.html" target="_blank">
+          <div class="cpe-provider">KPMG</div>
+          <div class="cpe-title">Consolidation Considerations in Investment Transactions</div>
+          <div class="cpe-meta">Webcast · Jul 20 · 1:00 PM ET · 1 CPE credit</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://www.masscpas.org/cpe" target="_blank">
+          <div class="cpe-provider">MSCPA</div>
+          <div class="cpe-title">Summer CPE Series — Boston</div>
+          <div class="cpe-meta">In-person &amp; webcast · July–Aug · Credits vary</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://www.deloitte.com/us/en/dbriefs-webcasts/quarterly-accounting-roundup-q2-2026-update-important-developments.html" target="_blank">
+          <div class="cpe-provider">Deloitte</div>
+          <div class="cpe-title">Quarterly Accounting Roundup: Q2 2026 Update</div>
+          <div class="cpe-meta">Dbriefs Webcast · Jun 17 · 1:00 PM ET · 1.5 CPE credits</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://www.aicpa-cima.com/cpe-learning/webcast/aicpa-town-hall-series-rebroadcast" target="_blank">
+          <div class="cpe-provider">AICPA</div>
+          <div class="cpe-title">Town Hall Series: Accounting &amp; Regulatory Update</div>
+          <div class="cpe-meta">Webcast · On-demand · 1.5 CPE credits</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://www.surgentcpe.com/one-big-beautiful-bill-act-cpe-series" target="_blank">
+          <div class="cpe-provider">Surgent</div>
+          <div class="cpe-title">Overview &amp; Analysis of the New Tax Law: OBBBA — Business Tax Provisions</div>
+          <div class="cpe-meta">Webinar · On-demand · 4 CPE credits</div>
+          </a>
+        </div>
+        <div class="cpe-item">
+          <a href="https://www.surgentcpe.com/ai-cpe" target="_blank">
+          <div class="cpe-provider">Surgent</div>
+          <div class="cpe-title">AI for Accountants — Agentic AI Certificate Series</div>
+          <div class="cpe-meta">On-demand · 10 CPE credits · 5-course series</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- OFF THE BOOKS -->
+      <div style="margin-top:22px;">
+        <div class="section-label slate" style="margin-bottom:4px;">Off the Books</div>
+
+        <!-- TRUE / FALSE -->
+        <div style="margin-bottom:4px;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#10B981;margin-bottom:2px;">True or False</div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+            <div style="font-size:10px;color:#94A3B8;">Select true or false for each statement.</div>
+            <div style="font-size:9px;font-weight:700;color:#10B981;">Score: <span id="tf-score">0/0</span></div>
+          </div>
+          <div id="tf-list" style="display:flex;flex-direction:column;gap:5px;"></div>
+        </div>
+
+        <!-- WORDLE -->
+        <div style="margin-top:18px;padding-top:16px;border-top:1px solid #E2E8F0;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#10B981;margin-bottom:2px;">Word of the Month</div>
+          <div style="font-size:10px;color:#94A3B8;margin-bottom:6px;">Guess the 5-letter term in 6 tries.</div>
+          <div style="margin-bottom:8px;">
+            <button id="hint-btn" onclick="var h=document.getElementById('hint-text');var showing=h.style.display!=='none';h.style.display=showing?'none':'block';this.textContent=showing?'Need a hint?':'Hide hint';" style="font-size:8.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:transparent;border:1px solid #E2E8F0;color:#94A3B8;padding:3px 8px;border-radius:3px;cursor:pointer;">Need a hint?</button>
+            <div id="hint-text" style="display:none;margin-top:5px;font-size:9.5px;color:#475569;font-style:italic;line-height:1.5;background:#F8FAFC;border-left:2px solid #10B981;padding:4px 7px;border-radius:0 3px 3px 0;">Think derivatives, risk management, and energy PPAs. Also an ASC topic number worth knowing.</div>
+          </div>
+          <div id="wordle-grid" style="display:grid;grid-template-columns:repeat(5,28px);grid-template-rows:repeat(6,28px);gap:3px;margin-bottom:8px;"></div>
+          <div id="wordle-keyboard" style="display:flex;flex-direction:column;gap:3px;align-items:flex-start;margin-bottom:6px;"></div>
+          <div id="wordle-msg" style="font-size:10px;font-weight:600;color:#10B981;min-height:14px;"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+ 
+  <!-- TWO-COL: Industry / ASU -->
+  <div class="three-col" style="grid-template-columns: 1fr 1fr;">
+ 
+    <div class="three-block">
+      <div id="sec-industry" class="section-label slate" style="margin-bottom:14px;">Industry news</div>
+      <div class="news-item">
+        <div class="news-source">PwC · December 2025</div>
+        <div class="news-title">Financial reporting impacts of rising power demand</div>
+        <div class="news-summary">As companies turn to PPAs, battery storage, and Energy-as-a-Service arrangements to meet growing power needs, PwC flags the unanticipated financial reporting consequences these complex contractual structures can trigger — across GAAP and IFRS.</div>
+        <a class="news-link" href="https://www.pwc.com/us/en/services/consulting/deals/library/financial-reporting-implications-of-rising-power-demand.html" target="_blank">Read more →</a>
+      </div>
+      <div class="news-item">
+        <div class="news-source">Energy IB · March 2026</div>
+        <div class="news-title">The data center power boom: AI demand, hyperscaler offtake, and 50+ GW of incremental load</div>
+        <div class="news-summary">US data center power demand is projected to reach approximately 76 GW by 2026, up from roughly 50 GW in 2024. Amazon, Microsoft, Google, and Meta together accounted for roughly half of all global clean energy purchase agreements signed in 2025, and hyperscaler capex is forecast to exceed $600 billion in 2026. Corporate procurement has evolved beyond REC purchasing toward hourly matching — raising the bar on what offtake structures need to deliver, and making bankable hyperscaler PPAs among the most sought-after assets in project finance.</div>
+        <a class="news-link" href="https://ibinterviewquestions.com/guides/energy-investment-banking/data-center-power-boom-ai-demand-hyperscaler" target="_blank">Read more →</a>
+      </div>
+      <div class="news-item">
+        <div class="news-source">Deloitte Insights · April 2026</div>
+        <div class="news-title">2026 Renewable Energy Industry Outlook: speed, resilience, and the OBBBA inflection point</div>
+        <div class="news-summary">Deloitte's annual outlook frames 2026 as a year defined by compressed timelines and supply chain pressure. Developers are racing to safe-harbor projects before the July 4 construction deadline, while FEOC restrictions and tariffs are reshaping procurement decisions. Deloitte projects annual solar, wind, and storage additions through 2030 could fall to 30–66 GW under the OBBBA regime, down from a pre-OBBBA range of 54–85 GW. Data center demand and rising electricity prices are identified as the counterweight keeping renewable economics viable despite the credit phaseout.</div>
+        <a class="news-link" href="https://www.deloitte.com/us/en/insights/industry/renewable-energy/renewable-energy-industry-outlook.html" target="_blank">Read more →</a>
+      </div>
+      <div class="news-item">
+        <div class="news-source">Journal of Accountancy · April 2026</div>
+        <div class="news-title">How finance teams are really using AI in 2026</div>
+        <div class="news-summary">60% of finance teams are piloting AI — but only 7% of CFOs report strong impact. A grounded look at what's actually working (and what isn't) across reconciliation, multi-entity consolidation, and workflow automation.</div>
+        <a class="news-link" href="https://www.journalofaccountancy.com/issues/2026/apr/how-are-finance-teams-really-using-ai-and-automation/" target="_blank">Read more →</a>
+      </div>
+      <div class="news-item">
+        <div class="news-source">FASB · May 19, 2026</div>
+        <div class="news-title">FASB issues first-ever standard on environmental credits</div>
+        <div class="news-summary">ASU 2026-02 establishes comprehensive GAAP guidance for recognizing, measuring, and disclosing environmental credits and related obligations — RECs, carbon offsets, and compliance credits included. Previously, companies accounted for these through inventory, intangibles, or contingencies with wide variation. The new standard defines treatment based on intended use and how credits are obtained. Directly relevant to our portfolio.</div>
+        <a class="news-link" href="https://rsmus.com/insights/financial-reporting/fasb-guidance-environmental-credits-related-obligations.html" target="_blank">Read more →</a>
+      </div>
+      <div class="news-item">
+        <div class="news-source">White &amp; Case / Utility Dive · June 2026</div>
+        <div class="news-title">FERC orders all major grid operators to reform large-load interconnection rules</div>
+        <div class="news-summary">In June 2026, FERC issued show cause orders to all six jurisdictional RTOs — including PJM, MISO, and SPP — requiring them to revise or justify their interconnection rules for data centers and other large loads. The orders follow a DOE directive from October 2025 and focus on standardizing study deposits, accelerating queue timelines, and addressing cost allocation for network upgrades. PJM alone projects 30 GW of new data center demand by 2030. The action has direct implications for developers structuring behind-the-meter and co-location arrangements.</div>
+        <a class="news-link" href="https://www.whitecase.com/insight-alert/ferc-orders-grid-operators-promptly-revise-or-justify-interconnection-rules-data" target="_blank">Read more →</a>
+      </div>
+      <div class="news-item">
+        <div class="news-source">Novogradac · Ongoing</div>
+        <div class="news-title">OBBB safe harbor deadline: July 4, 2026</div>
+        <div class="news-summary">Under the One Big Beautiful Bill Act, wind and solar projects must begin construction before July 5 to qualify for §45Y/48E tech-neutral credits. FEOC restrictions on foreign entity participation are also now in effect. Accounting teams should expect related capitalization questions, tax credit structuring activity, and potential safe harbor documentation requests in Q2/Q3.</div>
+        <a class="news-link" href="https://www.novoco.com/resource-centers/renewable-energy-tax-credits/about-renewable-energy-tax-credits" target="_blank">Read more →</a>
+      </div>
+    </div>
+ 
+    <div class="three-block">
+      <div id="sec-asu" class="section-label slate" style="margin-bottom:14px;">ASU updates</div>
+      <div class="asu-item">
+        <a href="https://www.fasb.org/page/ShowPdf?path=ASU%202025-10.pdf&title=Accounting%20Standards%20Update%202025-10%E2%80%94Government%20Grants%20(Topic%20832):%20Accounting%20for%20Government%20Grants" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2025-10 ↗</div></a>
+        <div class="asu-title">Government Grants (Topic 832)</div>
+        <div class="asu-summary">First explicit U.S. GAAP guidance on accounting for government grants — previously most entities defaulted to IAS 20 by analogy. Recognition requires conditions to be substantially met. Entities elect gross vs. net P&L presentation. Effective for annual periods beginning after Dec 15, 2026; nonpublic entities one year later. Early adoption permitted.</div>
+      </div>
+      <div class="asu-item">
+        <a href="https://www.fasb.org/page/ShowPdf?path=ASU%202025-12.pdf&title=Accounting%20Standards%20Update%202025-12%E2%80%94Codification%20Improvements" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2025-12 ↗</div></a>
+        <div class="asu-title">Codification Improvements</div>
+        <div class="asu-summary">Addresses 33 technical corrections and clarifications across a range of topics. Notable items include clarified diluted EPS calculation when a loss from continuing operations exists, permissible treasury stock retirement methods, and lease receivable disclosure requirements under ASC 842. Effective for all entities for annual periods beginning after Dec 15, 2026. Early adoption permitted.</div>
+      </div>
+      <div class="asu-item">
+        <a href="https://fasb.org/page/ShowPdf?path=ASU%202026-01.pdf&title=Accounting%20Standards%20Update%202026-01%E2%80%94Equity%20(Topic%20505):%20Initial%20Measurement%20of%20Paid-in-Kind%20Dividend" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2026-01 ↗</div></a>
+        <div class="asu-title">Initial Measurement of Paid-in-Kind Dividends (Topic 505)</div>
+        <div class="asu-summary">Issued April 23, 2026. Requires PIK dividends on equity-classified preferred stock to be measured based on the stated PIK dividend rate in the preferred stock agreement — eliminating prior diversity in practice. Applies to all entities. Effective for annual periods beginning after Dec 15, 2026; early adoption permitted.</div>
+      </div>
+      <div class="asu-item">
+        <a href="https://www.fasb.org/page/ShowPdf?path=ASU%202026-02.pdf&title=Accounting%20Standards%20Update%202026-02%E2%80%94Environmental%20Credits%20and%20Environmental%20Credit%20Obligations%20(Topi" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2026-02 · NEW ↗</div></a>
+        <div class="asu-title">Environmental Credits and ECOs (Topic 818)</div>
+        <div class="asu-summary">Issued May 19, 2026. Establishes the first comprehensive accounting model for environmental credits and environmental credit obligations. Entities recognize assets based on intended use (compliance vs. noncompliance vs. voluntary) and how credits are obtained. Effective for PBEs in fiscal years beginning after Dec 15, 2027; one year later for all others. Early adoption permitted. The standard also adds environmental credit expense categories to the ASU 2024-03 income statement disaggregation disclosures.</div>
+      </div>
+    </div>
+ 
+  </div>
+ 
+  <!-- SUGGESTIONS FOOTER -->
+  <div style="background:#F8FAFC;border-top:1px solid #E2E8F0;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <div style="font-size:12px;color:#64748B;line-height:1.5;">Have a suggestion for future editions?</div>
+    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=BcspO8NhZE-7_herJMJHBZ20oyIyhXBHp-8_DV8rvxFUNE00MThMNFJJRTlHNVRRODVSTVc4TzA4WS4u" style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;background:#475569;padding:8px 18px;border-radius:3px;text-decoration:none;white-space:nowrap;">Share your ideas →</a>
+  </div>
+ 
+  <!-- EMERALD DIVIDER -->
+  <div style="height:3px;background:#10B981;"></div>
+ 
+  <div class="footer">
+    <div>
+      <div class="closer-label">Monthly closer</div>
+      <div class="closer-text">Which accounting standard took the longest from exposure draft to final issuance?</div>
+      <div style="font-size:11px;color:#64748B;margin-top:8px;letter-spacing:0.02em;">A) ASC 606 &nbsp;·&nbsp; B) ASC 842 &nbsp;·&nbsp; C) ASC 815 &nbsp;·&nbsp; D) ASC 805</div>
+      <div style="margin-top:10px;">
+        <button id="reveal-btn" onclick="document.getElementById('reveal-btn').style.display='none';document.getElementById('reveal-ans').style.display='block';" style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:transparent;border:1px solid #334155;color:#64748B;padding:5px 14px;border-radius:3px;cursor:pointer;">Reveal answer</button>
+        <div id="reveal-ans" onclick="document.getElementById('reveal-ans').style.display='none';document.getElementById('reveal-btn').style.display='inline-block';" style="display:none;font-size:12px;color:#10B981;font-weight:600;padding:5px 0;cursor:pointer;">B) ASC 842 — Leases. From first exposure draft in 2010 to final standard in 2016: six years, two exposure drafts, and over 1,700 comment letters. <span style="font-size:10px;color:#475569;font-weight:400;margin-left:6px;">Hide ↑</span></div>
+      </div>
+    </div>
+    <div class="footer-brand">
+      The Ledger
+      <span>Longroad Accounting</span>
+    </div>
+  </div>
+ 
+</div>
+<!-- IDENTITY MODAL -->
+<div id="identity-modal" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.75);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:8px;padding:32px 28px 24px;max-width:360px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#10B981;margin-bottom:10px;">The Ledger · Comments</div>
+    <div style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#1E293B;margin-bottom:8px;line-height:1.2;">What&#39;s your name?</div>
+    <div style="font-size:12px;color:#64748B;margin-bottom:18px;line-height:1.5;">Your name appears on comments you post. You&#39;ll only be asked once per browser.</div>
+    <input id="idn-inp" type="text" placeholder="First Last" autocomplete="name"
+      style="width:100%;border:1.5px solid #E2E8F0;border-radius:5px;padding:9px 12px;font-size:13px;color:#1E293B;font-family:inherit;outline:none;transition:border-color 0.15s;margin-bottom:14px;"
+      onfocus="this.style.borderColor='#10B981'" onblur="this.style.borderColor='#E2E8F0'" />
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <button id="idn-skip" style="font-size:10px;font-weight:600;color:#94A3B8;background:none;border:none;cursor:pointer;padding:4px 0;">Skip for now</button>
+      <button id="idn-save" style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:#10B981;color:#fff;border:none;border-radius:3px;padding:9px 22px;cursor:pointer;" onmouseover="this.style.background='#059669'" onmouseout="this.style.background='#10B981'">Save name &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── NAV PILLS ──
+  document.querySelectorAll('.pill[data-target]').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('.pill').forEach(function(p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+      var target = document.getElementById(pill.getAttribute('data-target'));
+      if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // ── WORDLE ──
+  (function() {
+    var ANSWER = 'HEDGE';
+    var ROWS = 6, COLS = 5;
+    var currentRow = 0, currentCol = 0;
+    var board = Array.from({length: ROWS}, function() { return Array(COLS).fill(''); });
+    var gameOver = false;
+
+    var KEYS = [
+      ['Q','W','E','R','T','Y','U','I','O','P'],
+      ['A','S','D','F','G','H','J','K','L'],
+      ['ENTER','Z','X','C','V','B','N','M','⌫']
+    ];
+    var keyEls = {};
+
+    // Build grid
+    var grid = document.getElementById('wordle-grid');
+    // grid dimensions already set in HTML
+    for (var r = 0; r < ROWS; r++) {
+      for (var c = 0; c < COLS; c++) {
+        var cell = document.createElement('div');
+        cell.id = 'wc-' + r + '-' + c;
+        cell.style.cssText = 'width:28px;height:28px;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#1E293B;border-radius:3px;transition:background 0.2s;';
+        grid.appendChild(cell);
+      }
+    }
+
+    // Build keyboard
+    var kb = document.getElementById('wordle-keyboard');
+    KEYS.forEach(function(row) {
+      var rowEl = document.createElement('div');
+      rowEl.style.cssText = 'display:flex;gap:3px;';
+      row.forEach(function(key) {
+        var btn = document.createElement('button');
+        btn.textContent = key;
+        var isWide = key === 'ENTER' || key === '⌫';
+        btn.style.cssText = 'min-width:' + (isWide ? '36px' : '20px') + ';height:26px;border:none;border-radius:3px;background:#E2E8F0;color:#1E293B;font-size:8px;font-weight:700;cursor:pointer;transition:background 0.15s;';
+        btn.addEventListener('click', function() { handleKey(key); });
+        keyEls[key] = btn;
+        rowEl.appendChild(btn);
+      });
+      kb.appendChild(rowEl);
+    });
+
+    function handleKey(key) {
+      if (gameOver) return;
+      if (key === '⌫') {
+        if (currentCol > 0) {
+          currentCol--;
+          board[currentRow][currentCol] = '';
+          document.getElementById('wc-' + currentRow + '-' + currentCol).textContent = '';
+        }
+      } else if (key === 'ENTER') {
+        if (currentCol < COLS) { showMsg('Not enough letters'); return; }
+        submitGuess();
+      } else if (currentCol < COLS && key.length === 1) {
+        board[currentRow][currentCol] = key;
+        var cell = document.getElementById('wc-' + currentRow + '-' + currentCol);
+        cell.textContent = key;
+        cell.style.border = '2px solid #94A3B8';
+        currentCol++;
+      }
+    }
+
+    function submitGuess() {
+      var guess = board[currentRow].join('');
+      var result = Array(COLS).fill('absent');
+      var answerArr = ANSWER.split('');
+      var guessArr = guess.split('');
+      // Correct pass
+      for (var i = 0; i < COLS; i++) {
+        if (guessArr[i] === answerArr[i]) {
+          result[i] = 'correct';
+          answerArr[i] = null;
+          guessArr[i] = null;
+        }
+      }
+      // Present pass
+      for (var i = 0; i < COLS; i++) {
+        if (guessArr[i] === null) continue;
+        var idx = answerArr.indexOf(guessArr[i]);
+        if (idx !== -1) {
+          result[i] = 'present';
+          answerArr[idx] = null;
+        }
+      }
+      // Colour cells
+      var colors = { correct: '#6EE7B7', present: '#FDE68A', absent: '#CBD5E1' };
+      var textCol = { correct: '#065F46', present: '#92400E', absent: '#475569' };
+      result.forEach(function(r, i) {
+        var cell = document.getElementById('wc-' + currentRow + '-' + i);
+        cell.style.background = colors[r];
+        cell.style.border = '2px solid ' + colors[r];
+        cell.style.color = textCol[r];
+        // Update key colour (only upgrade: absent→present→correct)
+        var k = board[currentRow][i];
+        var btn = keyEls[k];
+        if (btn) {
+          var cur = btn.dataset.state || '';
+          if (r === 'correct' || (r === 'present' && cur !== 'correct') || (r === 'absent' && cur === '')) {
+            btn.style.background = colors[r];
+            btn.style.color = '#fff';
+            btn.dataset.state = r;
+          }
+        }
+      });
+
+      if (guess === ANSWER) {
+        gameOver = true;
+        showMsg('Nice work! 🎉');
+        return;
+      }
+      currentRow++;
+      currentCol = 0;
+      if (currentRow === ROWS) {
+        gameOver = true;
+        showMsg('The word was ' + ANSWER);
+      }
+    }
+
+    function showMsg(m) {
+      var el = document.getElementById('wordle-msg');
+      el.textContent = m;
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace') { handleKey('⌫'); }
+      else if (e.key === 'Enter') { handleKey('ENTER'); }
+      else if (/^[a-zA-Z]$/.test(e.key)) { handleKey(e.key.toUpperCase()); }
+    });
+  })();
+
+  // ── TRUE / FALSE ──
+  (function() {
+    var QUESTIONS = [
+      {
+        q: 'The HLBV method allocates income based on how much each partner would receive in a hypothetical liquidation.',
+        answer: true,
+        explanation: 'Correct! HLBV calculates each partner\'s share by comparing hypothetical liquidation proceeds at the start vs. end of the period.'
+      },
+      {
+        q: 'ASU 2026-02 on environmental credits is effective for public companies immediately upon issuance.',
+        answer: false,
+        explanation: 'False. It\'s effective for PBEs in fiscal years beginning after December 15, 2027. Early adoption is permitted.'
+      },
+      {
+        q: 'Under ASC 606, revenue is recognized when cash is received.',
+        answer: false,
+        explanation: 'False. Revenue is recognized when performance obligations are satisfied — regardless of when cash changes hands.'
+      },
+      {
+        q: 'Sun Pond is Longroad\'s largest solar project by capacity.',
+        answer: false,
+        explanation: 'False. 1000 Mile Solar in Texas is larger at 400 MWdc vs. Sun Pond\'s 111 MWdc.'
+      },
+      {
+        q: '1000 Mile Solar delivers output to Meta under a Power Purchase Agreement.',
+        answer: false,
+        explanation: 'False — it\'s an Environmental Attributes Purchase Agreement with a financial settlement arrangement. A meaningful distinction.'
+      },
+      {
+        q: 'Sun Pond\'s project generates enough electricity to power approximately 35,000 homes annually.',
+        answer: true,
+        explanation: 'Correct! Confirmed in Longroad\'s May 2026 COD announcement.'
+      }
+    ];
+
+    var score = 0;
+    var answered = 0;
+    var list = document.getElementById('tf-list');
+
+    QUESTIONS.forEach(function(item, idx) {
+      var wrapper = document.createElement('div');
+      wrapper.style.cssText = 'border:1.5px solid #E2E8F0;border-radius:5px;overflow:hidden;';
+
+      // Question row
+      var qRow = document.createElement('div');
+      qRow.style.cssText = 'padding:7px 9px 6px;font-size:9.5px;color:#334155;line-height:1.5;';
+      qRow.textContent = item.q;
+
+      // Button row
+      var btnRow = document.createElement('div');
+      btnRow.style.cssText = 'display:flex;gap:4px;padding:0 9px 7px;';
+
+      var trueBtn = document.createElement('button');
+      trueBtn.textContent = 'True';
+      trueBtn.style.cssText = 'flex:1;font-size:8.5px;font-weight:700;letter-spacing:0.06em;padding:4px 0;border-radius:3px;border:1.5px solid #E2E8F0;background:#fff;color:#334155;cursor:pointer;transition:all 0.15s;';
+
+      var falseBtn = document.createElement('button');
+      falseBtn.textContent = 'False';
+      falseBtn.style.cssText = 'flex:1;font-size:8.5px;font-weight:700;letter-spacing:0.06em;padding:4px 0;border-radius:3px;border:1.5px solid #E2E8F0;background:#fff;color:#334155;cursor:pointer;transition:all 0.15s;';
+
+      // Explanation row (hidden until answered)
+      var expRow = document.createElement('div');
+      expRow.style.cssText = 'display:none;padding:5px 9px 7px;border-top:1.5px solid #E2E8F0;font-size:9px;color:#475569;line-height:1.55;';
+
+      function handleAnswer(chosen) {
+        var correct = (chosen === item.answer);
+        if (correct) score++;
+        answered++;
+
+        // Style the chosen button
+        var chosenBtn = chosen ? trueBtn : falseBtn;
+        var otherBtn = chosen ? falseBtn : trueBtn;
+        chosenBtn.style.background = correct ? '#6EE7B7' : '#FCA5A5';
+        chosenBtn.style.color = correct ? '#065F46' : '#7F1D1D';
+        chosenBtn.style.borderColor = correct ? '#6EE7B7' : '#FCA5A5';
+
+        // If wrong, highlight the correct button
+        if (!correct) {
+          var correctBtn = item.answer ? trueBtn : falseBtn;
+          correctBtn.style.background = '#F0FDF8';
+          correctBtn.style.borderColor = '#6EE7B7';
+          correctBtn.style.color = '#065F46';
+        }
+
+        // Disable both buttons
+        trueBtn.disabled = true;
+        falseBtn.disabled = true;
+        trueBtn.style.cursor = 'default';
+        falseBtn.style.cursor = 'default';
+
+        // Show explanation
+        expRow.style.display = 'block';
+        expRow.style.background = correct ? '#F0FDF8' : '#FEF2F2';
+        expRow.innerHTML = '<span style="font-weight:700;color:' + (correct ? '#059669' : '#EF9090') + ';">' + (correct ? '✓ Correct' : '✗ Incorrect') + '</span> — ' + item.explanation;
+
+        // Update score display
+        document.getElementById('tf-score').textContent = score + '/' + answered;
+      }
+
+      trueBtn.addEventListener('click', function() { handleAnswer(true); });
+      falseBtn.addEventListener('click', function() { handleAnswer(false); });
+
+      btnRow.appendChild(trueBtn);
+      btnRow.appendChild(falseBtn);
+      wrapper.appendChild(qRow);
+      wrapper.appendChild(btnRow);
+      wrapper.appendChild(expRow);
+      list.appendChild(wrapper);
+    });
+  })();
+
+  // ── SMARTSHEET COMMENT ENGINE ──
+  var SS_TOKEN = '582WSoRAfSMF9vpicJgU4IVHcS42UY4kmr0ry';
+  var SS_SHEET = 4281939509858180;
+  var SS_URL   = 'https://api.smartsheet.com/2.0/sheets/' + SS_SHEET;
+  var EDITION  = 'June 2026';
+
+  var COL = {
+    commentId:     8500066816135044,
+    edition:        337292491526020,
+    itemKey:       4840892118896516,
+    itemTitle:     2589092305211268,
+    commenterName: 7092691932581764,
+    commentText:   1463192398368644,
+    timestamp:     5966792025739140,
+    parentId:      3714992212053892
+  };
+
+  var ITEM_TITLES = {
+    'dev-sunpond-cod':    'Sun Pond — COD',
+    'dev-champion':       'Champion Creek — IC approval',
+    'dev-raven':          'Raven — financing terms approved',
+    'dev-1000mile-te':    '1000 Mile Solar — tax equity funded',
+    'dev-bigcreek-ts':    'Big Creek Solar 1 — TE term sheet signed',
+    'dev-amargosa':       'Amargosa — acquisition signed',
+    'dev-notchpeak-dch':  'Notch Peak — deal contingent hedge executed',
+    'dev-serrano':        'Serrano TCPAs',
+    'dev-sunbasin':       'Sun Basin — land auctions',
+    'dev-1000mile-tcpa':  '1000 Mile Solar — TCPA executed with Publix',
+    'dev-milford-ptc':    'Milford Wind — 2025 PTCs transferred to Dot Foods',
+    'ops-sunpond':        'Sun Pond — storage payment dispute',
+    'ops-milford':        'Milford Wind — Fervo invoice revised',
+    'ops-prospero2':      'Prospero 2 — loan extension in negotiation',
+    'ops-mnwind':         'Minnesota wind sale'
+  };
+
+  var commentCounts = {};
+  var threadOpen    = {};
+  var currentUser   = '';
+
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function getInitials(name) {
+    var p = String(name||'').trim().split(/\s+/);
+    return p.length >= 2 ? (p[0][0]+p[p.length-1][0]).toUpperCase() : String(name||'??').slice(0,2).toUpperCase();
+  }
+  function avatarBg(name) {
+    var palette = ['#334155','#1E4D3A','#1E3A5F','#44337A','#744210','#065F46'];
+    var h = 0; for(var i=0;i<name.length;i++) h += name.charCodeAt(i);
+    return palette[h % palette.length];
+  }
+  function relTime(iso) {
+    var d = new Date(iso), diff = (Date.now()-d)/1000;
+    if (diff < 60)    return 'just now';
+    if (diff < 3600)  return Math.floor(diff/60)+'m ago';
+    if (diff < 86400) return Math.floor(diff/3600)+'h ago';
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  }
+  function uid() { return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+
+  function updateAvatars() {
+    var bg = avatarBg(currentUser), ini = getInitials(currentUser);
+    document.querySelectorAll('.compose-avatar-xs').forEach(function(el){
+      el.textContent = ini; el.style.background = bg;
+    });
+  }
+
+  function showIdentityPrompt(then) {
+    var modal = document.getElementById('identity-modal');
+    modal.style.display = 'flex';
+    var inp = document.getElementById('idn-inp');
+    inp.value = ''; inp.focus();
+    function save() {
+      var name = inp.value.trim();
+      if (!name) { inp.style.borderColor='#EF4444'; return; }
+      localStorage.setItem('ledger_name', name);
+      currentUser = name;
+      updateAvatars();
+      modal.style.display = 'none';
+      if (then) then();
+    }
+    document.getElementById('idn-save').onclick = save;
+    document.getElementById('idn-skip').onclick = function() { modal.style.display='none'; if(then) then(); };
+    inp.onkeydown = function(e) { if(e.key==='Enter') save(); };
+  }
+
+  function toggleThread(id) {
+    var thread = document.getElementById('thread-'+id);
+    var tog    = document.getElementById('tog-'+id);
+    if (!thread||!tog) return;
+    threadOpen[id] = !threadOpen[id];
+    thread.style.display = threadOpen[id] ? 'block' : 'none';
+    tog.textContent = threadOpen[id] ? 'hide' : 'show';
+  }
+
+  function renderComment(c, isNew, isReply) {
+    var bg = avatarBg(c.name), ini = getInitials(c.name);
+    var newBadge = isNew   ? '<span class="comment-new-badge">new</span>' : '';
+    var replyBtn = isReply ? '' : '<button class="comment-reply-link" onclick="startReply(''+esc(c.itemKey)+'',''+esc(c.id)+'')">Reply</button>';
+    return '<div class="comment-row" id="cmt-'+esc(c.id)+'">' +
+      '<div class="comment-avatar-sm" style="background:'+bg+';">'+ini+'</div>' +
+      '<div class="comment-body-wrap">' +
+        '<div class="comment-meta-row">' +
+          '<span class="comment-author">'+esc(c.name)+'</span>' +
+          '<span class="comment-time">'+relTime(c.ts)+'</span>' +
+          newBadge +
+        '</div>' +
+        '<div class="comment-text">'+esc(c.text)+'</div>' +
+        replyBtn +
+        '<div class="replies-for-'+esc(c.id)+'"></div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  async function loadComments() {
+    try {
+      var r = await fetch(SS_URL, { headers:{ Authorization:'Bearer '+SS_TOKEN } });
+      if (!r.ok) return;
+      var d = await r.json();
+      var all = [];
+      (d.rows||[]).forEach(function(row) {
+        var c = {};
+        (row.cells||[]).forEach(function(cell) {
+          var cid = cell.columnId, v = cell.value != null ? String(cell.value) : '';
+          if      (cid === COL.commentId)     c.id      = v;
+          else if (cid === COL.edition)       c.edition = v;
+          else if (cid === COL.itemKey)       c.itemKey = v;
+          else if (cid === COL.commenterName) c.name    = v;
+          else if (cid === COL.commentText)   c.text    = v;
+          else if (cid === COL.timestamp)     c.ts      = v;
+          else if (cid === COL.parentId)      c.parent  = v;
+        });
+        if (c.edition === EDITION && c.id && c.itemKey) all.push(c);
+      });
+      var byKey = {};
+      all.forEach(function(c) { (byKey[c.itemKey] = byKey[c.itemKey]||[]).push(c); });
+      Object.keys(byKey).forEach(function(key) {
+        var comments  = byKey[key];
+        var top       = comments.filter(function(c){ return !c.parent; });
+        var replies   = comments.filter(function(c){ return !!c.parent; });
+        var container = document.getElementById('new-'+key);
+        if (!container) return;
+        container.innerHTML = '';
+        top.forEach(function(c) {
+          var div = document.createElement('div');
+          div.innerHTML = renderComment(c, false, false);
+          container.appendChild(div.firstChild);
+          var slot = container.querySelector('.replies-for-'+c.id);
+          if (slot) {
+            replies.filter(function(r){ return r.parent===c.id; }).forEach(function(r){
+              var rdiv = document.createElement('div');
+              rdiv.className = 'comment-reply-indent';
+              rdiv.innerHTML = renderComment(r, false, true);
+              slot.appendChild(rdiv);
+            });
+          }
+        });
+        commentCounts[key] = comments.length;
+        var badge = document.getElementById('cnt-'+key);
+        if (badge) badge.textContent = commentCounts[key];
+      });
+    } catch(e) { console.warn('Ledger: could not load comments', e); }
+  }
+
+  async function sendToSheet(itemKey, text, parentId) {
+    var id = uid(), now = new Date().toISOString();
+    var payload = { rows:[{ cells:[
+      { columnId: COL.commentId,     value: id },
+      { columnId: COL.edition,       value: EDITION },
+      { columnId: COL.itemKey,       value: itemKey },
+      { columnId: COL.itemTitle,     value: ITEM_TITLES[itemKey]||itemKey },
+      { columnId: COL.commenterName, value: currentUser },
+      { columnId: COL.commentText,   value: text },
+      { columnId: COL.timestamp,     value: now },
+      { columnId: COL.parentId,      value: parentId||'' }
+    ]}]};
+    var r = await fetch(SS_URL+'/rows', {
+      method:'POST',
+      headers:{ Authorization:'Bearer '+SS_TOKEN, 'Content-Type':'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    return { id:id, ts:now, name:currentUser, itemKey:itemKey, text:text, parent:parentId||'' };
+  }
+
+  function postComment(itemKey) {
+    if (!currentUser) { showIdentityPrompt(function(){ postComment(itemKey); }); return; }
+    var inp = document.getElementById('inp-'+itemKey);
+    var btn = document.getElementById('btn-'+itemKey);
+    if (!inp) return;
+    var text = inp.value.trim();
+    if (!text) return;
+    if (btn) { btn.disabled=true; btn.textContent='Posting…'; }
+    sendToSheet(itemKey, text, '').then(function(c) {
+      var container = document.getElementById('new-'+itemKey);
+      if (container) {
+        var div = document.createElement('div');
+        div.innerHTML = renderComment(c, true, false);
+        container.appendChild(div.firstChild);
+      }
+      commentCounts[itemKey] = (commentCounts[itemKey]||0)+1;
+      var badge = document.getElementById('cnt-'+itemKey);
+      if (badge) badge.textContent = commentCounts[itemKey];
+      inp.value = ''; inp.placeholder = 'Add a comment…';
+      if (btn) { btn.textContent='Post'; btn.disabled=true; }
+    }).catch(function(e) {
+      console.error(e);
+      if (btn) { btn.textContent='Post'; btn.disabled=false; }
+      alert('Could not save comment — please try again.');
+    });
+  }
+
+  function startReply(itemKey, parentId) {
+    document.querySelectorAll('.reply-input-area').forEach(function(el){ el.remove(); });
+    var slot = document.querySelector('.replies-for-'+parentId);
+    if (!slot) return;
+    var bg  = currentUser ? avatarBg(currentUser)    : '#334155';
+    var ini = currentUser ? getInitials(currentUser) : '?';
+    var area = document.createElement('div');
+    area.className = 'reply-input-area comment-compose';
+    area.style.marginTop = '6px';
+    area.innerHTML =
+      '<div class="compose-avatar-xs" style="background:'+bg+';">'+ini+'</div>' +
+      '<div class="compose-inner-wrap">' +
+        '<textarea class="compose-textarea" id="ri-'+parentId+'" rows="2" placeholder="Reply…"></textarea>' +
+        '<div class="compose-footer-row">' +
+          '<button style="font-size:9px;color:#94A3B8;background:none;border:none;cursor:pointer;" onclick="this.closest('.reply-input-area').remove()">Cancel</button>' +
+          '<button class="compose-post-btn" id="rb-'+parentId+'" disabled>Reply</button>' +
+        '</div>' +
+      '</div>';
+    slot.appendChild(area);
+    var tinp = document.getElementById('ri-'+parentId);
+    var tbtn = document.getElementById('rb-'+parentId);
+    if (tinp) {
+      tinp.focus();
+      tinp.addEventListener('input', function(){ if(tbtn) tbtn.disabled = tinp.value.trim().length===0; });
+    }
+    if (tbtn) tbtn.onclick = function() {
+      if (!currentUser) { showIdentityPrompt(function(){ tbtn.click(); }); return; }
+      var text = tinp ? tinp.value.trim() : '';
+      if (!text) return;
+      tbtn.disabled=true; tbtn.textContent='Posting…';
+      sendToSheet(itemKey, text, parentId).then(function(c) {
+        var rdiv = document.createElement('div');
+        rdiv.className = 'comment-reply-indent';
+        rdiv.innerHTML = renderComment(c, true, true);
+        slot.insertBefore(rdiv, area);
+        commentCounts[itemKey] = (commentCounts[itemKey]||0)+1;
+        var badge = document.getElementById('cnt-'+itemKey);
+        if (badge) badge.textContent = commentCounts[itemKey];
+        area.remove();
+      }).catch(function(e){
+        console.error(e);
+        tbtn.disabled=false; tbtn.textContent='Reply';
+        alert('Could not save reply — please try again.');
+      });
+    };
+  }
+
+  (function init() {
+    document.querySelectorAll('.comment-count-badge').forEach(function(el) {
+      var id = el.id.replace('cnt-','');
+      commentCounts[id] = parseInt(el.textContent)||0;
+      threadOpen[id] = false;
+    });
+    document.querySelectorAll('.compose-textarea').forEach(function(inp) {
+      var id = inp.id.replace('inp-','');
+      var btn = document.getElementById('btn-'+id);
+      if (btn) inp.addEventListener('input', function(){ btn.disabled = inp.value.trim().length===0; });
+    });
+    currentUser = localStorage.getItem('ledger_name')||'';
+    if (currentUser) updateAvatars();
+    loadComments();
+  })();
+</script>
+</body>
+</html>
