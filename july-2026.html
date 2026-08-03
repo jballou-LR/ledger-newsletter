@@ -324,6 +324,13 @@
   .comment-time { font-size: 9.5px; color: #94A3B8; }
   .comment-new-badge { font-size: 7.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: #F0FDF8; color: #10B981; border: 1px solid #10B981; border-radius: 3px; padding: 1px 4px; }
   .comment-text { font-size: 11px; color: #334155; line-height: 1.6; }
+  .comment-delete-btn { font-size:10px;font-weight:500;color:#EF4444;background:none;border:none;cursor:pointer;padding:2px 6px;margin-left:6px;opacity:0.6;transition:opacity 0.15s; }
+  .comment-delete-btn:hover { opacity:1; }
+  .reaction-bar { display:flex; gap:4px; padding:6px 0 2px; flex-wrap:wrap; }
+  .react-btn { background:#F1F5F9; border:1px solid #E2E8F0; border-radius:12px; padding:2px 8px; font-size:13px; cursor:pointer; transition:all 0.15s; display:inline-flex; align-items:center; gap:3px; line-height:1.4; }
+  .react-btn:hover { background:#E2E8F0; }
+  .react-btn.active { background:#DBEAFE; border-color:#93C5FD; }
+  .react-count { font-size:10px; font-weight:600; color:#475569; }
   .comment-reply-link { font-size: 9.5px; color: #10B981; font-weight: 700; cursor: pointer; margin-top: 3px; display: inline-block; background: none; border: none; padding: 0; font-family: inherit; }
   .comment-reply-link:hover { text-decoration: underline; }
   .comment-reply-indent { margin-left: 30px; margin-bottom: 8px; padding-left: 8px; border-left: 2px solid #E2E8F0; }
@@ -376,6 +383,7 @@
 
         <p><strong>1000 Mile Solar — Substantial Completion &amp; COD.</strong></p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Achieved substantial completion (construction essentially complete, capable of operating) and COD under the LLCA is imminent. At substantial completion, reclass CIP to PP&amp;E and stop capitalizing construction interest. LLCA COD is the placed in service date and triggers the beginning of depreciation, the vesting of ITCs, final funding by the TE partner, and the beginning of HLBV accounting.</div>
+        <div class="reaction-bar" data-item="dev-1000mile-cod" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-1000mile-cod')">
             <span class="comment-section-label">Comments</span>
@@ -399,6 +407,7 @@
 
         <p><strong>Milford Wind — PTC transfer to Dot Foods approved, TCTA execution expected in August.</strong> Milford Wind 1 & 2 generated ~$18.0M of 2025 PTCs; $6.8M has already been monetized, leaving $11.2M available for transfer. IC approved the sale to Dot Foods on July 22 and the Tax Credit Transfer Agreement is expected to execute in August, with the closing payment due no later than mid-September; proceeds will service the High Street facility debt.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>TA to review, likely ASC 740 equity accounting.</div>
+        <div class="reaction-bar" data-item="dev-milford-ptc" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-milford-ptc')">
             <span class="comment-section-label">Comments</span>
@@ -423,6 +432,7 @@
         <!-- EDITORIAL NOTE (Justin): in-progress item, hold vs. cut during human review — fee structure explicitly not yet confirmed in IC minutes -->
         <p><strong>Notch Peak — LADWP Board approves PPA; self-operations approved with fee structure now set.</strong> The LADWP Board approved the Notch Peak PPA on July 14 — next up is a vote by the LA City Council, a gating item for the project's targeted September debt close and tax equity commitment. Separately, IC approved LES self-servicing Notch Peak directly i.e. LES will perform O&amp;M to help achieve FNTP timing. LES will contract intercompany at $4.77/kWDC (~$2.0mm).</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>The intercompany O&amp;M rate ($4.77/kWDC) is set — TA to confirm this reflects arm's-length pricing.</div>
+        <div class="reaction-bar" data-item="dev-notchpeak-selfops" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-notchpeak-selfops')">
             <span class="comment-section-label">Comments</span>
@@ -446,6 +456,7 @@
 
         <p><strong>Titan — Import Resource Adequacy agreement with SCE.</strong> IC approved a three-year Import RA agreement with Southern California Edison under a slice-of-day construct, providing strong RA revenue certainty at or above current market levels.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>TA to review for appropriate revenue treatment.</div>
+        <div class="reaction-bar" data-item="dev-titan-sce-ra" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-titan-sce-ra')">
             <span class="comment-section-label">Comments</span>
@@ -469,6 +480,7 @@
 
         <p><strong>Rosemary — BESS Supply Agreement with Fluence.</strong> IC approved executing a BESS Supply Agreement with Fluence, including an upfront cash deposit not to exceed $8mm.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Upfront deposit either capitalized as a contract asset or prepayment pending delivery milestones -- TA to review executed agreement when available.</div>
+        <div class="reaction-bar" data-item="dev-rosemary-fluence" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-rosemary-fluence')">
             <span class="comment-section-label">Comments</span>
@@ -499,6 +511,7 @@
 
         <p><strong>Prospero II — term loan extension signed.</strong> The loan extension was executed on July 16th and extends the maturity date to 12/31/2026, giving the project time to contract the remaining open 80MW and refinance under improved terms.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Completed the ASC 470-50 quantitative analysis (10% cash flow test) — the change falls short of the brightline threshold, so the restructuring is accounted for as a modification. No gain or loss is recognized on the modification itself; the carrying amount is adjusted for net lender fees, a revised effective interest rate of approximately 6.47% is applied prospectively, and third-party costs of ~$20.6K are expensed as incurred.</div>
+        <div class="reaction-bar" data-item="ops-prospero2-extension" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('ops-prospero2-extension')">
             <span class="comment-section-label">Comments</span>
@@ -522,6 +535,7 @@
 
         <p><strong>Milford Wind — Fervo outage reimbursement position cleared PwC review.</strong> The technical accounting position on the planned outage reimbursement from Fervo was approved by PwC and sets the precedent for planned outage reimbursements going forward.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>The reimbursement captures lost revenues from the inability to generate PV energy, RECs, and PTCs during the outage period. We obtained approval to record the full reimbursement in operating income, but kept outside of topline revenue as it does not meet the scope of ASC 606 (no customer and no delivery of performance obligation).</div>
+        <div class="reaction-bar" data-item="ops-milford-fervo" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('ops-milford-fervo')">
             <span class="comment-section-label">Comments</span>
@@ -555,6 +569,27 @@
         <div class="date-chip green"><span class="date-day">Sep</span><span class="date-desc">Milford Wind — TCTA closing payment due (no later than mid-September)</span></div>
         <div class="date-chip green"><span class="date-day">Sep 15–16</span><span class="date-desc">Longroad Accounting Summit (PwC Boston office)</span></div>
       </div>
+      <div class="reaction-bar" data-item="kd-july-2026" data-parent=""></div>
+      <div class="comment-section">
+        <div class="comment-section-header" onclick="toggleThread('kd-july-2026')">
+          <span class="comment-section-label">Comments</span>
+          <span class="comment-count-badge" id="cnt-kd-july-2026">0</span>
+          <button class="comment-toggle-btn" id="tog-kd-july-2026">show</button>
+        </div>
+        <div class="comment-thread" id="thread-kd-july-2026" style="display:none;">
+          <div id="new-kd-july-2026"></div>
+          <div class="comment-compose">
+            <div class="compose-avatar-xs">?</div>
+            <div class="compose-inner-wrap">
+              <textarea class="compose-textarea" id="inp-kd-july-2026" rows="2" placeholder="Add a comment…"></textarea>
+              <div class="compose-footer-row">
+                <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                <button class="compose-post-btn" id="btn-kd-july-2026" onclick="postComment('kd-july-2026')" disabled>Post</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
  
       <div style="margin-top: 22px;">
         <div id="sec-cpe" class="section-label slate" style="margin-bottom:12px;">CPE &amp; trainings</div>
@@ -564,6 +599,27 @@
           <div class="cpe-title">Beyond the Basics: Business Combinations</div>
           <div class="cpe-meta">Webcast · Aug 4 · Practical ASC 805 insights &amp; evaluation framework</div>
           </a>
+        <div class="reaction-bar" data-item="cpe-kpmg-biz-combos" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-kpmg-biz-combos')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-kpmg-biz-combos">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-kpmg-biz-combos">show</button>
+          </div>
+          <div class="comment-thread" id="thread-cpe-kpmg-biz-combos" style="display:none;">
+            <div id="new-cpe-kpmg-biz-combos"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-kpmg-biz-combos" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-cpe-kpmg-biz-combos" onclick="postComment('cpe-kpmg-biz-combos')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
         <div class="cpe-item">
           <a href="https://blog.surgentcpe.com/surgent-cpe-corporate-tax-cpe-series-dave-peters" target="_blank">
@@ -571,6 +627,27 @@
           <div class="cpe-title">Corporate Tax CPE Series: Understanding Corporate Tax Credits and Dispositions</div>
           <div class="cpe-meta">Live webinar · Sep 3 · 2 CPE credits</div>
           </a>
+        <div class="reaction-bar" data-item="cpe-surgent-corp-tax" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-surgent-corp-tax')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-surgent-corp-tax">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-surgent-corp-tax">show</button>
+          </div>
+          <div class="comment-thread" id="thread-cpe-surgent-corp-tax" style="display:none;">
+            <div id="new-cpe-surgent-corp-tax"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-surgent-corp-tax" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-cpe-surgent-corp-tax" onclick="postComment('cpe-surgent-corp-tax')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
         <div class="cpe-item">
           <a href="https://www.euci.com/event_post/ferc-accounting-101/" target="_blank">
@@ -578,6 +655,27 @@
           <div class="cpe-title">FERC Accounting 101</div>
           <div class="cpe-meta">Online course · August 2026</div>
           </a>
+        <div class="reaction-bar" data-item="cpe-euci-ferc" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-euci-ferc')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-euci-ferc">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-euci-ferc">show</button>
+          </div>
+          <div class="comment-thread" id="thread-cpe-euci-ferc" style="display:none;">
+            <div id="new-cpe-euci-ferc"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-euci-ferc" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-cpe-euci-ferc" onclick="postComment('cpe-euci-ferc')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
         <div class="cpe-item">
           <a href="https://www.euci.com/event_post/electric-utilities-101/" target="_blank">
@@ -585,6 +683,27 @@
           <div class="cpe-title">Electric Utilities 101</div>
           <div class="cpe-meta">Online course · September 2026</div>
           </a>
+        <div class="reaction-bar" data-item="cpe-euci-electric" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-euci-electric')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-euci-electric">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-euci-electric">show</button>
+          </div>
+          <div class="comment-thread" id="thread-cpe-euci-electric" style="display:none;">
+            <div id="new-cpe-euci-electric"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-euci-electric" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-cpe-euci-electric" onclick="postComment('cpe-euci-electric')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
         <div class="cpe-item">
           <a href="https://www.aicpa-cima.com/cpe-learning/webcast/annual-update-for-accountants-and-auditors-revenue-recognition-financial-instruments-leases" target="_blank">
@@ -592,6 +711,27 @@
           <div class="cpe-title">Annual Update for Accountants and Auditors: Revenue Recognition, Financial Instruments, Leases</div>
           <div class="cpe-meta">On-demand · Digital product · Credits vary</div>
           </a>
+        <div class="reaction-bar" data-item="cpe-aicpa-annual" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-aicpa-annual')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-aicpa-annual">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-aicpa-annual">show</button>
+          </div>
+          <div class="comment-thread" id="thread-cpe-aicpa-annual" style="display:none;">
+            <div id="new-cpe-aicpa-annual"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-aicpa-annual" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-cpe-aicpa-annual" onclick="postComment('cpe-aicpa-annual')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
 
@@ -625,7 +765,28 @@
       </div>
 
     </div>
-  </div>
+  
+        <div class="reaction-bar" data-item="otb-july-2026" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('otb-july-2026')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-otb-july-2026">0</span>
+            <button class="comment-toggle-btn" id="tog-otb-july-2026">show</button>
+          </div>
+          <div class="comment-thread" id="thread-otb-july-2026" style="display:none;">
+            <div id="new-otb-july-2026"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-otb-july-2026" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-otb-july-2026" onclick="postComment('otb-july-2026')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div></div>
  
   <!-- TWO-COL: Industry / ASU -->
   <div class="three-col" style="grid-template-columns: 1fr 1fr;">
@@ -637,24 +798,108 @@
         <div class="news-title">Wind and solar safe harbor survives court ruling</div>
         <div class="news-summary">A June 6 federal court ruling vacated IRS Notice 2025-42, restoring the 5% safe harbor for beginning-of-construction determinations just ahead of the July 4 statutory deadline for §45Y/48E eligibility. The government is expected to appeal, so developers relying on the restored safe harbor for construction starts near the deadline carry real risk that it could be reinstated mid-litigation.</div>
         <a class="news-link" href="https://www.crowe.com/insights/tax-news-highlights/wind-and-solar-safe-harbor-survives-court-ruling" target="_blank">Read more →</a>
+        <div class="reaction-bar" data-item="news-safe-harbor" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-safe-harbor')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-safe-harbor">0</span>
+            <button class="comment-toggle-btn" id="tog-news-safe-harbor">show</button>
+          </div>
+          <div class="comment-thread" id="thread-news-safe-harbor" style="display:none;">
+            <div id="new-news-safe-harbor"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-safe-harbor" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-news-safe-harbor" onclick="postComment('news-safe-harbor')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="news-item">
         <div class="news-source">Enverus Intelligence Research · July 29, 2026</div>
         <div class="news-title">Race to resiliency: tax-credit phaseout expected to push renewable PPA prices higher</div>
         <div class="news-summary">Enverus screened over 3,200 U.S. wind and solar projects with first-power dates before the end of 2027 and found roughly 760 (mostly solar) are dependent on IRA tax credits, meaning their levelized costs exceed projected merchant power and REC revenue once those credits phase out. Projects that miss the July 4 construction-start or 2027 in-service deadlines will need materially stronger PPA pricing to pencil, with hyperscalers likely more willing to absorb the premium than other offtakers.</div>
         <a class="news-link" href="https://www.enverus.com/newsroom/race-to-resiliency-tax-credit-phaseout-expected-to-push-renewable-ppa-prices-higher/" target="_blank">Read more →</a>
+        <div class="reaction-bar" data-item="news-ppa-prices" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-ppa-prices')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-ppa-prices">0</span>
+            <button class="comment-toggle-btn" id="tog-news-ppa-prices">show</button>
+          </div>
+          <div class="comment-thread" id="thread-news-ppa-prices" style="display:none;">
+            <div id="new-news-ppa-prices"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-ppa-prices" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-news-ppa-prices" onclick="postComment('news-ppa-prices')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="news-item">
         <div class="news-source">Lazard · July 13, 2026</div>
         <div class="news-title">Renewables remain the lowest-cost new-build generation despite rising cost pressures</div>
         <div class="news-summary">Lazard's 19th annual Levelized Cost of Energy+ report finds unsubsidized renewables still the cheapest new-build generation option, even as costs rise across every technology amid tariffs, supply-chain pressure, and unprecedented data-center-driven demand growth. Wind, solar, and storage are still expected to make up the majority of near-term U.S. capacity additions given their comparatively short deployment timelines — a trend directly relevant to how we underwrite new PPA pricing.</div>
         <a class="news-link" href="https://www.lazard.com/news-announcements/lazard-releases-2026-levelized-cost-of-energyplus-report-pr/" target="_blank">Read more →</a>
+        <div class="reaction-bar" data-item="news-renewables-cost" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-renewables-cost')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-renewables-cost">0</span>
+            <button class="comment-toggle-btn" id="tog-news-renewables-cost">show</button>
+          </div>
+          <div class="comment-thread" id="thread-news-renewables-cost" style="display:none;">
+            <div id="new-news-renewables-cost"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-renewables-cost" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-news-renewables-cost" onclick="postComment('news-renewables-cost')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="news-item">
         <div class="news-source">Crux · 2Q 2026</div>
         <div class="news-title">Market update: what happened in the 2Q2026 tax credit market</div>
         <div class="news-summary">Crux's second-quarter market update covers where transferable tax credit pricing landed following the OBBB-driven pause, how prohibited-foreign-entity restrictions are shaping deal structuring, and the competitive dynamics among buyers as the pool of available 2025- and 2026-vintage credits narrows — directly relevant context for how we price our own ITC/PTC transfers.</div>
         <a class="news-link" href="https://www.crux.com/blog/market-update-what-happened-in-the-2q2026-tax-credit-market" target="_blank">Read more →</a>
+        <div class="reaction-bar" data-item="news-tax-credit-market" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-tax-credit-market')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-tax-credit-market">0</span>
+            <button class="comment-toggle-btn" id="tog-news-tax-credit-market">show</button>
+          </div>
+          <div class="comment-thread" id="thread-news-tax-credit-market" style="display:none;">
+            <div id="new-news-tax-credit-market"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-tax-credit-market" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-news-tax-credit-market" onclick="postComment('news-tax-credit-market')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
  
@@ -665,18 +910,81 @@
         <div class="asu-title">Government Grants (Topic 832)</div>
         <div class="asu-summary">Issued July 7, 2026. FASB's first authoritative U.S. GAAP guidance for recognizing and measuring government grants received by business entities — previously handled by analogy to IAS 20. The ASU defines "government grant" and sets recognition/measurement requirements that vary by whether the grant relates to an asset or to income. Effective for PBEs in fiscal years beginning after Dec 15, 2029; one year later for other entities. Modified prospective, modified retrospective, or full retrospective transition permitted.</div>
         <div class="acct-lens"><div class="acct-lens-label">Where we landed</div>As it relates to transferrable tax credits, TA evaluating whether we can analogize to the new ASC 832 standard rather than ASC 740. No impact in 2026. Will be a 2027 change in policy, if elected.</div>
+        <div class="reaction-bar" data-item="asu-2025-10" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('asu-2025-10')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-asu-2025-10">0</span>
+            <button class="comment-toggle-btn" id="tog-asu-2025-10">show</button>
+          </div>
+          <div class="comment-thread" id="thread-asu-2025-10" style="display:none;">
+            <div id="new-asu-2025-10"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-asu-2025-10" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-asu-2025-10" onclick="postComment('asu-2025-10')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="asu-item">
         <a href="https://fasb.org/page/ShowPdf?path=ASU%202026-01.pdf" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2026-01 ↗</div></a>
         <div class="asu-title">Initial Measurement of Paid-in-Kind Dividends (Topic 505)</div>
         <div class="asu-summary">Issued April 23, 2026. Requires PIK dividends on equity-classified preferred stock to be measured based on the stated PIK dividend rate in the preferred stock agreement, eliminating prior diversity in practice. Applies to all entities. Effective for annual periods beginning after Dec 15, 2026; early adoption permitted.</div>
         <div class="acct-lens"><div class="acct-lens-label">Where we landed</div>Deemed not applicable to Longroad.</div>
+        <div class="reaction-bar" data-item="asu-2026-01" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('asu-2026-01')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-asu-2026-01">0</span>
+            <button class="comment-toggle-btn" id="tog-asu-2026-01">show</button>
+          </div>
+          <div class="comment-thread" id="thread-asu-2026-01" style="display:none;">
+            <div id="new-asu-2026-01"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-asu-2026-01" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-asu-2026-01" onclick="postComment('asu-2026-01')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="asu-item">
         <a href="https://www.fasb.org/page/ShowPdf?path=ASU%202026-02.pdf" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2026-02 ↗</div></a>
         <div class="asu-title">Environmental Credits and ECOs (Topic 818)</div>
         <div class="asu-summary">Issued May 19, 2026. Establishes the first comprehensive accounting model for environmental credits and environmental credit obligations. Entities recognize assets based on intended use (compliance vs. noncompliance vs. voluntary) and how credits are obtained. Effective for PBEs in fiscal years beginning after Dec 15, 2027; one year later for all others. Early adoption permitted.</div>
         <div class="acct-lens"><div class="acct-lens-label">Where we landed</div>We're effectively already there — our current REC/environmental credit treatment lines up with the ASC 818 model, so we will formally early-adopt the ASU, however, there is no change to our current accounting methodology.</div>
+        <div class="reaction-bar" data-item="asu-2026-02" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('asu-2026-02')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-asu-2026-02">0</span>
+            <button class="comment-toggle-btn" id="tog-asu-2026-02">show</button>
+          </div>
+          <div class="comment-thread" id="thread-asu-2026-02" style="display:none;">
+            <div id="new-asu-2026-02"></div>
+            <div class="comment-compose">
+              <div class="compose-avatar-xs">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-asu-2026-02" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
+                  <button class="compose-post-btn" id="btn-asu-2026-02" onclick="postComment('asu-2026-02')" disabled>Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
  
@@ -985,7 +1293,8 @@
     commenterName: 7092691932581764,
     commentText:   1463192398368644,
     timestamp:     5966792025739140,
-    parentId:      3714992212053892
+    parentId:      3714992212053892,
+    reactionType:  1335735687090052
   };
 
   var ITEM_TITLES = {
@@ -995,7 +1304,21 @@
     'dev-titan-sce-ra':        'Titan — Import Resource Adequacy (SCE)',
     'dev-rosemary-fluence':    'Rosemary — BESS Supply Agreement with Fluence',
     'ops-prospero2-extension': 'Prospero II — term loan extension signed',
-    'ops-milford-fervo':       'Milford Wind — Fervo outage reimbursement'
+    'ops-milford-fervo':       'Milford Wind — Fervo outage reimbursement',
+    'kd-july-2026':             'Key Dates & Deadlines',
+    'cpe-kpmg-biz-combos':      'KPMG: Beyond the Basics: Business Combinations',
+    'cpe-surgent-corp-tax':     'Surgent: Corporate Tax CPE Series',
+    'cpe-euci-ferc':            'EUCI: FERC Accounting 101',
+    'cpe-euci-electric':        'EUCI: Electric Utilities 101',
+    'cpe-aicpa-annual':         'AICPA: Annual Update for Accountants and Auditors',
+    'otb-july-2026':            'Off the Books',
+    'news-safe-harbor':         'Wind and solar safe harbor survives court ruling',
+    'news-ppa-prices':          'Race to resiliency: PPA price pressures',
+    'news-renewables-cost':     'Renewables remain lowest-cost new-build generation',
+    'news-tax-credit-market':   'Market update: 2Q2026 tax credit market',
+    'asu-2025-10':              'ASU 2025-10: Government Grants (Topic 832)',
+    'asu-2026-01':              'ASU 2026-01: Paid-in-Kind Dividends (Topic 505)',
+    'asu-2026-02':              'ASU 2026-02: Environmental Credits and ECOs (Topic 818)'
   };
 
   var commentCounts = {};
@@ -1060,6 +1383,7 @@
     var bg = avatarBg(c.name), ini = getInitials(c.name);
     var newBadge = isNew   ? '<span class="comment-new-badge">new</span>' : '';
     var replyBtn = isReply ? '' : '<button class="comment-reply-link" onclick="startReply(\'' + esc(c.itemKey) + '\',\'' + esc(c.id) + '\')">Reply</button>';
+    var deleteBtn = (c.name === currentUser && c.rowId) ? '<button class="comment-delete-btn" onclick="deleteComment(\'' + c.rowId + '\',\'' + esc(c.id) + '\',\'' + esc(c.itemKey) + '\')">✕ Delete</button>' : '';
     return '<div class="comment-row" id="cmt-'+esc(c.id)+'">' +
       '<div class="comment-avatar-sm" style="background:'+bg+';">'+ini+'</div>' +
       '<div class="comment-body-wrap">' +
@@ -1070,9 +1394,70 @@
         '</div>' +
         '<div class="comment-text">'+esc(c.text)+'</div>' +
         replyBtn +
+        deleteBtn +
+        '<div class="reaction-bar" data-item="'+esc(c.itemKey)+'" data-parent="'+esc(c.id)+'">' +
+        '</div>' +
         '<div class="replies-for-'+esc(c.id)+'"></div>' +
       '</div>' +
     '</div>';
+  }
+
+  var EMOJIS = ['👍','❤️','🔥','💡'];
+  window._reactionMap = {};
+
+  function buildReactionHTML(itemKey, parentId, rm) {
+    return EMOJIS.map(function(e) {
+      var count = (rm.counts && rm.counts[e]) || 0;
+      var isMe  = rm.userEmoji === e;
+      var cls   = 'react-btn' + (isMe ? ' active' : '');
+      return '<button class="' + cls + '" onclick="toggleReaction(\'' + itemKey + '\',\'' + (parentId||'') + '\',\'' + e + '\')">'
+        + e + (count > 0 ? ' <span class="react-count">' + count + '</span>' : '') + '</button>';
+    }).join('');
+  }
+
+  async function sendReactionToSheet(itemKey, parentId, emoji) {
+    var id = uid(), now = new Date().toISOString();
+    var payload = [{ toBottom:true, cells:[
+      { columnId: COL.commentId,     value: id },
+      { columnId: COL.edition,       value: EDITION },
+      { columnId: COL.itemKey,       value: itemKey },
+      { columnId: COL.itemTitle,     value: ITEM_TITLES[itemKey]||itemKey },
+      { columnId: COL.commenterName, value: currentUser },
+      { columnId: COL.commentText,   value: '' },
+      { columnId: COL.timestamp,     value: now },
+      { columnId: COL.parentId,      value: parentId||'' },
+      { columnId: COL.reactionType,  value: emoji }
+    ]}];
+    var r = await fetch(SS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    var d = await r.json();
+    return { rowId: d.result.id };
+  }
+
+  async function toggleReaction(itemKey, parentId, emoji) {
+    if (!currentUser) { showIdentityPrompt(function(){ toggleReaction(itemKey, parentId, emoji); }); return; }
+    var key = itemKey + ':' + (parentId||'');
+    if (!window._reactionMap[key]) window._reactionMap[key] = { counts:{}, userRowId:null, userEmoji:null };
+    var rm = window._reactionMap[key];
+    var prevEmoji = rm.userEmoji, prevRowId = rm.userRowId;
+    if (prevEmoji) {
+      try {
+        await fetch(SS_URL + '?rowId=' + prevRowId, { method:'DELETE' });
+        rm.counts[prevEmoji] = Math.max(0, (rm.counts[prevEmoji]||1) - 1);
+        rm.userRowId = null; rm.userEmoji = null;
+      } catch(e) { console.error('delete reaction', e); }
+    }
+    if (emoji !== prevEmoji) {
+      try {
+        var res = await sendReactionToSheet(itemKey, parentId, emoji);
+        rm.counts[emoji] = (rm.counts[emoji]||0) + 1;
+        rm.userRowId = res.rowId; rm.userEmoji = emoji;
+      } catch(e) { console.error('add reaction', e); }
+    }
+    var bar = parentId
+      ? document.querySelector('.reaction-bar[data-item="' + itemKey + '"][data-parent="' + parentId + '"'  + ']')
+      : document.querySelector('.reaction-bar[data-item="' + itemKey + '"][data-parent=""]');
+    if (bar) bar.innerHTML = buildReactionHTML(itemKey, parentId||'', rm);
   }
 
   async function loadComments() {
@@ -1082,18 +1467,27 @@
       var d = await r.json();
       var all = [];
       (d.rows||[]).forEach(function(row) {
-        var c = {};
+        var c = { rowId: row.id };
         (row.cells||[]).forEach(function(cell) {
           var cid = cell.columnId, v = cell.value != null ? String(cell.value) : '';
-          if      (cid === COL.commentId)     c.id      = v;
-          else if (cid === COL.edition)       c.edition = v;
-          else if (cid === COL.itemKey)       c.itemKey = v;
-          else if (cid === COL.commenterName) c.name    = v;
-          else if (cid === COL.commentText)   c.text    = v;
-          else if (cid === COL.timestamp)     c.ts      = v;
-          else if (cid === COL.parentId)      c.parent  = v;
+          if      (cid === COL.commentId)     c.id           = v;
+          else if (cid === COL.edition)       c.edition      = v;
+          else if (cid === COL.itemKey)       c.itemKey      = v;
+          else if (cid === COL.commenterName) c.name         = v;
+          else if (cid === COL.commentText)   c.text         = v;
+          else if (cid === COL.timestamp)     c.ts           = v;
+          else if (cid === COL.parentId)      c.parent       = v;
+          else if (cid === COL.reactionType)  c.reactionType = v;
         });
-        if (c.edition === EDITION && c.id && c.itemKey) all.push(c);
+        if (c.edition === EDITION && c.id && c.itemKey) {
+          if (c.reactionType) {
+            var rkey = c.itemKey + ':' + (c.parent||'');
+            if (!window._reactionMap[rkey]) window._reactionMap[rkey] = { counts:{}, userRowId:null, userEmoji:null };
+            var rm = window._reactionMap[rkey];
+            rm.counts[c.reactionType] = (rm.counts[c.reactionType]||0) + 1;
+            if (c.name === currentUser) { rm.userRowId = c.rowId; rm.userEmoji = c.reactionType; }
+          } else if (c.text) { all.push(c); }
+        }
       });
       var byKey = {};
       all.forEach(function(c) { (byKey[c.itemKey] = byKey[c.itemKey]||[]).push(c); });
@@ -1122,6 +1516,15 @@
         var badge = document.getElementById('cnt-'+key);
         if (badge) badge.textContent = commentCounts[key];
       });
+      // Populate reaction bars
+      document.querySelectorAll('.reaction-bar').forEach(function(bar) {
+        var ik = bar.getAttribute('data-item');
+        var pid = bar.getAttribute('data-parent') || '';
+        if (!ik) return;
+        var rkey = ik + ':' + pid;
+        var rm2 = window._reactionMap[rkey] || { counts:{}, userRowId:null, userEmoji:null };
+        bar.innerHTML = buildReactionHTML(ik, pid, rm2);
+      });
     } catch(e) { console.warn('Ledger: could not load comments', e); }
   }
 
@@ -1144,6 +1547,19 @@
     });
     if (!r.ok) throw new Error('HTTP '+r.status);
     return { id:id, ts:now, name:currentUser, itemKey:itemKey, text:text, parent:parentId||'' };
+  }
+
+  async function deleteComment(rowId, commentId, itemKey) {
+    if (!confirm('Delete this comment?')) return;
+    try {
+      var r = await fetch(SS_URL + '?rowId=' + rowId, { method: 'DELETE' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      var el = document.getElementById('cmt-' + commentId);
+      if (el) { var wrap = el.closest('.comment-reply-indent'); (wrap || el).remove(); }
+      commentCounts[itemKey] = Math.max(0, (commentCounts[itemKey]||1) - 1);
+      var badge = document.getElementById('cnt-' + itemKey);
+      if (badge) badge.textContent = commentCounts[itemKey];
+    } catch(e) { alert('Could not delete — please try again.'); }
   }
 
   function postComment(itemKey) {
