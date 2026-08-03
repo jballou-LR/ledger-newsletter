@@ -1127,7 +1127,7 @@
 
   async function sendToSheet(itemKey, text, parentId) {
     var id = uid(), now = new Date().toISOString();
-    var payload = { rows:[{ cells:[
+    var payload = [{ toBottom:true, cells:[
       { columnId: COL.commentId,     value: id },
       { columnId: COL.edition,       value: EDITION },
       { columnId: COL.itemKey,       value: itemKey },
@@ -1136,7 +1136,7 @@
       { columnId: COL.commentText,   value: text },
       { columnId: COL.timestamp,     value: now },
       { columnId: COL.parentId,      value: parentId||'' }
-    ]}]};
+    ]}];
     var r = await fetch(SS_URL, {
       method:'POST',
       headers:{ 'Content-Type':'application/json' },
