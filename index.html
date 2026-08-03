@@ -6,164 +6,31 @@
 <title>The Ledger — Longroad Energy Accounting</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Georgia', serif;
-    background: #0f172a;
-    color: #e2e8f0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 20px;
-  }
-
-  header {
-    text-align: center;
-    margin-bottom: 56px;
-  }
-
-  .logo-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    margin-bottom: 18px;
-  }
-
-  .logo-icon {
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #10b981, #059669);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-  }
-
-  h1 {
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: #f8fafc;
-  }
-
-  .tagline {
-    font-size: 1rem;
-    color: #94a3b8;
-    font-style: italic;
-    margin-top: 6px;
-    font-family: 'Georgia', serif;
-  }
-
-  .divider {
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, #10b981, #059669);
-    border-radius: 2px;
-    margin: 20px auto 0;
-  }
-
-  .editions-grid {
-    width: 100%;
-    max-width: 680px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .section-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #10b981;
-    margin-bottom: 4px;
-  }
-
-  .edition-card {
-    background: #1e293b;
-    border: 1px solid #334155;
-    border-radius: 12px;
-    padding: 22px 26px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.2s, background 0.2s, transform 0.15s;
-  }
-
-  .edition-card:hover {
-    border-color: #10b981;
-    background: #1a2a3a;
-    transform: translateY(-1px);
-  }
-
-  .edition-card .meta {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .edition-card .month {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #f1f5f9;
-  }
-
-  .edition-card .edition-num {
-    font-size: 0.8rem;
-    color: #64748b;
-    font-family: 'Courier New', monospace;
-  }
-
-  .edition-card .arrow {
-    color: #10b981;
-    font-size: 1.3rem;
-    transition: transform 0.2s;
-  }
-
-  .edition-card:hover .arrow {
-    transform: translateX(4px);
-  }
-
-  .badge-new {
-    background: #10b981;
-    color: #fff;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 999px;
-    margin-left: 10px;
-    vertical-align: middle;
-  }
-
-  footer {
-    margin-top: 60px;
-    font-size: 0.78rem;
-    color: #475569;
-    text-align: center;
-    font-family: 'Courier New', monospace;
-  }
+  body { font-family: 'Georgia', serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; }
+  header { text-align: center; margin-bottom: 56px; }
+  h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.5px; color: #f8fafc; }
+  .tagline { font-size: 1rem; color: #94a3b8; font-style: italic; margin-top: 6px; }
+  .divider { width: 60px; height: 3px; background: linear-gradient(90deg, #10b981, #059669); border-radius: 2px; margin: 20px auto 0; }
+  .editions-grid { width: 100%; max-width: 680px; display: flex; flex-direction: column; gap: 16px; }
+  .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #10b981; margin-bottom: 4px; }
+  .edition-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 22px 26px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; transition: border-color 0.2s, background 0.2s, transform 0.15s; }
+  .edition-card:hover { border-color: #10b981; background: #1a2a3a; transform: translateY(-1px); }
+  .edition-card .meta { display: flex; flex-direction: column; gap: 4px; }
+  .edition-card .month { font-size: 1.1rem; font-weight: 700; color: #f1f5f9; }
+  .edition-card .edition-num { font-size: 0.8rem; color: #64748b; font-family: 'Courier New', monospace; }
+  .edition-card .arrow { color: #10b981; font-size: 1.3rem; transition: transform 0.2s; }
+  .edition-card:hover .arrow { transform: translateX(4px); }
+  .badge-new { background: #10b981; color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; margin-left: 10px; vertical-align: middle; }
 </style>
 </head>
 <body>
-
 <header>
   <h1>The Ledger</h1>
   <p class="tagline">Monthly accounting newsletter</p>
   <div class="divider"></div>
 </header>
-
 <div class="editions-grid">
   <div class="section-label">All Editions</div>
-
-  <!-- Add new editions at the top as they are published -->
-
   <a class="edition-card" href="july-2026.html">
     <div class="meta">
       <span class="month">July 2026 <span class="badge-new">New</span></span>
@@ -171,7 +38,6 @@
     </div>
     <span class="arrow">→</span>
   </a>
-
   <a class="edition-card" href="june-2026.html">
     <div class="meta">
       <span class="month">June 2026</span>
@@ -179,9 +45,6 @@
     </div>
     <span class="arrow">→</span>
   </a>
-
 </div>
-
-
 </body>
 </html>
