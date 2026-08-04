@@ -569,27 +569,28 @@
         <div class="date-chip green"><span class="date-day">Sep</span><span class="date-desc">Milford Wind — TCTA closing payment due (no later than mid-September)</span></div>
         <div class="date-chip green"><span class="date-day">Sep 15–16</span><span class="date-desc">Longroad Accounting Summit (PwC Boston office)</span></div>
       </div>
-      <div class="reaction-bar" data-item="kd-july-2026" data-parent=""></div>
-      <div class="comment-section">
-        <div class="comment-section-header" onclick="toggleThread('kd-july-2026')">
-          <span class="comment-section-label">Comments</span>
-          <span class="comment-count-badge" id="cnt-kd-july-2026">0</span>
-          <button class="comment-toggle-btn" id="tog-kd-july-2026">show</button>
-        </div>
-        <div class="comment-thread" id="thread-kd-july-2026" style="display:none;">
-          <div id="new-kd-july-2026"></div>
-          <div class="comment-compose">
-            <div class="compose-avatar-xs">?</div>
-            <div class="compose-inner-wrap">
-              <textarea class="compose-textarea" id="inp-kd-july-2026" rows="2" placeholder="Add a comment…"></textarea>
-              <div class="compose-footer-row">
-                <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                <button class="compose-post-btn" id="btn-kd-july-2026" onclick="postComment('kd-july-2026')" disabled>Post</button>
+        <div class="reaction-bar" data-item="kd-july-2026" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('kd-july-2026')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-kd-july-2026">0</span>
+            <button class="comment-toggle-btn" id="tog-kd-july-2026">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-kd-july-2026" style="display:none;">
+            <div class="comment-list" id="list-kd-july-2026"></div>
+            <div class="new-comments" id="new-kd-july-2026"></div>
+            <div class="comment-compose" id="compose-kd-july-2026">
+              <div class="compose-avatar-xs" id="av-kd-july-2026" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-kd-july-2026" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-kd-july-2026"></span>
+                  <button class="compose-post-btn" id="btn-kd-july-2026" disabled onclick="postComment('kd-july-2026')">Post</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
  
       <div style="margin-top: 22px;">
         <div id="sec-cpe" class="section-label slate" style="margin-bottom:12px;">CPE &amp; trainings</div>
@@ -599,6 +600,7 @@
           <div class="cpe-title">Beyond the Basics: Business Combinations</div>
           <div class="cpe-meta">Webcast · Aug 4 · Practical ASC 805 insights &amp; evaluation framework</div>
           </a>
+        </div>
         <div class="reaction-bar" data-item="cpe-kpmg-biz-combos" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('cpe-kpmg-biz-combos')">
@@ -606,20 +608,20 @@
             <span class="comment-count-badge" id="cnt-cpe-kpmg-biz-combos">0</span>
             <button class="comment-toggle-btn" id="tog-cpe-kpmg-biz-combos">show</button>
           </div>
-          <div class="comment-thread" id="thread-cpe-kpmg-biz-combos" style="display:none;">
-            <div id="new-cpe-kpmg-biz-combos"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">?</div>
+          <div class="comment-thread-wrap" id="thread-cpe-kpmg-biz-combos" style="display:none;">
+            <div class="comment-list" id="list-cpe-kpmg-biz-combos"></div>
+            <div class="new-comments" id="new-cpe-kpmg-biz-combos"></div>
+            <div class="comment-compose" id="compose-cpe-kpmg-biz-combos">
+              <div class="compose-avatar-xs" id="av-cpe-kpmg-biz-combos" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-cpe-kpmg-biz-combos" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-cpe-kpmg-biz-combos" onclick="postComment('cpe-kpmg-biz-combos')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-cpe-kpmg-biz-combos"></span>
+                  <button class="compose-post-btn" id="btn-cpe-kpmg-biz-combos" disabled onclick="postComment('cpe-kpmg-biz-combos')">Post</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
         <div class="cpe-item">
           <a href="https://blog.surgentcpe.com/surgent-cpe-corporate-tax-cpe-series-dave-peters" target="_blank">
@@ -627,6 +629,7 @@
           <div class="cpe-title">Corporate Tax CPE Series: Understanding Corporate Tax Credits and Dispositions</div>
           <div class="cpe-meta">Live webinar · Sep 3 · 2 CPE credits</div>
           </a>
+        </div>
         <div class="reaction-bar" data-item="cpe-surgent-corp-tax" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('cpe-surgent-corp-tax')">
@@ -634,20 +637,20 @@
             <span class="comment-count-badge" id="cnt-cpe-surgent-corp-tax">0</span>
             <button class="comment-toggle-btn" id="tog-cpe-surgent-corp-tax">show</button>
           </div>
-          <div class="comment-thread" id="thread-cpe-surgent-corp-tax" style="display:none;">
-            <div id="new-cpe-surgent-corp-tax"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">?</div>
+          <div class="comment-thread-wrap" id="thread-cpe-surgent-corp-tax" style="display:none;">
+            <div class="comment-list" id="list-cpe-surgent-corp-tax"></div>
+            <div class="new-comments" id="new-cpe-surgent-corp-tax"></div>
+            <div class="comment-compose" id="compose-cpe-surgent-corp-tax">
+              <div class="compose-avatar-xs" id="av-cpe-surgent-corp-tax" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-cpe-surgent-corp-tax" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-cpe-surgent-corp-tax" onclick="postComment('cpe-surgent-corp-tax')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-cpe-surgent-corp-tax"></span>
+                  <button class="compose-post-btn" id="btn-cpe-surgent-corp-tax" disabled onclick="postComment('cpe-surgent-corp-tax')">Post</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
         <div class="cpe-item">
           <a href="https://www.euci.com/event_post/ferc-accounting-101/" target="_blank">
@@ -655,6 +658,7 @@
           <div class="cpe-title">FERC Accounting 101</div>
           <div class="cpe-meta">Online course · August 2026</div>
           </a>
+        </div>
         <div class="reaction-bar" data-item="cpe-euci-ferc" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('cpe-euci-ferc')">
@@ -662,20 +666,20 @@
             <span class="comment-count-badge" id="cnt-cpe-euci-ferc">0</span>
             <button class="comment-toggle-btn" id="tog-cpe-euci-ferc">show</button>
           </div>
-          <div class="comment-thread" id="thread-cpe-euci-ferc" style="display:none;">
-            <div id="new-cpe-euci-ferc"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">?</div>
+          <div class="comment-thread-wrap" id="thread-cpe-euci-ferc" style="display:none;">
+            <div class="comment-list" id="list-cpe-euci-ferc"></div>
+            <div class="new-comments" id="new-cpe-euci-ferc"></div>
+            <div class="comment-compose" id="compose-cpe-euci-ferc">
+              <div class="compose-avatar-xs" id="av-cpe-euci-ferc" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-cpe-euci-ferc" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-cpe-euci-ferc" onclick="postComment('cpe-euci-ferc')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-cpe-euci-ferc"></span>
+                  <button class="compose-post-btn" id="btn-cpe-euci-ferc" disabled onclick="postComment('cpe-euci-ferc')">Post</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
         <div class="cpe-item">
           <a href="https://www.euci.com/event_post/electric-utilities-101/" target="_blank">
@@ -683,6 +687,7 @@
           <div class="cpe-title">Electric Utilities 101</div>
           <div class="cpe-meta">Online course · September 2026</div>
           </a>
+        </div>
         <div class="reaction-bar" data-item="cpe-euci-electric" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('cpe-euci-electric')">
@@ -690,20 +695,20 @@
             <span class="comment-count-badge" id="cnt-cpe-euci-electric">0</span>
             <button class="comment-toggle-btn" id="tog-cpe-euci-electric">show</button>
           </div>
-          <div class="comment-thread" id="thread-cpe-euci-electric" style="display:none;">
-            <div id="new-cpe-euci-electric"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">?</div>
+          <div class="comment-thread-wrap" id="thread-cpe-euci-electric" style="display:none;">
+            <div class="comment-list" id="list-cpe-euci-electric"></div>
+            <div class="new-comments" id="new-cpe-euci-electric"></div>
+            <div class="comment-compose" id="compose-cpe-euci-electric">
+              <div class="compose-avatar-xs" id="av-cpe-euci-electric" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-cpe-euci-electric" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-cpe-euci-electric" onclick="postComment('cpe-euci-electric')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-cpe-euci-electric"></span>
+                  <button class="compose-post-btn" id="btn-cpe-euci-electric" disabled onclick="postComment('cpe-euci-electric')">Post</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
         <div class="cpe-item">
           <a href="https://www.aicpa-cima.com/cpe-learning/webcast/annual-update-for-accountants-and-auditors-revenue-recognition-financial-instruments-leases" target="_blank">
@@ -711,6 +716,7 @@
           <div class="cpe-title">Annual Update for Accountants and Auditors: Revenue Recognition, Financial Instruments, Leases</div>
           <div class="cpe-meta">On-demand · Digital product · Credits vary</div>
           </a>
+        </div>
         <div class="reaction-bar" data-item="cpe-aicpa-annual" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('cpe-aicpa-annual')">
@@ -718,20 +724,20 @@
             <span class="comment-count-badge" id="cnt-cpe-aicpa-annual">0</span>
             <button class="comment-toggle-btn" id="tog-cpe-aicpa-annual">show</button>
           </div>
-          <div class="comment-thread" id="thread-cpe-aicpa-annual" style="display:none;">
-            <div id="new-cpe-aicpa-annual"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">?</div>
+          <div class="comment-thread-wrap" id="thread-cpe-aicpa-annual" style="display:none;">
+            <div class="comment-list" id="list-cpe-aicpa-annual"></div>
+            <div class="new-comments" id="new-cpe-aicpa-annual"></div>
+            <div class="comment-compose" id="compose-cpe-aicpa-annual">
+              <div class="compose-avatar-xs" id="av-cpe-aicpa-annual" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-cpe-aicpa-annual" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-cpe-aicpa-annual" onclick="postComment('cpe-aicpa-annual')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-cpe-aicpa-annual"></span>
+                  <button class="compose-post-btn" id="btn-cpe-aicpa-annual" disabled onclick="postComment('cpe-aicpa-annual')">Post</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
 
@@ -762,10 +768,6 @@
           <div id="wordle-msg" style="font-size:10px;font-weight:600;color:#10B981;min-height:14px;"></div>
         </div>
 
-      </div>
-
-    </div>
-  
         <div class="reaction-bar" data-item="otb-july-2026" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('otb-july-2026')">
@@ -773,20 +775,26 @@
             <span class="comment-count-badge" id="cnt-otb-july-2026">0</span>
             <button class="comment-toggle-btn" id="tog-otb-july-2026">show</button>
           </div>
-          <div class="comment-thread" id="thread-otb-july-2026" style="display:none;">
-            <div id="new-otb-july-2026"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">?</div>
+          <div class="comment-thread-wrap" id="thread-otb-july-2026" style="display:none;">
+            <div class="comment-list" id="list-otb-july-2026"></div>
+            <div class="new-comments" id="new-otb-july-2026"></div>
+            <div class="comment-compose" id="compose-otb-july-2026">
+              <div class="compose-avatar-xs" id="av-otb-july-2026" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-otb-july-2026" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-otb-july-2026" onclick="postComment('otb-july-2026')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-otb-july-2026"></span>
+                  <button class="compose-post-btn" id="btn-otb-july-2026" disabled onclick="postComment('otb-july-2026')">Post</button>
                 </div>
               </div>
             </div>
           </div>
-        </div></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
  
   <!-- TWO-COL: Industry / ASU -->
   <div class="three-col" style="grid-template-columns: 1fr 1fr;">
