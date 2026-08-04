@@ -338,6 +338,40 @@
   .compose-post-btn { font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: #10B981; color: #fff; border: none; border-radius: 3px; padding: 4px 12px; cursor: pointer; transition: background 0.15s; font-family: inherit; }
   .compose-post-btn:hover { background: #059669; }
   .compose-post-btn:disabled { background: #CBD5E1; cursor: default; }
+
+  /* ── EDITION NAV ── */
+  .header { position: relative; }
+  .edition-nav { position:absolute; top:20px; right:28px; display:flex; align-items:center; gap:6px; }
+  .edition-nav-btn { width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:1px solid #10B981; border-radius:4px; color:#10B981; cursor:pointer; text-decoration:none; transition:background 0.15s; }
+  .edition-nav-btn:hover { background:rgba(16,185,129,0.12); }
+  .edition-nav-btn.disabled { border-color:#334155; color:#334155; cursor:default; pointer-events:none; }
+
+  /* ── REACTIONS ── */
+  .reaction-bar { display:flex; gap:4px; padding:6px 0 2px; flex-wrap:wrap; }
+  .react-btn { background:transparent; border:1px solid #D1FAE5; border-radius:12px; padding:2px 7px; cursor:pointer; transition:all 0.15s; display:inline-flex; align-items:center; gap:3px; line-height:1.4; }
+  .react-btn:hover { background:#D1FAE5; border-color:#6EE7B7; }
+  .react-btn.active { background:#D1FAE5; border-color:#10B981; }
+  .react-count { font-size:10px; font-weight:600; color:#10B981; }
+
+  /* ── COMMENT THREAD ── */
+  .comment-thread-wrap { margin-top:10px; }
+  .comment-list { display:flex; flex-direction:column; gap:8px; margin-bottom:8px; }
+  .comment-card { background:#fff; border:1px solid #E2E8F0; border-radius:6px; padding:8px 10px; }
+  .comment-header-row { display:flex; align-items:center; gap:6px; margin-bottom:3px; }
+  .comment-avatar-sm { width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; color:#fff; flex-shrink:0; }
+  .comment-author { font-size:10px; font-weight:700; color:#1E293B; }
+  .comment-time { font-size:9px; color:#94A3B8; margin-left:auto; }
+  .comment-text { font-size:11px; color:#334155; line-height:1.5; }
+  .comment-actions { display:flex; gap:8px; margin-top:4px; align-items:center; }
+  .comment-reply-link { font-size:9px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#94A3B8; background:none; border:none; cursor:pointer; padding:0; }
+  .comment-reply-link:hover { color:#475569; }
+  .comment-delete-btn { font-size:9px; color:#CBD5E1; background:none; border:none; cursor:pointer; padding:0; margin-left:4px; }
+  .comment-delete-btn:hover { color:#F87171; }
+  .comment-reply-indent { padding-left:16px; border-left:2px solid #E2E8F0; margin-top:6px; }
+  .replies-for { display:flex; flex-direction:column; gap:6px; }
+  .reply-input-area { margin-top:6px; }
+  .new-comments { display:flex; flex-direction:column; gap:8px; margin-bottom:8px; }
+  .compose-name-label { font-size:9px; color:#94A3B8; }
 </style>
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
@@ -354,6 +388,17 @@
  
   <!-- HEADER -->
   <div class="header">
+    <div class="edition-nav">
+      <span class="edition-nav-btn disabled" title="No previous edition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </span>
+      <a class="edition-nav-btn" href="index.html" title="All editions">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </a>
+      <a class="edition-nav-btn" href="july-2026.html" title="Next edition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
     <div class="header-meta">Newsletter &nbsp;·&nbsp; <span>June 2026</span> &nbsp;·&nbsp; Edition 01</div>
     <div class="header-title">The Ledger</div>
     <div class="header-teaser">Piloting the inaugural edition. Inside: development and operations updates, key dates and milestones, industry news, ASU updates, and CPE picks. Would appreciate your feedback — hit the link at the bottom and let us know what's working and what would make this better.</div>
@@ -376,251 +421,295 @@
         <div id="sec-dev" class="section-label emerald">Development updates</div>
         <p><strong>Sun Pond achieves COD.</strong> Sun Pond (111 MWdc solar + 340 MWh BESS, Maricopa County, AZ) achieved COD under the LLCA on December 18, COD under the PPA on April 1 (guaranteed COD), and term conversion on April 20. Part of the Sun Streams Complex (~1.6 GW); PPAs with Ava Community Energy and San José Clean Energy. ITC closing payment from Sprouts executed mid-May.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>CIP → placed-in-service; depreciation and ITC recapture periods start. ITC transfer follows Serrano approach.</div>
+        <div class="reaction-bar" data-item="dev-sunpond-cod" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-sunpond-cod')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-sunpond-cod">0</span>
             <button class="comment-toggle-btn" id="tog-dev-sunpond-cod">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-sunpond-cod" style="display:none;">
-            
-            <div id="new-dev-sunpond-cod"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-sunpond-cod" style="display:none;">
+            <div class="comment-list" id="list-dev-sunpond-cod"></div>
+            <div class="new-comments" id="new-dev-sunpond-cod"></div>
+            <div class="comment-compose" id="compose-dev-sunpond-cod">
+              <div class="compose-avatar-xs" id="av-dev-sunpond-cod" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-sunpond-cod" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-sunpond-cod" onclick="postComment('dev-sunpond-cod')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-sunpond-cod"></span>
+                  <button class="compose-post-btn" id="btn-dev-sunpond-cod" disabled onclick="postComment('dev-sunpond-cod')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Champion Creek clears IC.</strong> IC approved June 3. Two tracks: Champion Creek Generation (PV + BESS, ~500 MWac / 207 MWac BESS) and Champion Creek Link (600 MW data center, bridge-to-grid concept). Behind-the-meter and long-term data center offtake structures under consideration.</p>
+        <div class="reaction-bar" data-item="dev-champion" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-champion')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-champion">0</span>
             <button class="comment-toggle-btn" id="tog-dev-champion">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-champion" style="display:none;">
-            
-            <div id="new-dev-champion"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-champion" style="display:none;">
+            <div class="comment-list" id="list-dev-champion"></div>
+            <div class="new-comments" id="new-dev-champion"></div>
+            <div class="comment-compose" id="compose-dev-champion">
+              <div class="compose-avatar-xs" id="av-dev-champion" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-champion" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-champion" onclick="postComment('dev-champion')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-champion"></span>
+                  <button class="compose-post-btn" id="btn-dev-champion" disabled onclick="postComment('dev-champion')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Raven — financing terms approved.</strong> IC approved tax equity (Captona) and debt (First Citizens Bank) on a portfolio-level structure, with a minimum Longroad equity contribution required.</p>
+        <div class="reaction-bar" data-item="dev-raven" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-raven')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-raven">0</span>
             <button class="comment-toggle-btn" id="tog-dev-raven">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-raven" style="display:none;">
-            
-            <div id="new-dev-raven"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-raven" style="display:none;">
+            <div class="comment-list" id="list-dev-raven"></div>
+            <div class="new-comments" id="new-dev-raven"></div>
+            <div class="comment-compose" id="compose-dev-raven">
+              <div class="compose-avatar-xs" id="av-dev-raven" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-raven" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-raven" onclick="postComment('dev-raven')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-raven"></span>
+                  <button class="compose-post-btn" id="btn-dev-raven" disabled onclick="postComment('dev-raven')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>1000 Mile Solar — tax equity funded.</strong> 400 MWdc, Yoakum County, TX; COD targeted 2026. Morgan Stanley tax equity (~$329M total, ~$68M first funding April 30; remainder to be contributed following COD) in place. Debt ~$510M (Societe Generale / CIBC). PPA with Meta.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Allocation is subject to hypothetical liquidation at book value (HLBV) method (relates to 3Q2026 close).</div>
+        <div class="reaction-bar" data-item="dev-1000mile-te" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-1000mile-te')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-1000mile-te">0</span>
             <button class="comment-toggle-btn" id="tog-dev-1000mile-te">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-1000mile-te" style="display:none;">
-            
-            <div id="new-dev-1000mile-te"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-1000mile-te" style="display:none;">
+            <div class="comment-list" id="list-dev-1000mile-te"></div>
+            <div class="new-comments" id="new-dev-1000mile-te"></div>
+            <div class="comment-compose" id="compose-dev-1000mile-te">
+              <div class="compose-avatar-xs" id="av-dev-1000mile-te" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-1000mile-te" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-1000mile-te" onclick="postComment('dev-1000mile-te')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-1000mile-te"></span>
+                  <button class="compose-post-btn" id="btn-dev-1000mile-te" disabled onclick="postComment('dev-1000mile-te')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Big Creek Solar 1 — TE term sheet signed; ECCA and LLCA in draft.</strong> 400 MWac, Lee County, AR; COD August 31, 2027, on track. TE term sheet signed May 4. Tax equity investor is Wells Fargo; ECCA expected 2026. PPA with Siculus, Inc. (Meta). Technical accounting and tax teams reviewing draft ECCA and LLCA for reporting requirements, consolidation conclusions, and HLBV modeling.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Similar ASC 606 / 815 considerations as 1000 Mile. TE term sheet affects debt classification — uncommitted TEBLs are current; committed TEBLs are noncurrent. ECCA in draft = TE commitment not yet closed; TEBL remains uncommitted and current.</div>
+        <div class="reaction-bar" data-item="dev-bigcreek-ts" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-bigcreek-ts')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-bigcreek-ts">0</span>
             <button class="comment-toggle-btn" id="tog-dev-bigcreek-ts">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-bigcreek-ts" style="display:none;">
-            
-            <div id="new-dev-bigcreek-ts"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-bigcreek-ts" style="display:none;">
+            <div class="comment-list" id="list-dev-bigcreek-ts"></div>
+            <div class="new-comments" id="new-dev-bigcreek-ts"></div>
+            <div class="comment-compose" id="compose-dev-bigcreek-ts">
+              <div class="compose-avatar-xs" id="av-dev-bigcreek-ts" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-bigcreek-ts" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-bigcreek-ts" onclick="postComment('dev-bigcreek-ts')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-bigcreek-ts"></span>
+                  <button class="compose-post-btn" id="btn-dev-bigcreek-ts" disabled onclick="postComment('dev-bigcreek-ts')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Amargosa — acquisition signed.</strong> ~1,200 MWac solar + storage (two 600 MW phases) with NV Energy, signed April 17. Delayed close conditioned on development milestones; earliest close September–November 2026.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>No acquisition accounting until close.</div>
+        <div class="reaction-bar" data-item="dev-amargosa" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-amargosa')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-amargosa">0</span>
             <button class="comment-toggle-btn" id="tog-dev-amargosa">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-amargosa" style="display:none;">
-            
-            <div id="new-dev-amargosa"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-amargosa" style="display:none;">
+            <div class="comment-list" id="list-dev-amargosa"></div>
+            <div class="new-comments" id="new-dev-amargosa"></div>
+            <div class="comment-compose" id="compose-dev-amargosa">
+              <div class="compose-avatar-xs" id="av-dev-amargosa" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-amargosa" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-amargosa" onclick="postComment('dev-amargosa')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-amargosa"></span>
+                  <button class="compose-post-btn" id="btn-dev-amargosa" disabled onclick="postComment('dev-amargosa')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Notch Peak — deal contingent hedge executed; debt term sheet approved.</strong> DCH (~70% of expected debt) with JPMorgan executed to manage interest rate risk during PPA approval; unwinds automatically if the deal doesn't close. IC approved the debt term sheet on June 10. Debt close and tax equity commitment (anticipated to be JPMorgan) both targeted for September 2026. Awaiting LADWP approval of the PPA. ITC/PTC deal structure.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>No longer designating deal-contingent hedges. TEBL stays current until the TE commitment is signed.</div>
+        <div class="reaction-bar" data-item="dev-notchpeak-dch" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-notchpeak-dch')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-notchpeak-dch">0</span>
             <button class="comment-toggle-btn" id="tog-dev-notchpeak-dch">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-notchpeak-dch" style="display:none;">
-            
-            <div id="new-dev-notchpeak-dch"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-notchpeak-dch" style="display:none;">
+            <div class="comment-list" id="list-dev-notchpeak-dch"></div>
+            <div class="new-comments" id="new-dev-notchpeak-dch"></div>
+            <div class="comment-compose" id="compose-dev-notchpeak-dch">
+              <div class="compose-avatar-xs" id="av-dev-notchpeak-dch" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-notchpeak-dch" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-notchpeak-dch" onclick="postComment('dev-notchpeak-dch')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-notchpeak-dch"></span>
+                  <button class="compose-post-btn" id="btn-dev-notchpeak-dch" disabled onclick="postComment('dev-notchpeak-dch')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Serrano TCPAs.</strong> MetLife and Allstate TCPAs executed; Chipotle in draft. ~$100M incremental TCPA volume on Serrano.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Each executed TCPA is a separate recognition event.</div>
+        <div class="reaction-bar" data-item="dev-serrano" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-serrano')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-serrano">0</span>
             <button class="comment-toggle-btn" id="tog-dev-serrano">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-serrano" style="display:none;">
-            
-            <div id="new-dev-serrano"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-serrano" style="display:none;">
+            <div class="comment-list" id="list-dev-serrano"></div>
+            <div class="new-comments" id="new-dev-serrano"></div>
+            <div class="comment-compose" id="compose-dev-serrano">
+              <div class="compose-avatar-xs" id="av-dev-serrano" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-serrano" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-serrano" onclick="postComment('dev-serrano')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-serrano"></span>
+                  <button class="compose-post-btn" id="btn-dev-serrano" disabled onclick="postComment('dev-serrano')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Sun Basin — land auctions.</strong> Land auctions completed June 3.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Auctions were successful — a project that was previously storage-only will now include PV as well.</div>
+        <div class="reaction-bar" data-item="dev-sunbasin" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-sunbasin')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-sunbasin">0</span>
             <button class="comment-toggle-btn" id="tog-dev-sunbasin">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-sunbasin" style="display:none;">
-            
-            <div id="new-dev-sunbasin"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-sunbasin" style="display:none;">
+            <div class="comment-list" id="list-dev-sunbasin"></div>
+            <div class="new-comments" id="new-dev-sunbasin"></div>
+            <div class="comment-compose" id="compose-dev-sunbasin">
+              <div class="compose-avatar-xs" id="av-dev-sunbasin" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-sunbasin" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-sunbasin" onclick="postComment('dev-sunbasin')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-sunbasin"></span>
+                  <button class="compose-post-btn" id="btn-dev-sunbasin" disabled onclick="postComment('dev-sunbasin')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>1000 Mile Solar — TCPA executed with Publix.</strong> Executed tax credit purchase agreement with Morgan Stanley on June 5, transferring up to $225M of ITCs to Publix Super Markets. No funds exchanged at execution; final closing is targeted for September 2026.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>The $0.913 pricing and par monetization will be key inputs to the ITC transfer gain/loss calculation at closing (est. September).</div>
+        <div class="reaction-bar" data-item="dev-1000mile-tcpa" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-1000mile-tcpa')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-1000mile-tcpa">0</span>
             <button class="comment-toggle-btn" id="tog-dev-1000mile-tcpa">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-1000mile-tcpa" style="display:none;">
-            
-            <div id="new-dev-1000mile-tcpa"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-1000mile-tcpa" style="display:none;">
+            <div class="comment-list" id="list-dev-1000mile-tcpa"></div>
+            <div class="new-comments" id="new-dev-1000mile-tcpa"></div>
+            <div class="comment-compose" id="compose-dev-1000mile-tcpa">
+              <div class="compose-avatar-xs" id="av-dev-1000mile-tcpa" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-1000mile-tcpa" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-1000mile-tcpa" onclick="postComment('dev-1000mile-tcpa')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-1000mile-tcpa"></span>
+                  <button class="compose-post-btn" id="btn-dev-1000mile-tcpa" disabled onclick="postComment('dev-1000mile-tcpa')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Milford Wind — 2025 PTCs transferred to Dot Foods.</strong> Commercial terms agreed with Dot Foods (facilitated by Wells Fargo) for the transfer of 2025 Milford Wind PTCs.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>PTC transfer gain recognized at closing of the transfer agreement.</div>
+        <div class="reaction-bar" data-item="dev-milford-ptc" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('dev-milford-ptc')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-dev-milford-ptc">0</span>
             <button class="comment-toggle-btn" id="tog-dev-milford-ptc">show</button>
           </div>
-          <div class="comment-thread" id="thread-dev-milford-ptc" style="display:none;">
-            
-            <div id="new-dev-milford-ptc"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-dev-milford-ptc" style="display:none;">
+            <div class="comment-list" id="list-dev-milford-ptc"></div>
+            <div class="new-comments" id="new-dev-milford-ptc"></div>
+            <div class="comment-compose" id="compose-dev-milford-ptc">
+              <div class="compose-avatar-xs" id="av-dev-milford-ptc" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-dev-milford-ptc" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-dev-milford-ptc" onclick="postComment('dev-milford-ptc')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-dev-milford-ptc"></span>
+                  <button class="compose-post-btn" id="btn-dev-milford-ptc" disabled onclick="postComment('dev-milford-ptc')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
@@ -633,90 +722,108 @@
         <div id="sec-ops" class="section-label slate">Operations updates</div>
         <p><strong>Sun Pond — now operating; storage payment dispute.</strong> COD April 1. O&amp;M under NovaSource and Longroad Energy Services. PPAs with Ava Community Energy and San José Clean Energy now generating revenue. Ava is contesting payment on the storage component, arguing that because one of the ancillary services has not been approved by CAISO, availability is effectively 0. Resolution expected to hinge on CAISO approval. Ava is also the offtaker for Zeta and Rosemary.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>PV revenue recognition under ASC 606 begins at COD. Battery portion is accounted for under ASC 842. If the CAISO dispute takes time to resolve, a reserve or derecognition may be warranted.</div>
+        <div class="reaction-bar" data-item="ops-sunpond" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('ops-sunpond')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-ops-sunpond">0</span>
             <button class="comment-toggle-btn" id="tog-ops-sunpond">show</button>
           </div>
-          <div class="comment-thread" id="thread-ops-sunpond" style="display:none;">
-            <div id="new-ops-sunpond"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-ops-sunpond" style="display:none;">
+            <div class="comment-list" id="list-ops-sunpond"></div>
+            <div class="new-comments" id="new-ops-sunpond"></div>
+            <div class="comment-compose" id="compose-ops-sunpond">
+              <div class="compose-avatar-xs" id="av-ops-sunpond" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-ops-sunpond" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-ops-sunpond" onclick="postComment('ops-sunpond')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-ops-sunpond"></span>
+                  <button class="compose-post-btn" id="btn-ops-sunpond" disabled onclick="postComment('ops-sunpond')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Milford Wind — Fervo invoice revised; LADWP replacement power obligation emerging.</strong> Original ~$7M invoice to Fervo for the outage is being revised downward. Separately, Milford 2 is expected to miss minimum delivery requirements because of the outage, triggering a replacement power payment obligation to LADWP for the first time. Discussions with LADWP are ongoing. A credit against future invoices is being explored rather than a lump-sum payment.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Two separate exposures: (1) the initial Fervo outage receivable; (2) the LADWP replacement power obligation.</div>
+        <div class="reaction-bar" data-item="ops-milford" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('ops-milford')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-ops-milford">0</span>
             <button class="comment-toggle-btn" id="tog-ops-milford">show</button>
           </div>
-          <div class="comment-thread" id="thread-ops-milford" style="display:none;">
-            <div id="new-ops-milford"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-ops-milford" style="display:none;">
+            <div class="comment-list" id="list-ops-milford"></div>
+            <div class="new-comments" id="new-ops-milford"></div>
+            <div class="comment-compose" id="compose-ops-milford">
+              <div class="compose-avatar-xs" id="av-ops-milford" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-ops-milford" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-ops-milford" onclick="postComment('ops-milford')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-ops-milford"></span>
+                  <button class="compose-post-btn" id="btn-ops-milford" disabled onclick="postComment('ops-milford')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Prospero 2 — loan extension in negotiation.</strong> Term loan matures August 1. Extension through December 31 being negotiated — $5M paydown.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Loan is current until extension is signed. Mod vs. extinguishment call needed on the paydown and fee under ASC 470-50.</div>
+        <div class="reaction-bar" data-item="ops-prospero2" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('ops-prospero2')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-ops-prospero2">0</span>
             <button class="comment-toggle-btn" id="tog-ops-prospero2">show</button>
           </div>
-          <div class="comment-thread" id="thread-ops-prospero2" style="display:none;">
-            
-            <div id="new-ops-prospero2"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-ops-prospero2" style="display:none;">
+            <div class="comment-list" id="list-ops-prospero2"></div>
+            <div class="new-comments" id="new-ops-prospero2"></div>
+            <div class="comment-compose" id="compose-ops-prospero2">
+              <div class="compose-avatar-xs" id="av-ops-prospero2" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-ops-prospero2" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-ops-prospero2" onclick="postComment('ops-prospero2')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-ops-prospero2"></span>
+                  <button class="compose-post-btn" id="btn-ops-prospero2" disabled onclick="postComment('ops-prospero2')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
         </div>
         <p><strong>Minnesota wind sale — Shaokatan Hills, Lakota Ridge, and West Pipestone.</strong> Small Minnesota Wind being sold. Combined net asset position is a deficit of approximately $4.085M.</p>
         <div class="acct-lens"><div class="acct-lens-label">Accounting lens</div>Approximately $4M in AROs to be written off at sale.</div>
+        <div class="reaction-bar" data-item="ops-mnwind" data-parent=""></div>
         <div class="comment-section">
           <div class="comment-section-header" onclick="toggleThread('ops-mnwind')">
             <span class="comment-section-label">Comments</span>
             <span class="comment-count-badge" id="cnt-ops-mnwind">0</span>
             <button class="comment-toggle-btn" id="tog-ops-mnwind">show</button>
           </div>
-          <div class="comment-thread" id="thread-ops-mnwind" style="display:none;">
-            
-            <div id="new-ops-mnwind"></div>
-            <div class="comment-compose">
-              <div class="compose-avatar-xs">JB</div>
+          <div class="comment-thread-wrap" id="thread-ops-mnwind" style="display:none;">
+            <div class="comment-list" id="list-ops-mnwind"></div>
+            <div class="new-comments" id="new-ops-mnwind"></div>
+            <div class="comment-compose" id="compose-ops-mnwind">
+              <div class="compose-avatar-xs" id="av-ops-mnwind" style="background:#334155;">?</div>
               <div class="compose-inner-wrap">
                 <textarea class="compose-textarea" id="inp-ops-mnwind" rows="2" placeholder="Add a comment…"></textarea>
                 <div class="compose-footer-row">
-                  <span class="compose-hint-text">Visible to Longroad Accounting</span>
-                  <button class="compose-post-btn" id="btn-ops-mnwind" onclick="postComment('ops-mnwind')" disabled>Post</button>
+                  <span class="compose-name-label" id="nm-ops-mnwind"></span>
+                  <button class="compose-post-btn" id="btn-ops-mnwind" disabled onclick="postComment('ops-mnwind')">Post</button>
                 </div>
+              </div>
+            </div>
+          </div>
               </div>
             </div>
           </div>
@@ -738,6 +845,29 @@
         <div class="date-chip green"><span class="date-day">Sep</span><span class="date-desc">1000 Mile Solar — TCPA closing with Publix (contingent on COD / placed-in-service)</span></div>
       </div>
  
+        <div class="reaction-bar" data-item="kd-june-2026" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('kd-june-2026')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-kd-june-2026">0</span>
+            <button class="comment-toggle-btn" id="tog-kd-june-2026">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-kd-june-2026" style="display:none;">
+            <div class="comment-list" id="list-kd-june-2026"></div>
+            <div class="new-comments" id="new-kd-june-2026"></div>
+            <div class="comment-compose" id="compose-kd-june-2026">
+              <div class="compose-avatar-xs" id="av-kd-june-2026" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-kd-june-2026" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-kd-june-2026"></span>
+                  <button class="compose-post-btn" id="btn-kd-june-2026" disabled onclick="postComment('kd-june-2026')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       <div style="margin-top: 22px;">
         <div id="sec-cpe" class="section-label slate" style="margin-bottom:12px;">CPE &amp; trainings</div>
         <div class="cpe-item">
@@ -797,6 +927,182 @@
           </a>
         </div>
       </div>
+        <div class="reaction-bar" data-item="cpe-surgent-ai" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-surgent-ai')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-surgent-ai">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-surgent-ai">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-cpe-surgent-ai" style="display:none;">
+            <div class="comment-list" id="list-cpe-surgent-ai"></div>
+            <div class="new-comments" id="new-cpe-surgent-ai"></div>
+            <div class="comment-compose" id="compose-cpe-surgent-ai">
+              <div class="compose-avatar-xs" id="av-cpe-surgent-ai" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-surgent-ai" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-cpe-surgent-ai"></span>
+                  <button class="compose-post-btn" id="btn-cpe-surgent-ai" disabled onclick="postComment('cpe-surgent-ai')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reaction-bar" data-item="cpe-surgent-obbba" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-surgent-obbba')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-surgent-obbba">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-surgent-obbba">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-cpe-surgent-obbba" style="display:none;">
+            <div class="comment-list" id="list-cpe-surgent-obbba"></div>
+            <div class="new-comments" id="new-cpe-surgent-obbba"></div>
+            <div class="comment-compose" id="compose-cpe-surgent-obbba">
+              <div class="compose-avatar-xs" id="av-cpe-surgent-obbba" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-surgent-obbba" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-cpe-surgent-obbba"></span>
+                  <button class="compose-post-btn" id="btn-cpe-surgent-obbba" disabled onclick="postComment('cpe-surgent-obbba')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reaction-bar" data-item="cpe-aicpa-townhall" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-aicpa-townhall')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-aicpa-townhall">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-aicpa-townhall">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-cpe-aicpa-townhall" style="display:none;">
+            <div class="comment-list" id="list-cpe-aicpa-townhall"></div>
+            <div class="new-comments" id="new-cpe-aicpa-townhall"></div>
+            <div class="comment-compose" id="compose-cpe-aicpa-townhall">
+              <div class="compose-avatar-xs" id="av-cpe-aicpa-townhall" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-aicpa-townhall" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-cpe-aicpa-townhall"></span>
+                  <button class="compose-post-btn" id="btn-cpe-aicpa-townhall" disabled onclick="postComment('cpe-aicpa-townhall')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reaction-bar" data-item="cpe-deloitte-q2" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-deloitte-q2')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-deloitte-q2">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-deloitte-q2">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-cpe-deloitte-q2" style="display:none;">
+            <div class="comment-list" id="list-cpe-deloitte-q2"></div>
+            <div class="new-comments" id="new-cpe-deloitte-q2"></div>
+            <div class="comment-compose" id="compose-cpe-deloitte-q2">
+              <div class="compose-avatar-xs" id="av-cpe-deloitte-q2" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-deloitte-q2" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-cpe-deloitte-q2"></span>
+                  <button class="compose-post-btn" id="btn-cpe-deloitte-q2" disabled onclick="postComment('cpe-deloitte-q2')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reaction-bar" data-item="cpe-mscpa-summer" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-mscpa-summer')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-mscpa-summer">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-mscpa-summer">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-cpe-mscpa-summer" style="display:none;">
+            <div class="comment-list" id="list-cpe-mscpa-summer"></div>
+            <div class="new-comments" id="new-cpe-mscpa-summer"></div>
+            <div class="comment-compose" id="compose-cpe-mscpa-summer">
+              <div class="compose-avatar-xs" id="av-cpe-mscpa-summer" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-mscpa-summer" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-cpe-mscpa-summer"></span>
+                  <button class="compose-post-btn" id="btn-cpe-mscpa-summer" disabled onclick="postComment('cpe-mscpa-summer')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reaction-bar" data-item="cpe-kpmg-consol" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-kpmg-consol')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-kpmg-consol">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-kpmg-consol">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-cpe-kpmg-consol" style="display:none;">
+            <div class="comment-list" id="list-cpe-kpmg-consol"></div>
+            <div class="new-comments" id="new-cpe-kpmg-consol"></div>
+            <div class="comment-compose" id="compose-cpe-kpmg-consol">
+              <div class="compose-avatar-xs" id="av-cpe-kpmg-consol" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-kpmg-consol" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-cpe-kpmg-consol"></span>
+                  <button class="compose-post-btn" id="btn-cpe-kpmg-consol" disabled onclick="postComment('cpe-kpmg-consol')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reaction-bar" data-item="cpe-ey-q2" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-ey-q2')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-ey-q2">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-ey-q2">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-cpe-ey-q2" style="display:none;">
+            <div class="comment-list" id="list-cpe-ey-q2"></div>
+            <div class="new-comments" id="new-cpe-ey-q2"></div>
+            <div class="comment-compose" id="compose-cpe-ey-q2">
+              <div class="compose-avatar-xs" id="av-cpe-ey-q2" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-ey-q2" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-cpe-ey-q2"></span>
+                  <button class="compose-post-btn" id="btn-cpe-ey-q2" disabled onclick="postComment('cpe-ey-q2')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reaction-bar" data-item="cpe-pwc-q2" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('cpe-pwc-q2')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-cpe-pwc-q2">0</span>
+            <button class="comment-toggle-btn" id="tog-cpe-pwc-q2">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-cpe-pwc-q2" style="display:none;">
+            <div class="comment-list" id="list-cpe-pwc-q2"></div>
+            <div class="new-comments" id="new-cpe-pwc-q2"></div>
+            <div class="comment-compose" id="compose-cpe-pwc-q2">
+              <div class="compose-avatar-xs" id="av-cpe-pwc-q2" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-cpe-pwc-q2" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-cpe-pwc-q2"></span>
+                  <button class="compose-post-btn" id="btn-cpe-pwc-q2" disabled onclick="postComment('cpe-pwc-q2')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       <!-- OFF THE BOOKS -->
       <div style="margin-top:22px;">
@@ -825,6 +1131,29 @@
           <div id="wordle-msg" style="font-size:10px;font-weight:600;color:#10B981;min-height:14px;"></div>
         </div>
 
+        <div class="reaction-bar" data-item="otb-june-2026" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('otb-june-2026')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-otb-june-2026">0</span>
+            <button class="comment-toggle-btn" id="tog-otb-june-2026">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-otb-june-2026" style="display:none;">
+            <div class="comment-list" id="list-otb-june-2026"></div>
+            <div class="new-comments" id="new-otb-june-2026"></div>
+            <div class="comment-compose" id="compose-otb-june-2026">
+              <div class="compose-avatar-xs" id="av-otb-june-2026" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-otb-june-2026" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-otb-june-2026"></span>
+                  <button class="compose-post-btn" id="btn-otb-june-2026" disabled onclick="postComment('otb-june-2026')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -839,42 +1168,196 @@
         <div class="news-source">PwC · December 2025</div>
         <div class="news-title">Financial reporting impacts of rising power demand</div>
         <div class="news-summary">As companies turn to PPAs, battery storage, and Energy-as-a-Service arrangements to meet growing power needs, PwC flags the unanticipated financial reporting consequences these complex contractual structures can trigger — across GAAP and IFRS.</div>
+        <div class="reaction-bar" data-item="news-power-demand" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-power-demand')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-power-demand">0</span>
+            <button class="comment-toggle-btn" id="tog-news-power-demand">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-news-power-demand" style="display:none;">
+            <div class="comment-list" id="list-news-power-demand"></div>
+            <div class="new-comments" id="new-news-power-demand"></div>
+            <div class="comment-compose" id="compose-news-power-demand">
+              <div class="compose-avatar-xs" id="av-news-power-demand" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-power-demand" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-news-power-demand"></span>
+                  <button class="compose-post-btn" id="btn-news-power-demand" disabled onclick="postComment('news-power-demand')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <a class="news-link" href="https://www.pwc.com/us/en/services/consulting/deals/library/financial-reporting-implications-of-rising-power-demand.html" target="_blank">Read more →</a>
       </div>
       <div class="news-item">
         <div class="news-source">Energy IB · March 2026</div>
         <div class="news-title">The data center power boom: AI demand, hyperscaler offtake, and 50+ GW of incremental load</div>
         <div class="news-summary">US data center power demand is projected to reach approximately 76 GW by 2026, up from roughly 50 GW in 2024. Amazon, Microsoft, Google, and Meta together accounted for roughly half of all global clean energy purchase agreements signed in 2025, and hyperscaler capex is forecast to exceed $600 billion in 2026. Corporate procurement has evolved beyond REC purchasing toward hourly matching — raising the bar on what offtake structures need to deliver, and making bankable hyperscaler PPAs among the most sought-after assets in project finance.</div>
+        <div class="reaction-bar" data-item="news-datacenter" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-datacenter')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-datacenter">0</span>
+            <button class="comment-toggle-btn" id="tog-news-datacenter">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-news-datacenter" style="display:none;">
+            <div class="comment-list" id="list-news-datacenter"></div>
+            <div class="new-comments" id="new-news-datacenter"></div>
+            <div class="comment-compose" id="compose-news-datacenter">
+              <div class="compose-avatar-xs" id="av-news-datacenter" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-datacenter" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-news-datacenter"></span>
+                  <button class="compose-post-btn" id="btn-news-datacenter" disabled onclick="postComment('news-datacenter')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <a class="news-link" href="https://ibinterviewquestions.com/guides/energy-investment-banking/data-center-power-boom-ai-demand-hyperscaler" target="_blank">Read more →</a>
       </div>
       <div class="news-item">
         <div class="news-source">Deloitte Insights · April 2026</div>
         <div class="news-title">2026 Renewable Energy Industry Outlook: speed, resilience, and the OBBBA inflection point</div>
         <div class="news-summary">Deloitte's annual outlook frames 2026 as a year defined by compressed timelines and supply chain pressure. Developers are racing to safe-harbor projects before the July 4 construction deadline, while FEOC restrictions and tariffs are reshaping procurement decisions. Deloitte projects annual solar, wind, and storage additions through 2030 could fall to 30–66 GW under the OBBBA regime, down from a pre-OBBBA range of 54–85 GW. Data center demand and rising electricity prices are identified as the counterweight keeping renewable economics viable despite the credit phaseout.</div>
+        <div class="reaction-bar" data-item="news-renewables-2026" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-renewables-2026')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-renewables-2026">0</span>
+            <button class="comment-toggle-btn" id="tog-news-renewables-2026">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-news-renewables-2026" style="display:none;">
+            <div class="comment-list" id="list-news-renewables-2026"></div>
+            <div class="new-comments" id="new-news-renewables-2026"></div>
+            <div class="comment-compose" id="compose-news-renewables-2026">
+              <div class="compose-avatar-xs" id="av-news-renewables-2026" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-renewables-2026" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-news-renewables-2026"></span>
+                  <button class="compose-post-btn" id="btn-news-renewables-2026" disabled onclick="postComment('news-renewables-2026')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <a class="news-link" href="https://www.deloitte.com/us/en/insights/industry/renewable-energy/renewable-energy-industry-outlook.html" target="_blank">Read more →</a>
       </div>
       <div class="news-item">
         <div class="news-source">Journal of Accountancy · April 2026</div>
         <div class="news-title">How finance teams are really using AI in 2026</div>
         <div class="news-summary">60% of finance teams are piloting AI — but only 7% of CFOs report strong impact. A grounded look at what's actually working (and what isn't) across reconciliation, multi-entity consolidation, and workflow automation.</div>
+        <div class="reaction-bar" data-item="news-ai-finance" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-ai-finance')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-ai-finance">0</span>
+            <button class="comment-toggle-btn" id="tog-news-ai-finance">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-news-ai-finance" style="display:none;">
+            <div class="comment-list" id="list-news-ai-finance"></div>
+            <div class="new-comments" id="new-news-ai-finance"></div>
+            <div class="comment-compose" id="compose-news-ai-finance">
+              <div class="compose-avatar-xs" id="av-news-ai-finance" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-ai-finance" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-news-ai-finance"></span>
+                  <button class="compose-post-btn" id="btn-news-ai-finance" disabled onclick="postComment('news-ai-finance')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <a class="news-link" href="https://www.journalofaccountancy.com/issues/2026/apr/how-are-finance-teams-really-using-ai-and-automation/" target="_blank">Read more →</a>
       </div>
       <div class="news-item">
         <div class="news-source">FASB · May 19, 2026</div>
         <div class="news-title">FASB issues first-ever standard on environmental credits</div>
         <div class="news-summary">ASU 2026-02 establishes comprehensive GAAP guidance for recognizing, measuring, and disclosing environmental credits and related obligations — RECs, carbon offsets, and compliance credits included. Previously, companies accounted for these through inventory, intangibles, or contingencies with wide variation. The new standard defines treatment based on intended use and how credits are obtained. Directly relevant to our portfolio.</div>
+        <div class="reaction-bar" data-item="news-env-credits" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-env-credits')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-env-credits">0</span>
+            <button class="comment-toggle-btn" id="tog-news-env-credits">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-news-env-credits" style="display:none;">
+            <div class="comment-list" id="list-news-env-credits"></div>
+            <div class="new-comments" id="new-news-env-credits"></div>
+            <div class="comment-compose" id="compose-news-env-credits">
+              <div class="compose-avatar-xs" id="av-news-env-credits" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-env-credits" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-news-env-credits"></span>
+                  <button class="compose-post-btn" id="btn-news-env-credits" disabled onclick="postComment('news-env-credits')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <a class="news-link" href="https://rsmus.com/insights/financial-reporting/fasb-guidance-environmental-credits-related-obligations.html" target="_blank">Read more →</a>
       </div>
       <div class="news-item">
         <div class="news-source">White &amp; Case / Utility Dive · June 2026</div>
         <div class="news-title">FERC orders all major grid operators to reform large-load interconnection rules</div>
         <div class="news-summary">In June 2026, FERC issued show cause orders to all six jurisdictional RTOs — including PJM, MISO, and SPP — requiring them to revise or justify their interconnection rules for data centers and other large loads. The orders follow a DOE directive from October 2025 and focus on standardizing study deposits, accelerating queue timelines, and addressing cost allocation for network upgrades. PJM alone projects 30 GW of new data center demand by 2030. The action has direct implications for developers structuring behind-the-meter and co-location arrangements.</div>
+        <div class="reaction-bar" data-item="news-ferc-interconnect" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-ferc-interconnect')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-ferc-interconnect">0</span>
+            <button class="comment-toggle-btn" id="tog-news-ferc-interconnect">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-news-ferc-interconnect" style="display:none;">
+            <div class="comment-list" id="list-news-ferc-interconnect"></div>
+            <div class="new-comments" id="new-news-ferc-interconnect"></div>
+            <div class="comment-compose" id="compose-news-ferc-interconnect">
+              <div class="compose-avatar-xs" id="av-news-ferc-interconnect" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-ferc-interconnect" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-news-ferc-interconnect"></span>
+                  <button class="compose-post-btn" id="btn-news-ferc-interconnect" disabled onclick="postComment('news-ferc-interconnect')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <a class="news-link" href="https://www.whitecase.com/insight-alert/ferc-orders-grid-operators-promptly-revise-or-justify-interconnection-rules-data" target="_blank">Read more →</a>
       </div>
       <div class="news-item">
         <div class="news-source">Novogradac · Ongoing</div>
         <div class="news-title">OBBB safe harbor deadline: July 4, 2026</div>
         <div class="news-summary">Under the One Big Beautiful Bill Act, wind and solar projects must begin construction before July 5 to qualify for §45Y/48E tech-neutral credits. FEOC restrictions on foreign entity participation are also now in effect. Accounting teams should expect related capitalization questions, tax credit structuring activity, and potential safe harbor documentation requests in Q2/Q3.</div>
+        <div class="reaction-bar" data-item="news-obbb-safe-harbor" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('news-obbb-safe-harbor')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-news-obbb-safe-harbor">0</span>
+            <button class="comment-toggle-btn" id="tog-news-obbb-safe-harbor">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-news-obbb-safe-harbor" style="display:none;">
+            <div class="comment-list" id="list-news-obbb-safe-harbor"></div>
+            <div class="new-comments" id="new-news-obbb-safe-harbor"></div>
+            <div class="comment-compose" id="compose-news-obbb-safe-harbor">
+              <div class="compose-avatar-xs" id="av-news-obbb-safe-harbor" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-news-obbb-safe-harbor" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-news-obbb-safe-harbor"></span>
+                  <button class="compose-post-btn" id="btn-news-obbb-safe-harbor" disabled onclick="postComment('news-obbb-safe-harbor')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <a class="news-link" href="https://www.novoco.com/resource-centers/renewable-energy-tax-credits/about-renewable-energy-tax-credits" target="_blank">Read more →</a>
       </div>
     </div>
@@ -885,21 +1368,109 @@
         <a href="https://www.fasb.org/page/ShowPdf?path=ASU%202025-10.pdf&title=Accounting%20Standards%20Update%202025-10%E2%80%94Government%20Grants%20(Topic%20832):%20Accounting%20for%20Government%20Grants" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2025-10 ↗</div></a>
         <div class="asu-title">Government Grants (Topic 832)</div>
         <div class="asu-summary">First explicit U.S. GAAP guidance on accounting for government grants — previously most entities defaulted to IAS 20 by analogy. Recognition requires conditions to be substantially met. Entities elect gross vs. net P&L presentation. Effective for annual periods beginning after Dec 15, 2026; nonpublic entities one year later. Early adoption permitted.</div>
+        <div class="reaction-bar" data-item="asu-topic-832-june" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('asu-topic-832-june')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-asu-topic-832-june">0</span>
+            <button class="comment-toggle-btn" id="tog-asu-topic-832-june">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-asu-topic-832-june" style="display:none;">
+            <div class="comment-list" id="list-asu-topic-832-june"></div>
+            <div class="new-comments" id="new-asu-topic-832-june"></div>
+            <div class="comment-compose" id="compose-asu-topic-832-june">
+              <div class="compose-avatar-xs" id="av-asu-topic-832-june" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-asu-topic-832-june" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-asu-topic-832-june"></span>
+                  <button class="compose-post-btn" id="btn-asu-topic-832-june" disabled onclick="postComment('asu-topic-832-june')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="asu-item">
         <a href="https://www.fasb.org/page/ShowPdf?path=ASU%202025-12.pdf&title=Accounting%20Standards%20Update%202025-12%E2%80%94Codification%20Improvements" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2025-12 ↗</div></a>
         <div class="asu-title">Codification Improvements</div>
         <div class="asu-summary">Addresses 33 technical corrections and clarifications across a range of topics. Notable items include clarified diluted EPS calculation when a loss from continuing operations exists, permissible treasury stock retirement methods, and lease receivable disclosure requirements under ASC 842. Effective for all entities for annual periods beginning after Dec 15, 2026. Early adoption permitted.</div>
+        <div class="reaction-bar" data-item="asu-codification-june" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('asu-codification-june')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-asu-codification-june">0</span>
+            <button class="comment-toggle-btn" id="tog-asu-codification-june">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-asu-codification-june" style="display:none;">
+            <div class="comment-list" id="list-asu-codification-june"></div>
+            <div class="new-comments" id="new-asu-codification-june"></div>
+            <div class="comment-compose" id="compose-asu-codification-june">
+              <div class="compose-avatar-xs" id="av-asu-codification-june" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-asu-codification-june" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-asu-codification-june"></span>
+                  <button class="compose-post-btn" id="btn-asu-codification-june" disabled onclick="postComment('asu-codification-june')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="asu-item">
         <a href="https://fasb.org/page/ShowPdf?path=ASU%202026-01.pdf&title=Accounting%20Standards%20Update%202026-01%E2%80%94Equity%20(Topic%20505):%20Initial%20Measurement%20of%20Paid-in-Kind%20Dividend" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2026-01 ↗</div></a>
         <div class="asu-title">Initial Measurement of Paid-in-Kind Dividends (Topic 505)</div>
         <div class="asu-summary">Issued April 23, 2026. Requires PIK dividends on equity-classified preferred stock to be measured based on the stated PIK dividend rate in the preferred stock agreement — eliminating prior diversity in practice. Applies to all entities. Effective for annual periods beginning after Dec 15, 2026; early adoption permitted.</div>
+        <div class="reaction-bar" data-item="asu-2026-01-june" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('asu-2026-01-june')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-asu-2026-01-june">0</span>
+            <button class="comment-toggle-btn" id="tog-asu-2026-01-june">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-asu-2026-01-june" style="display:none;">
+            <div class="comment-list" id="list-asu-2026-01-june"></div>
+            <div class="new-comments" id="new-asu-2026-01-june"></div>
+            <div class="comment-compose" id="compose-asu-2026-01-june">
+              <div class="compose-avatar-xs" id="av-asu-2026-01-june" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-asu-2026-01-june" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-asu-2026-01-june"></span>
+                  <button class="compose-post-btn" id="btn-asu-2026-01-june" disabled onclick="postComment('asu-2026-01-june')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="asu-item">
         <a href="https://www.fasb.org/page/ShowPdf?path=ASU%202026-02.pdf&title=Accounting%20Standards%20Update%202026-02%E2%80%94Environmental%20Credits%20and%20Environmental%20Credit%20Obligations%20(Topi" target="_blank" style="text-decoration:none;"><div class="asu-tag">ASU 2026-02 · NEW ↗</div></a>
         <div class="asu-title">Environmental Credits and ECOs (Topic 818)</div>
         <div class="asu-summary">Issued May 19, 2026. Establishes the first comprehensive accounting model for environmental credits and environmental credit obligations. Entities recognize assets based on intended use (compliance vs. noncompliance vs. voluntary) and how credits are obtained. Effective for PBEs in fiscal years beginning after Dec 15, 2027; one year later for all others. Early adoption permitted. The standard also adds environmental credit expense categories to the ASU 2024-03 income statement disaggregation disclosures.</div>
+        <div class="reaction-bar" data-item="asu-2026-02-june" data-parent=""></div>
+        <div class="comment-section">
+          <div class="comment-section-header" onclick="toggleThread('asu-2026-02-june')">
+            <span class="comment-section-label">Comments</span>
+            <span class="comment-count-badge" id="cnt-asu-2026-02-june">0</span>
+            <button class="comment-toggle-btn" id="tog-asu-2026-02-june">show</button>
+          </div>
+          <div class="comment-thread-wrap" id="thread-asu-2026-02-june" style="display:none;">
+            <div class="comment-list" id="list-asu-2026-02-june"></div>
+            <div class="new-comments" id="new-asu-2026-02-june"></div>
+            <div class="comment-compose" id="compose-asu-2026-02-june">
+              <div class="compose-avatar-xs" id="av-asu-2026-02-june" style="background:#334155;">?</div>
+              <div class="compose-inner-wrap">
+                <textarea class="compose-textarea" id="inp-asu-2026-02-june" rows="2" placeholder="Add a comment…"></textarea>
+                <div class="compose-footer-row">
+                  <span class="compose-name-label" id="nm-asu-2026-02-june"></span>
+                  <button class="compose-post-btn" id="btn-asu-2026-02-june" disabled onclick="postComment('asu-2026-02-june')">Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
  
@@ -931,18 +1502,17 @@
   </div>
  
 </div>
-<!-- IDENTITY MODAL -->
 <div id="identity-modal" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.75);z-index:9999;align-items:center;justify-content:center;">
   <div style="background:#fff;border-radius:8px;padding:32px 28px 24px;max-width:360px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
-    <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#10B981;margin-bottom:10px;">The Ledger &middot; Comments</div>
-    <div style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#1E293B;margin-bottom:8px;line-height:1.2;">What&#39;s your name?</div>
-    <div style="font-size:12px;color:#64748B;margin-bottom:18px;line-height:1.5;">Your name appears on comments you post. You&#39;ll only be asked once per browser.</div>
+    <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#10B981;margin-bottom:10px;">The Ledger · Comments</div>
+    <div style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#1E293B;margin-bottom:8px;line-height:1.2;">What’s your name?</div>
+    <div style="font-size:12px;color:#64748B;margin-bottom:18px;line-height:1.5;">Your name appears on comments you post. You’ll only be asked once per browser.</div>
     <input id="idn-inp" type="text" placeholder="First Last" autocomplete="name"
       style="width:100%;border:1.5px solid #E2E8F0;border-radius:5px;padding:9px 12px;font-size:13px;color:#1E293B;font-family:inherit;outline:none;transition:border-color 0.15s;margin-bottom:14px;"
       onfocus="this.style.borderColor='#10B981'" onblur="this.style.borderColor='#E2E8F0'" />
     <div style="display:flex;align-items:center;justify-content:space-between;">
       <button id="idn-skip" style="font-size:10px;font-weight:600;color:#94A3B8;background:none;border:none;cursor:pointer;padding:4px 0;">Skip for now</button>
-      <button id="idn-save" style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:#10B981;color:#fff;border:none;border-radius:3px;padding:9px 22px;cursor:pointer;" onmouseover="this.style.background='#059669'" onmouseout="this.style.background='#10B981'">Save name &rarr;</button>
+      <button id="idn-save" style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;background:#10B981;color:#fff;border:none;border-radius:3px;padding:9px 22px;cursor:pointer;" onmouseover="this.style.background='#059669'" onmouseout="this.style.background='#10B981'">Save name →</button>
     </div>
   </div>
 </div>
@@ -1154,9 +1724,56 @@
       var expRow = document.createElement('div');
       expRow.style.cssText = 'display:none;padding:5px 9px 7px;border-top:1.5px solid #E2E8F0;font-size:9px;color:#475569;line-height:1.55;';
 
-      function handl// ── SMARTSHEET COMMENT ENGINE ──
-  var SS_URL = '/.netlify/functions/smartsheet';
-  var EDITION  = 'June 2026';
+      function handleAnswer(chosen) {
+        var correct = (chosen === item.answer);
+        if (correct) score++;
+        answered++;
+
+        // Style the chosen button
+        var chosenBtn = chosen ? trueBtn : falseBtn;
+        var otherBtn = chosen ? falseBtn : trueBtn;
+        chosenBtn.style.background = correct ? '#6EE7B7' : '#FCA5A5';
+        chosenBtn.style.color = correct ? '#065F46' : '#7F1D1D';
+        chosenBtn.style.borderColor = correct ? '#6EE7B7' : '#FCA5A5';
+
+        // If wrong, highlight the correct button
+        if (!correct) {
+          var correctBtn = item.answer ? trueBtn : falseBtn;
+          correctBtn.style.background = '#F0FDF8';
+          correctBtn.style.borderColor = '#6EE7B7';
+          correctBtn.style.color = '#065F46';
+        }
+
+        // Disable both buttons
+        trueBtn.disabled = true;
+        falseBtn.disabled = true;
+        trueBtn.style.cursor = 'default';
+        falseBtn.style.cursor = 'default';
+
+        // Show explanation
+        expRow.style.display = 'block';
+        expRow.style.background = correct ? '#F0FDF8' : '#FEF2F2';
+        expRow.innerHTML = '<span style="font-weight:700;color:' + (correct ? '#059669' : '#EF9090') + ';">' + (correct ? '✓ Correct' : '✗ Incorrect') + '</span> — ' + item.explanation;
+
+        // Update score display
+        document.getElementById('tf-score').textContent = score + '/' + answered;
+      }
+
+      trueBtn.addEventListener('click', function() { handleAnswer(true); });
+      falseBtn.addEventListener('click', function() { handleAnswer(false); });
+
+      btnRow.appendChild(trueBtn);
+      btnRow.appendChild(falseBtn);
+      wrapper.appendChild(qRow);
+      wrapper.appendChild(btnRow);
+      wrapper.appendChild(expRow);
+      list.appendChild(wrapper);
+    });
+  })();
+
+  // ── LEDGER COMMENT & REACTION ENGINE ──
+  var SS_URL  = '/.netlify/functions/smartsheet';
+  var EDITION = 'June 2026';
 
   var COL = {
     commentId:     8500066816135044,
@@ -1166,25 +1783,47 @@
     commenterName: 7092691932581764,
     commentText:   1463192398368644,
     timestamp:     5966792025739140,
-    parentId:      3714992212053892
+    parentId:      3714992212053892,
+    reactionType:  1335735687090052
   };
 
   var ITEM_TITLES = {
-    'dev-sunpond-cod':    'Sun Pond — COD',
-    'dev-champion':       'Champion Creek — IC approval',
-    'dev-raven':          'Raven — financing terms approved',
-    'dev-1000mile-te':    '1000 Mile Solar — tax equity funded',
-    'dev-bigcreek-ts':    'Big Creek Solar 1 — TE term sheet signed',
-    'dev-amargosa':       'Amargosa — acquisition signed',
-    'dev-notchpeak-dch':  'Notch Peak — deal contingent hedge executed',
-    'dev-serrano':        'Serrano TCPAs',
-    'dev-sunbasin':       'Sun Basin — land auctions',
-    'dev-1000mile-tcpa':  '1000 Mile Solar — TCPA executed with Publix',
-    'dev-milford-ptc':    'Milford Wind — 2025 PTCs transferred to Dot Foods',
-    'ops-sunpond':        'Sun Pond — storage payment dispute',
-    'ops-milford':        'Milford Wind — Fervo invoice revised',
-    'ops-prospero2':      'Prospero 2 — loan extension in negotiation',
-    'ops-mnwind':         'Minnesota wind sale'
+    'dev-sunpond-cod':       'Sun Pond Solar — Commercial Operation Date',
+    'dev-champion':          'Champion Wind — Financing Update',
+    'dev-raven':             'Raven Solar — Development Update',
+    'dev-1000mile-te':       '1000 Mile Solar — Tax Equity Closing',
+    'dev-bigcreek-ts':       'Big Creek Wind — Term Sheet Executed',
+    'dev-amargosa':          'Amargosa Solar — Site Control Update',
+    'dev-notchpeak-dch':     'Notch Peak — DCH Board Approval',
+    'dev-serrano':           'Serrano Solar — Development Update',
+    'dev-sunbasin':          'Sun Basin Solar — Permitting Update',
+    'dev-1000mile-tcpa':     '1000 Mile Solar — TCPA Amendment',
+    'dev-milford-ptc':       'Milford Wind — PTC Transfer Update',
+    'ops-sunpond':           'Sun Pond Solar — Operations Update',
+    'ops-milford':           'Milford Wind — Operations Update',
+    'ops-prospero2':         'Prospero II — Operations Update',
+    'ops-mnwind':            'MN Wind — Operations Update',
+    'kd-june-2026':          'Key Dates & Deadlines',
+    'cpe-pwc-q2':            'PwC: Q2 2026 Accounting & Reporting Update',
+    'cpe-ey-q2':             'EY: Q2 2026 Technical Accounting Update',
+    'cpe-kpmg-consol':       'KPMG: Consolidation & VIE Accounting',
+    'cpe-mscpa-summer':      'MSCPA: Summer CPE Series',
+    'cpe-deloitte-q2':       'Deloitte: Q2 2026 Accounting Updates',
+    'cpe-aicpa-townhall':    'AICPA: 2026 Mid-Year Town Hall',
+    'cpe-surgent-obbba':     'Surgent: One Big Beautiful Bill Act — Tax Impacts',
+    'cpe-surgent-ai':        'Surgent: AI Tools for Accountants',
+    'otb-june-2026':         'Off the Books',
+    'news-power-demand':     'Power Demand Outlook Update',
+    'news-datacenter':       'Data Center Energy Demand Surge',
+    'news-renewables-2026':  '2026 Renewables Market Outlook',
+    'news-ai-finance':       'AI in Finance: Accounting Implications',
+    'news-env-credits':      'Environmental Credits Market Update',
+    'news-ferc-interconnect':'FERC Interconnection Queue Reform',
+    'news-obbb-safe-harbor': 'OBBBA Safe Harbor Provisions',
+    'asu-topic-832-june':    'ASU: Government Grants (Topic 832)',
+    'asu-codification-june': 'ASU: Codification Improvements',
+    'asu-2026-01-june':      'ASU 2026-01: Paid-in-Kind Dividends (Topic 505)',
+    'asu-2026-02-june':      'ASU 2026-02: Environmental Credits & ECOs (Topic 818)'
   };
 
   var commentCounts = {};
@@ -1248,7 +1887,8 @@
   function renderComment(c, isNew, isReply) {
     var bg = avatarBg(c.name), ini = getInitials(c.name);
     var newBadge = isNew   ? '<span class="comment-new-badge">new</span>' : '';
-    var replyBtn = isReply ? '' : '<button class="comment-reply-link" onclick="startReply(''+esc(c.itemKey)+'',''+esc(c.id)+'')">Reply</button>';
+    var replyBtn = isReply ? '' : '<button class="comment-reply-link" onclick="startReply(\'' + esc(c.itemKey) + '\',\'' + esc(c.id) + '\')">Reply</button>';
+    var deleteBtn = (c.name === currentUser && c.rowId) ? '<button class="comment-delete-btn" onclick="deleteComment(\'' + c.rowId + '\',\'' + esc(c.id) + '\',\'' + esc(c.itemKey) + '\')">✕ Delete</button>' : '';
     return '<div class="comment-row" id="cmt-'+esc(c.id)+'">' +
       '<div class="comment-avatar-sm" style="background:'+bg+';">'+ini+'</div>' +
       '<div class="comment-body-wrap">' +
@@ -1259,9 +1899,102 @@
         '</div>' +
         '<div class="comment-text">'+esc(c.text)+'</div>' +
         replyBtn +
+        deleteBtn +
+        '<div class="reaction-bar" data-item="'+esc(c.itemKey)+'" data-parent="'+esc(c.id)+'">' +
+        '</div>' +
         '<div class="replies-for-'+esc(c.id)+'"></div>' +
       '</div>' +
     '</div>';
+  }
+
+  var EMOJIS = ['👍','❤️','🔥','💡'];
+  window._reactionMap = {};
+
+  function reactIcon(e, active) {
+    var c = active ? '#10B981' : 'none';
+    var s = '#10B981';
+    var w = '1.5';
+    if (e === '👍') {
+      return '<svg width="13" height="13" viewBox="0 0 24 24" fill="'+c+'" stroke="'+s+'" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round">'
+        + '<path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>'
+        + '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>'
+        + '</svg>';
+    }
+    if (e === '❤️') {
+      return '<svg width="13" height="13" viewBox="0 0 24 24" fill="'+c+'" stroke="'+s+'" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round">'
+        + '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>'
+        + '</svg>';
+    }
+    if (e === '🔥') {
+      return '<svg width="13" height="13" viewBox="0 0 24 24" fill="'+c+'" stroke="'+s+'" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round">'
+        + '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'
+        + '</svg>';
+    }
+    if (e === '💡') {
+      return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="'+s+'" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round">'
+        + '<path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" fill="'+c+'"/>'
+        + '<line x1="9" y1="14" x2="15" y2="14"/>'
+        + '<line x1="9" y1="18" x2="15" y2="18"/>'
+        + '<line x1="10" y1="22" x2="14" y2="22"/>'
+        + '</svg>';
+    }
+    return e;
+  }
+
+  function buildReactionHTML(itemKey, parentId, rm) {
+    return EMOJIS.map(function(e) {
+      var count = (rm.counts && rm.counts[e]) || 0;
+      var isMe  = rm.userEmoji === e;
+      var cls   = 'react-btn' + (isMe ? ' active' : '');
+      var label = e==='👍'?'Thumbs up':e==='❤️'?'Heart':e==='🔥'?'Exciting':'Insightful';
+      return '<button class="' + cls + '" title="' + label + '" onclick="toggleReaction(\'' + itemKey + '\',\'' + (parentId||'') + '\',\'' + e + '\')">'
+        + reactIcon(e, isMe) + (count > 0 ? '<span class="react-count">' + count + '</span>' : '') + '</button>';
+    }).join('');
+  }
+
+  async function sendReactionToSheet(itemKey, parentId, emoji) {
+    var id = uid(), now = new Date().toISOString();
+    var payload = [{ toBottom:true, cells:[
+      { columnId: COL.commentId,     value: id },
+      { columnId: COL.edition,       value: EDITION },
+      { columnId: COL.itemKey,       value: itemKey },
+      { columnId: COL.itemTitle,     value: ITEM_TITLES[itemKey]||itemKey },
+      { columnId: COL.commenterName, value: currentUser },
+      { columnId: COL.commentText,   value: '' },
+      { columnId: COL.timestamp,     value: now },
+      { columnId: COL.parentId,      value: parentId||'' },
+      { columnId: COL.reactionType,  value: emoji }
+    ]}];
+    var r = await fetch(SS_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    var d = await r.json();
+    return { rowId: d.result.id };
+  }
+
+  async function toggleReaction(itemKey, parentId, emoji) {
+    if (!currentUser) { showIdentityPrompt(function(){ toggleReaction(itemKey, parentId, emoji); }); return; }
+    var key = itemKey + ':' + (parentId||'');
+    if (!window._reactionMap[key]) window._reactionMap[key] = { counts:{}, userRowId:null, userEmoji:null };
+    var rm = window._reactionMap[key];
+    var prevEmoji = rm.userEmoji, prevRowId = rm.userRowId;
+    if (prevEmoji) {
+      try {
+        await fetch(SS_URL + '?rowId=' + prevRowId, { method:'DELETE' });
+        rm.counts[prevEmoji] = Math.max(0, (rm.counts[prevEmoji]||1) - 1);
+        rm.userRowId = null; rm.userEmoji = null;
+      } catch(e) { console.error('delete reaction', e); }
+    }
+    if (emoji !== prevEmoji) {
+      try {
+        var res = await sendReactionToSheet(itemKey, parentId, emoji);
+        rm.counts[emoji] = (rm.counts[emoji]||0) + 1;
+        rm.userRowId = res.rowId; rm.userEmoji = emoji;
+      } catch(e) { console.error('add reaction', e); }
+    }
+    var bar = parentId
+      ? document.querySelector('.reaction-bar[data-item="' + itemKey + '"][data-parent="' + parentId + '"' + ']')
+      : document.querySelector('.reaction-bar[data-item="' + itemKey + '"][data-parent=""]');
+    if (bar) bar.innerHTML = buildReactionHTML(itemKey, parentId||'', rm);
   }
 
   async function loadComments() {
@@ -1271,18 +2004,27 @@
       var d = await r.json();
       var all = [];
       (d.rows||[]).forEach(function(row) {
-        var c = {};
+        var c = { rowId: row.id };
         (row.cells||[]).forEach(function(cell) {
           var cid = cell.columnId, v = cell.value != null ? String(cell.value) : '';
-          if      (cid === COL.commentId)     c.id      = v;
-          else if (cid === COL.edition)       c.edition = v;
-          else if (cid === COL.itemKey)       c.itemKey = v;
-          else if (cid === COL.commenterName) c.name    = v;
-          else if (cid === COL.commentText)   c.text    = v;
-          else if (cid === COL.timestamp)     c.ts      = v;
-          else if (cid === COL.parentId)      c.parent  = v;
+          if      (cid === COL.commentId)     c.id           = v;
+          else if (cid === COL.edition)       c.edition      = v;
+          else if (cid === COL.itemKey)       c.itemKey      = v;
+          else if (cid === COL.commenterName) c.name         = v;
+          else if (cid === COL.commentText)   c.text         = v;
+          else if (cid === COL.timestamp)     c.ts           = v;
+          else if (cid === COL.parentId)      c.parent       = v;
+          else if (cid === COL.reactionType)  c.reactionType = v;
         });
-        if (c.edition === EDITION && c.id && c.itemKey) all.push(c);
+        if (c.edition === EDITION && c.id && c.itemKey) {
+          if (c.reactionType) {
+            var rkey = c.itemKey + ':' + (c.parent||'');
+            if (!window._reactionMap[rkey]) window._reactionMap[rkey] = { counts:{}, userRowId:null, userEmoji:null };
+            var rm = window._reactionMap[rkey];
+            rm.counts[c.reactionType] = (rm.counts[c.reactionType]||0) + 1;
+            if (c.name === currentUser) { rm.userRowId = c.rowId; rm.userEmoji = c.reactionType; }
+          } else if (c.text) { all.push(c); }
+        }
       });
       var byKey = {};
       all.forEach(function(c) { (byKey[c.itemKey] = byKey[c.itemKey]||[]).push(c); });
@@ -1311,12 +2053,20 @@
         var badge = document.getElementById('cnt-'+key);
         if (badge) badge.textContent = commentCounts[key];
       });
+      document.querySelectorAll('.reaction-bar').forEach(function(bar) {
+        var ik = bar.getAttribute('data-item');
+        var pid = bar.getAttribute('data-parent') || '';
+        if (!ik) return;
+        var rkey = ik + ':' + pid;
+        var rm2 = window._reactionMap[rkey] || { counts:{}, userRowId:null, userEmoji:null };
+        bar.innerHTML = buildReactionHTML(ik, pid, rm2);
+      });
     } catch(e) { console.warn('Ledger: could not load comments', e); }
   }
 
   async function sendToSheet(itemKey, text, parentId) {
     var id = uid(), now = new Date().toISOString();
-    var payload = { rows:[{ cells:[
+    var payload = [{ toBottom:true, cells:[
       { columnId: COL.commentId,     value: id },
       { columnId: COL.edition,       value: EDITION },
       { columnId: COL.itemKey,       value: itemKey },
@@ -1325,7 +2075,7 @@
       { columnId: COL.commentText,   value: text },
       { columnId: COL.timestamp,     value: now },
       { columnId: COL.parentId,      value: parentId||'' }
-    ]}]};
+    ]}];
     var r = await fetch(SS_URL, {
       method:'POST',
       headers:{ 'Content-Type':'application/json' },
@@ -1333,6 +2083,19 @@
     });
     if (!r.ok) throw new Error('HTTP '+r.status);
     return { id:id, ts:now, name:currentUser, itemKey:itemKey, text:text, parent:parentId||'' };
+  }
+
+  async function deleteComment(rowId, commentId, itemKey) {
+    if (!confirm('Delete this comment?')) return;
+    try {
+      var r = await fetch(SS_URL + '?rowId=' + rowId, { method: 'DELETE' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      var el = document.getElementById('cmt-' + commentId);
+      if (el) { var wrap = el.closest('.comment-reply-indent'); (wrap || el).remove(); }
+      commentCounts[itemKey] = Math.max(0, (commentCounts[itemKey]||1) - 1);
+      var badge = document.getElementById('cnt-' + itemKey);
+      if (badge) badge.textContent = commentCounts[itemKey];
+    } catch(e) { alert('Could not delete — please try again.'); }
   }
 
   function postComment(itemKey) {
@@ -1376,7 +2139,7 @@
       '<div class="compose-inner-wrap">' +
         '<textarea class="compose-textarea" id="ri-'+parentId+'" rows="2" placeholder="Reply…"></textarea>' +
         '<div class="compose-footer-row">' +
-          '<button style="font-size:9px;color:#94A3B8;background:none;border:none;cursor:pointer;" onclick="this.closest('.reply-input-area').remove()">Cancel</button>' +
+          '<button style="font-size:9px;color:#94A3B8;background:none;border:none;cursor:pointer;" onclick="this.closest(\'.reply-input-area\').remove()">Cancel</button>' +
           '<button class="compose-post-btn" id="rb-'+parentId+'" disabled>Reply</button>' +
         '</div>' +
       '</div>';
@@ -1423,43 +2186,7 @@
     currentUser = localStorage.getItem('ledger_name')||'';
     if (currentUser) updateAvatars();
     loadComments();
-  })();EventListener('input', function() { btn.disabled = inp.value.trim().length === 0; });
-  });
-  function toggleThread(id) {
-    var thread = document.getElementById('thread-' + id);
-    var tog = document.getElementById('tog-' + id);
-    if (!thread || !tog) return;
-    threadOpen[id] = !threadOpen[id];
-    thread.style.display = threadOpen[id] ? 'block' : 'none';
-    tog.textContent = threadOpen[id] ? 'hide' : 'show';
-  }
-  function focusCompose(id) {
-    var inp = document.getElementById('inp-' + id);
-    if (inp) { inp.focus(); inp.placeholder = 'Replying\u2026'; }
-  }
-  function postComment(id) {
-    var inp = document.getElementById('inp-' + id);
-    if (!inp) return;
-    var text = inp.value.trim();
-    if (!text) return;
-    var container = document.getElementById('new-' + id);
-    var row = document.createElement('div');
-    row.className = 'comment-row';
-    row.innerHTML = '<div class="comment-avatar-sm" style="background:#334155;">JB</div>' +
-      '<div class="comment-body-wrap">' +
-        '<div class="comment-meta-row"><span class="comment-author">J. Ballou</span><span class="comment-time">just now</span><span class="comment-new-badge">new</span></div>' +
-        '<div class="comment-text">' + text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>' +
-        '<button class="comment-reply-link" onclick="focusCompose(\'' + id + '\')">Reply</button>' +
-      '</div>';
-    container.appendChild(row);
-    commentCounts[id] = (commentCounts[id] || 0) + 1;
-    var badge = document.getElementById('cnt-' + id);
-    if (badge) badge.textContent = commentCounts[id];
-    inp.value = '';
-    inp.placeholder = 'Add a comment\u2026';
-    var btn = document.getElementById('btn-' + id);
-    if (btn) btn.disabled = true;
-  }
+  })();
 </script>
 </body>
 </html>
