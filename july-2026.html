@@ -327,10 +327,10 @@
   .comment-delete-btn { font-size:10px;font-weight:500;color:#EF4444;background:none;border:none;cursor:pointer;padding:2px 6px;margin-left:6px;opacity:0.6;transition:opacity 0.15s; }
   .comment-delete-btn:hover { opacity:1; }
   .reaction-bar { display:flex; gap:4px; padding:6px 0 2px; flex-wrap:wrap; }
-  .react-btn { background:#F1F5F9; border:1px solid #E2E8F0; border-radius:12px; padding:2px 8px; font-size:13px; cursor:pointer; transition:all 0.15s; display:inline-flex; align-items:center; gap:3px; line-height:1.4; }
-  .react-btn:hover { background:#E2E8F0; }
-  .react-btn.active { background:#DBEAFE; border-color:#93C5FD; }
-  .react-count { font-size:10px; font-weight:600; color:#475569; }
+  .react-btn { background:transparent; border:1px solid #D1FAE5; border-radius:12px; padding:2px 7px; cursor:pointer; transition:all 0.15s; display:inline-flex; align-items:center; gap:3px; line-height:1.4; }
+  .react-btn:hover { background:#D1FAE5; border-color:#6EE7B7; }
+  .react-btn.active { background:#D1FAE5; border-color:#10B981; }
+  .react-count { font-size:10px; font-weight:600; color:#10B981; }
   .comment-reply-link { font-size: 9.5px; color: #10B981; font-weight: 700; cursor: pointer; margin-top: 3px; display: inline-block; background: none; border: none; padding: 0; font-family: inherit; }
   .comment-reply-link:hover { text-decoration: underline; }
   .comment-reply-indent { margin-left: 30px; margin-bottom: 8px; padding-left: 8px; border-left: 2px solid #E2E8F0; }
@@ -1413,13 +1413,45 @@
   var EMOJIS = ['👍','❤️','🔥','💡'];
   window._reactionMap = {};
 
+  function reactIcon(e, active) {
+    var c = active ? '#10B981' : 'none';
+    var s = '#10B981';
+    var w = '1.5';
+    if (e === '👍') {
+      return '<svg width="13" height="13" viewBox="0 0 24 24" fill="'+c+'" stroke="'+s+'" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round">'
+        + '<path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>'
+        + '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>'
+        + '</svg>';
+    }
+    if (e === '❤️') {
+      return '<svg width="13" height="13" viewBox="0 0 24 24" fill="'+c+'" stroke="'+s+'" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round">'
+        + '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>'
+        + '</svg>';
+    }
+    if (e === '🔥') {
+      return '<svg width="13" height="13" viewBox="0 0 24 24" fill="'+c+'" stroke="'+s+'" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round">'
+        + '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'
+        + '</svg>';
+    }
+    if (e === '💡') {
+      return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="'+s+'" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round">'
+        + '<path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" fill="'+c+'"/>'
+        + '<line x1="9" y1="14" x2="15" y2="14"/>'
+        + '<line x1="9" y1="18" x2="15" y2="18"/>'
+        + '<line x1="10" y1="22" x2="14" y2="22"/>'
+        + '</svg>';
+    }
+    return e;
+  }
+
   function buildReactionHTML(itemKey, parentId, rm) {
     return EMOJIS.map(function(e) {
       var count = (rm.counts && rm.counts[e]) || 0;
       var isMe  = rm.userEmoji === e;
       var cls   = 'react-btn' + (isMe ? ' active' : '');
-      return '<button class="' + cls + '" onclick="toggleReaction(\'' + itemKey + '\',\'' + (parentId||'') + '\',\'' + e + '\')">'
-        + e + (count > 0 ? ' <span class="react-count">' + count + '</span>' : '') + '</button>';
+      var label = e==='👍'?'Thumbs up':e==='❤️'?'Heart':e==='🔥'?'Exciting':'Insightful';
+      return '<button class="' + cls + '" title="' + label + '" onclick="toggleReaction(\'' + itemKey + '\',\'' + (parentId||'') + '\',\'' + e + '\')">' 
+        + reactIcon(e, isMe) + (count > 0 ? '<span class="react-count">' + count + '</span>' : '') + '</button>';
     }).join('');
   }
 
